@@ -1,0 +1,177 @@
+{
+  "members": [
+    {
+      "id": "1",
+      "name": "",
+      "role": "",
+      "profileImage": "",
+      "introduction": ""
+    },
+    {
+      "id": "2",
+      "name": "권혁빈",
+      "role": "",
+      "profileImage": "사진링크",
+      "introduction": "추가설명."
+    },
+    {
+      "id": "3",
+      "name": "김성민",
+      "role": "",
+      "profileImage": "사진링크",
+      "introduction": "추가설명"
+    },
+    {
+      "id": "4",
+      "name": "김창민",
+      "role": "게시판 담당",
+      "profileImage": "사진링크",
+      "introduction": "추가설명"
+    },
+    {
+      "id": "5",
+      "name": "이유찬",
+      "role": "",
+      "profileImage": "사진링크",
+      "introduction": "추가설명"
+    }
+  ],
+  "semester": [
+    {
+      "id": "1",
+      "title": "경복궁 소개 서비스ㅁ",
+      "description": "경복궁의 역사와 볼거리를 제공합니다.",
+      "imageUrl": "https://plus.unsplash.com/premium_photo-1661948404806-391a240d6d40?q=80&w=2944&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {
+      "id": "2",
+      "title": "제주도 맛집 지도",
+      "description": "제주도 내 맛집을 지도 기반으로 소개합니다.",
+      "imageUrl": "https://images.unsplash.com/photo-1701678638937-7d538a9f0211?q=80&w=3174&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {
+      "id": "3",
+      "title": "이거 되나",
+      "description": "제발되라",
+      "imageUrl": "https://plus.unsplash.com/premium_photo-1666700698920-d2d2bba589f8?q=80&w=3132&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {
+      "id": "4",
+      "title": "asdf",
+      "description": "asdf",
+      "imageUrl": "https://plus.unsplash.com/premium_photo-1666700698920-d2d2bba589f8?q=80&w=3132&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {
+      "id": "dae8",
+      "title": "ㅁㄴㅇㄹ",
+      "description": "ㅁㄴㅇㄹ",
+      "imageUrl": "https://plus.unsplash.com/premium_photo-1666700698920-d2d2bba589f8?q=80&w=3132&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    }
+  ],
+  "posts": [
+    {
+      "id": "1",
+      "userId": 3,
+      "title": "첫 게시글입니다!",
+      "content": "안녕하세요. 첫 글이에요.",
+      "createdAt": "2025-05-22",
+      "views": 1
+    },
+    {
+      "id": "2",
+      "userId": 5,
+      "title": "두 번째 글",
+      "content": "게시판 잘 작동하네요 :)",
+      "createdAt": "2025-05-23"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "postId": 1,
+      "userId": 4,
+      "text": "축하드립니다!",
+      "likes": 1,
+      "createdAt": "2025-05-22"
+    },
+    {
+      "id": 2,
+      "postId": 1,
+      "userId": 2,
+      "text": "잘 보고 갑니다~",
+      "likes": 4,
+      "createdAt": "2025-05-23"
+    },
+    {
+      "id": 3,
+      "postId": 2,
+      "userId": 1,
+      "text": "응원합니다 :)",
+      "likes": 1,
+      "createdAt": "2025-05-23"
+    },
+    {
+      "id": 4,
+      "postId": 1,
+      "userId": 1,
+      "text": "가나다라 마바",
+      "likes": 0
+    },
+    {
+      "postId": 1,
+      "userId": 3,
+      "text": "ㅁㄴㅇㄹ",
+      "id": 5
+    },
+    {
+      "postId": 1,
+      "userId": 3,
+      "text": "ㅁㄴㅇㄹ",
+      "id": 6
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "loginId": "heejun",
+      "password": "1111",
+      "name": "강희준"
+    },
+    {
+      "id": "2",
+      "loginId": "hyukbin",
+      "password": "2222",
+      "name": "권혁빈"
+    },
+    {
+      "id": "3",
+      "loginId": "seongmin",
+      "password": "3333",
+      "name": "김성민"
+    },
+    {
+      "id": "4",
+      "loginId": "changmin",
+      "password": "4444",
+      "name": "김창민"
+    },
+    {
+      "id": "5",
+      "loginId": "yoochan",
+      "password": "5555",
+      "name": "이유찬"
+    },
+    {
+      "name": "ㅁㄴㅇㄹ",
+      "loginId": "ㅁㄴㄹㅇ",
+      "password": "asfd",
+      "id": "tx8p4NG"
+    },
+    {
+      "name": "asdf",
+      "loginId": "asfd",
+      "password": "s",
+      "id": "SWPdFzD"
+    }
+  ]
+}
