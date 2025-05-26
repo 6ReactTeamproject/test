@@ -8,7 +8,9 @@ import PostBoard from "./pages/Board.jsx";
 import Login from "./components/Login/Login.jsx";
 import Home from "./Home.jsx";
 import PostDetail from "./pages/PostDetail";
-import Signup from "./components/Login/Signup.jsx"; 
+import Signup from "./components/Login/Signup.jsx";
+// import WritePost
+import WritePost from "./pages/WritePost.jsx";
 
 export default function AppRouter() {
   return (
@@ -22,6 +24,8 @@ export default function AppRouter() {
       {/* <Route path="/team" element={<TeamIntro />} /> */}
       <Route path="/board" element={<PostBoard />} />
       <Route path="/posts/:id" element={<PostDetail />} />
+      <Route path="/write" element={<WritePost />} />
+      <Route path="/edit/:id" element={<WritePost />} />
     </Routes>
   );
 }

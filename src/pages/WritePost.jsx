@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import PostForm from "../components/PostForm";
+import PostForm from "../components/Board/PostForm";
 
 const WritePost = () => {
   const { id } = useParams(); // 수정이면 id 존재

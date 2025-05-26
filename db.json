@@ -75,7 +75,7 @@
       "title": "첫 게시글입니다!",
       "content": "안녕하세요. 첫 글이에요.",
       "createdAt": "2025-05-22",
-      "views": 1
+      "views": 4
     },
     {
       "id": "2",
@@ -91,7 +91,7 @@
       "postId": 1,
       "userId": 4,
       "text": "축하드립니다!",
-      "likes": 1,
+      "likes": 2,
       "createdAt": "2025-05-22"
     },
     {
@@ -99,7 +99,7 @@
       "postId": 1,
       "userId": 2,
       "text": "잘 보고 갑니다~",
-      "likes": 4,
+      "likes": 5,
       "createdAt": "2025-05-23"
     },
     {
@@ -126,7 +126,7 @@
     {
       "postId": 1,
       "userId": 3,
-      "text": "ㅁㄴㅇㄹ",
+      "text": "123",
       "id": 6
     }
   ],
