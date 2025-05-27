@@ -4,13 +4,13 @@ import TravelIntro from "./components/Travel/TravelIntro";
 import CreateTravelIntro from "./components/Travel/CreateTravelIntro";
 import DetailTravel from "./components/Travel/DetailTravel";
 // import TeamIntro from "./components/Member/TeamIntro";
-import PostBoard from "./pages/Board.jsx";
+import PostBoard from "./components/Board/Board.jsx";
 import Login from "./components/Login/Login.jsx";
 import Home from "./Home.jsx";
-import PostDetail from "./pages/PostDetail";
+import PostDetail from "./components/Comment/PostDetail";
 import Signup from "./components/Login/Signup.jsx";
 // import WritePost
-import WritePost from "./pages/WritePost.jsx";
+import WritePost from "./components/Comment/WritePost.jsx";
 
 export default function AppRouter() {
   return (
