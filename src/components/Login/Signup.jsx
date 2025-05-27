@@ -7,53 +7,151 @@ export function Signup() {
   const [userId, setUserId] = useState("");
   const [passwd, setPassword] = useState("");
 
+  const [idCheckMsg, setIdCheckMsg] = useState("");
+  const [idCheckColor, setIdCheckColor] = useState("black");
+
+  const nameRegex = /^[가-힣a-zA-Z\s]+$/;
+  const idRegex = /^[a-zA-Z0-9]+$/;
+  const passwordRegex = /^[^\u3131-\uD79D]+$/;
+
+  const isNameValid = nameRegex.test(name);
+  const isUserIdValid = idRegex.test(userId);
+  const isPasswordValid = passwordRegex.test(passwd);
+
+  const checkDuplicateId = async () => {
+    if (!userId) {
+      setIdCheckMsg("아이디를 입력하세요.");
+      setIdCheckColor("red");
+      return;
+    }
+    if (!isUserIdValid) {
+      setIdCheckMsg("아이디 형식이 올바르지 않습니다.");
+      setIdCheckColor("red");
+      return;
+    }
+
+    try {
+      const res = await fetch(`${API_URL}?loginId=${userId}`);
+      const users = await res.json();
+
+      if (users.length > 0) {
+        setIdCheckMsg("이미 존재하는 아이디입니다.");
+        setIdCheckColor("red");
+      } else {
+        setIdCheckMsg("사용 가능한 아이디입니다.");
+        setIdCheckColor("green");
+      }
+    } catch (err) {
+      console.error("중복 확인 중 오류:", err);
+      setIdCheckMsg("중복 확인 중 오류가 발생했습니다.");
+      setIdCheckColor("red");
+    }
+  };
+
   const handleSignup = async () => {
-    // 🔒 유효성 검사
     if (!name || !userId || !passwd) {
-      alert("이름, 아이디, 비밀번호를 모두 입력하세요.");
+      alert("모든 항목을 입력하세요.");
       return;
     }
 
-    // 아이디 중복 확인
-    const res = await fetch(`${API_URL}?loginId=${userId}`);
-    const existingUsers = await res.json();
-
-    if (existingUsers.length > 0) {
-      alert("이미 존재하는 아이디입니다.");
+    if (!isNameValid) {
+      alert("이름 형식이 올바르지 않습니다.");
       return;
     }
 
-    // 회원가입 요청
-    fetch(API_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name: name, loginId: userId, password: passwd }),
-    })
-      .then((res) => {
-        if (res.ok) {
-          alert("회원가입 성공!");
-          // 입력값 초기화
-          setName("");
-          setUserId("");
-          setPassword("");
-        } else {
-          alert("회원가입 실패");
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        alert("에러 발생!");
+    if (!isUserIdValid) {
+      alert("아이디 형식이 올바르지 않습니다.");
+      return;
+    }
+
+    if (!isPasswordValid) {
+      alert("비밀번호에 한글을 포함할 수 없습니다.");
+      return;
+    }
+
+    try {
+      const res = await fetch(`${API_URL}?loginId=${userId}`);
+      const existingUsers = await res.json();
+
+      if (existingUsers.length > 0) {
+        alert("이미 존재하는 아이디입니다.");
+        return;
+      }
+
+      const postRes = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          loginId: userId,
+          password: passwd,
+        }),
       });
+
+      if (postRes.ok) {
+        alert("회원가입 성공!");
+        setName("");
+        setUserId("");
+        setPassword("");
+        setIdCheckMsg("");
+      } else {
+        alert("회원가입 실패! 서버 오류");
+      }
+    } catch (err) {
+      console.error("에러 발생:", err);
+      alert("서버와의 통신 중 문제가 발생했습니다.");
+    }
   };
 
   return (
-    <div>
+    <div style={{ maxWidth: "400px", margin: "20px auto", fontFamily: "sans-serif" }}>
       <h2>회원가입</h2>
-      <input value={name} onChange={(e) => setName(e.target.value)} placeholder="이름" />
+
+      {/* 이름 */}
+      <input
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        placeholder="이름 (한글/영어만)"
+        style={{ width: "200px" }}
+      />
       <br />
-      <input value={userId} onChange={(e) => setUserId(e.target.value)} placeholder="아이디" />
+      {name && !isNameValid && (
+        <div>이름에는 숫자나 특수문자를 사용할 수 없습니다.</div>
+      )}
+
+      {/* 아이디 + 중복확인 버튼 */}
+      <div style={{ display: "flex", gap: "5px", marginTop: "10px" }}>
+        <input
+          value={userId}
+          onChange={(e) => {
+            setUserId(e.target.value);
+            setIdCheckMsg(""); // 메시지 초기화
+          }}
+          placeholder="아이디 (영문/숫자만)"
+          style={{ width: "200px" }}
+        />
+        <button onClick={checkDuplicateId}>중복확인</button>
+      </div>
+      {userId && !isUserIdValid && (
+        <div>특수문자 또는 한글은 사용할 수 없습니다.</div>
+      )}
+      {idCheckMsg && (
+        <div style={{ color: idCheckColor }}>{idCheckMsg}</div>
+      )}
+
+      {/* 비밀번호 */}
+      <input
+        type="password"
+        value={passwd}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="비밀번호 (한글 제외)"
+        style={{ width: "200px", marginTop: "10px" }}
+      />
       <br />
-      <input value={passwd} onChange={(e) => setPassword(e.target.value)} placeholder="비밀번호" type="password" />
+      {passwd && !isPasswordValid && (
+        <div>비밀번호에 한글을 포함할 수 없습니다.</div>
+      )}
+
       <br />
       <button onClick={handleSignup}>회원가입</button>
     </div>
