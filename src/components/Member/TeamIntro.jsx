@@ -1,7 +1,7 @@
 // TeamIntro.jsx
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./travel.css"; // 스타일 재활용
+import "../travel/travel.css"; // 스타일 재활용
 const API_URL = "http://localhost:3001/members";
 
 export default function TeamIntro() {
@@ -22,11 +22,14 @@ export default function TeamIntro() {
           <div
             key={member.id}
             className="travel-card"
-            onClick={() => navigate(`/team/${member.id}`)}
-          >
-            <img src={member.profileImage} alt={member.name} />
+            onClick={() => navigate(`/team/${member.id}`)} >
+            <img src={member.profileImage ? (
+              member.profileImage ) : (
+              <p>no image</p>
+              )} alt={member.name} />
             <h3>{member.name}</h3>
             <p>{member.role}</p>
+            <p>{member.introduction}</p>
           </div>
         ))}
       </div>
