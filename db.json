@@ -75,14 +75,68 @@
       "title": "첫 게시글입니다!",
       "content": "안녕하세요. 첫 글이에요.",
       "createdAt": "2025-05-22",
-      "views": 7
+      "views": 13
     },
     {
       "id": "2",
       "userId": 5,
       "title": "두 번째 글",
       "content": "게시판 잘 작동하네요 :)",
+      "createdAt": "2025-05-23",
+      "views": 2
+    },
+    {
+      "id": "3",
+      "userId": 2,
+      "title": "안녕하세요",
+      "content": "처음 달아봐요",
       "createdAt": "2025-05-23"
+    },
+    {
+      "id": "4",
+      "userId": 1,
+      "title": "그래요",
+      "content": "이제 많이 올려라",
+      "createdAt": "2025-05-23"
+    },
+    {
+      "id": "5",
+      "userId": 3,
+      "title": "ㅎㅇ",
+      "content": "ㅇㅇ",
+      "createdAt": "2025-05-23"
+    },
+    {
+      "id": "6",
+      "userId": 4,
+      "title": "김성민",
+      "content": "김성민",
+      "createdAt": "2025-05-23",
+      "views": 3
+    },
+    {
+      "id": 1748340648348,
+      "title": "테스트입니다",
+      "content": "잘 작동하나요?",
+      "userId": 1,
+      "createdAt": "2025-05-27T10:10:48.348Z",
+      "views": 0
+    },
+    {
+      "id": 1748612405100,
+      "title": "김성민",
+      "content": "ㄱㅁㅇㅁㄴㅇ",
+      "userId": 1,
+      "createdAt": "2025-05-30T13:40:05.100Z",
+      "views": 1
+    },
+    {
+      "id": 1748612444040,
+      "title": "김성민",
+      "content": "다시 태어났어요\n",
+      "userId": 1,
+      "createdAt": "2025-05-30T13:40:44.040Z",
+      "views": 0
     }
   ],
   "comments": [
@@ -128,6 +182,12 @@
       "userId": 3,
       "text": "123",
       "id": 6
+    },
+    {
+      "id": "ed90",
+      "postId": 6,
+      "userId": 3,
+      "text": "그래요"
     }
   ],
   "users": [
