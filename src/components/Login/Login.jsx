@@ -1,16 +1,21 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useUser } from "../Travel/UserContext";
 
-function Login() {
+export default function Login({ setUser }) {
   const [loginId, setLoginId] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = () => {
     fetch(`http://localhost:3001/users?loginId=${loginId}&password=${password}`)
       .then(res => res.json())
       .then(data => {
         if (data.length > 0) {
-          alert(`${data[0].name}님 환영합니다!`);
-          localStorage.setItem("user", JSON.stringify(data[0]));
+          const user = data[0];
+          localStorage.setItem("user", JSON.stringify(user));
+          setUser(user); // Context 업데이트
+          navigate("/");
         } else {
           alert("로그인 실패");
         }
@@ -28,5 +33,3 @@ function Login() {
     </div>
   );
 }
-
-export default Login;
