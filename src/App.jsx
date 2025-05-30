@@ -1,24 +1,21 @@
-function App() {
-  const products = [
-    { title: 'Cabbage', isFruit: false, id: 1 },
-    { title: 'Garlic', isFruit: false, id: 2 },
-    { title: 'Apple', isFruit: true, id: 3 },
-  ];
+// // src/App.jsx
+// import { useEffect, useState } from "react";
+// import { UserContext } from "./components/Travel/UserContext";
+// import AppRouter from "./AppRouter";
 
-  return (
-    <ul>
-      {products.map((product) => (
-        <li
-          key={product.id}
-          style={{
-            color: product.isFruit ? 'magenta' : 'darkgreen',
-          }}
-        >
-          {product.title}
-        </li>
-      ))}
-    </ul>
-  );
-}
+// export default function App() {
+//   const [user, setUser] = useState(null);
 
-export default App;
+//   useEffect(() => {
+//     const saved = localStorage.getItem("user");
+//     if (saved) {
+//       setUser(JSON.parse(saved));
+//     }
+//   }, []);
+
+//   return (
+//     <UserContext.Provider value={user}>
+//       <AppRouter setUser={setUser} />
+//     </UserContext.Provider>
+//   );
+// }
