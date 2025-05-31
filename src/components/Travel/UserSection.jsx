@@ -7,8 +7,12 @@ export function UserSection() {
 
   // localStorage로부터 초기 로딩 완료 여부 판단
   useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
     setIsLoading(false);
-  }, []);
+  }, [setUser]);
 
   const handleLogout = () => {
     localStorage.removeItem("user");

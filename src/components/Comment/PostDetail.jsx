@@ -14,6 +14,16 @@ function PostDetail() {
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [editingText, setEditingText] = useState("");
 
+  // 페이지가 로드될 때 localStorage에서 user 정보를 가져와 콘솔에 출력
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      console.log("로컬스토리지에서 가져온 user:", JSON.parse(storedUser));
+    } else {
+      console.log("로컬스토리지에 user 정보가 없습니다.");
+    }
+  }, []);
+
   useEffect(() => {
     fetch("http://localhost:3001/users")
       .then((res) => res.json())
@@ -54,6 +64,12 @@ function PostDetail() {
     }
   }, [post, users]);
 
+  useEffect(() => {
+    if (post) {
+      console.log("현재 보고 있는 게시글:", post);
+    }
+  }, [post]);
+
   if (!post) return <div>잘못된 접근 입니다.</div>;
 
   return (
@@ -63,7 +79,7 @@ function PostDetail() {
       <p>조회수: {post.views || 0}회</p> {/* 조회수 표시 */}
       <p>
         작성자: {postUser ? postUser.name : "알 수 없음"}
-        {currentUser && currentUser.id === post.userId && (
+        {currentUser && String(currentUser.id) === String(post.userId) && (
           <>
             <button
               onClick={() => {
