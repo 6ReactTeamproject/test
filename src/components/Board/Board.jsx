@@ -157,7 +157,7 @@ const Board = () => {
               <li
                 key={post.id}
                 style={{ cursor: "pointer" }}
-                onClick={() => navigate(`/posts/${post.id}`)}
+                onClick={() => navigate(`/post/${post.id}`)}
               >
                 <h3>{post.title}</h3>
                 <p>{post.content}</p>

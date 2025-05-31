@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 function PostDetail() {
-  const currentUser = { id: 3, name: "김성민" }; // 강제 로그인
+  const currentUser = { id: 1, name: "강희준" }; // 강제 로그인
   const { id } = useParams();
   const navigate = useNavigate();
   const [post, setPost] = useState(null);

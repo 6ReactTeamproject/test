@@ -1,5 +1,3 @@
-// src/AppRouter.jsx
-
 import { Routes, Route } from "react-router-dom";
 import TravelIntro from "./components/Travel/TravelIntro";
 import CreateTravelIntro from "./components/Travel/CreateTravelIntro";
@@ -12,7 +10,7 @@ import ReadMember from "./components/Member/ReadMember";
 
 // 게시판 관련 컴포넌트
 import PostBoard from "./components/Board/Board.jsx";
-import PostDetail from "./components/Comment/PostDetail";
+import PostDetail from "./components/Comment/PostDetail.jsx";
 import WritePost from "./components/Comment/WritePost";
 
 // 기타 기본 페이지

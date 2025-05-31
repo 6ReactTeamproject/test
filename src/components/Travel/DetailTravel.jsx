@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import DeleteTravelIntro from "./DeleteTravelIntro";
 import EditTravelIntro from "./EditTravelIntro";
+import { useUser } from "./UserContext";
 import './travel.css';
 
 export default function DetailTravel() {
@@ -9,6 +10,7 @@ export default function DetailTravel() {
   const [isEditing, setIsEditing] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
+  const { user } = useUser();
 
   useEffect(() => {
     fetch(`http://localhost:3001/semester/${id}`)
@@ -17,6 +19,8 @@ export default function DetailTravel() {
   }, [id]);
 
   if (!travelPlace) return <p>로딩 중...</p>;
+
+  const isOwner = user?.id === travelPlace.authorId;
 
   return (
     <div className="modal-overlay" onClick={() => navigate("/intro")}>
@@ -34,10 +38,12 @@ export default function DetailTravel() {
             <img src={travelPlace.imageUrl} alt="preview" style={{ width: "100%", borderRadius: "8px" }} />
             <h3>{travelPlace.title}</h3>
             <p>{travelPlace.description}</p>
-            <div className="button-group">
-              <button onClick={() => setIsEditing(true)} className="add-button">✏️ 수정</button>
-              <DeleteTravelIntro travelId={travelPlace.id} />
-            </div>
+            {isOwner && (
+              <div className="button-group">
+                <button onClick={() => setIsEditing(true)} className="add-button">✏️ 수정</button>
+                <DeleteTravelIntro travelId={travelPlace.id} />
+              </div>
+            )}
           </>
         )}
       </div>
