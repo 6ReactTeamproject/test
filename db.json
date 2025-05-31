@@ -27,7 +27,7 @@
     {
       "id": "4",
       "authorId": "1",
-      "name": "김창민",
+      "name": "이창민",
       "role": "게시판 담당",
       "profileImage": "사진링크",
       "introduction": "추가설명"
@@ -40,8 +40,8 @@
       "profileImage": "사진링크",
       "introduction": "추가설명"
     },
-    { 
-      "id": "6",  
+    {
+      "id": "6",
       "authorId": "1",
       "name": "qwe",
       "role": "qwe",
@@ -100,7 +100,7 @@
       "title": "첫 게시글입니다!",
       "content": "안녕하세요. 첫 글이에요.",
       "createdAt": "2025-05-22",
-      "views": 20
+      "views": 36
     },
     {
       "id": "2",
@@ -115,7 +115,8 @@
       "userId": 2,
       "title": "안녕하세요",
       "content": "처음 달아봐요",
-      "createdAt": "2025-05-23"
+      "createdAt": "2025-05-23",
+      "views": 1
     },
     {
       "id": "4",
@@ -194,48 +195,61 @@
       "postId": 1,
       "userId": 4,
       "text": "축하드립니다!",
-      "likes": 2,
-      "createdAt": "2025-05-22"
+      "likes": 0,
+      "createdAt": "2025-05-22",
+      "likedUserIds": []
     },
     {
       "id": 2,
       "postId": 1,
       "userId": 2,
       "text": "잘 보고 갑니다~",
-      "likes": 5,
-      "createdAt": "2025-05-23"
+      "likes": 0,
+      "createdAt": "2025-05-23",
+      "likedUserIds": []
     },
     {
       "id": 3,
       "postId": 2,
       "userId": 1,
       "text": "응원합니다 :)",
-      "likes": 1,
-      "createdAt": "2025-05-23"
+      "likes": 0,
+      "createdAt": "2025-05-23",
+      "likedUserIds": []
     },
     {
       "postId": 1,
       "userId": 3,
       "text": "ㅁㄴㅇㄹ",
-      "id": 5
+      "id": 5,
+      "likedUserIds": [],
+      "likes": 0
     },
     {
       "postId": 1,
       "userId": 3,
       "text": "123",
-      "id": 6
+      "id": 6,
+      "likes": 0,
+      "likedUserIds": []
     },
     {
       "id": "ed90",
       "postId": 6,
       "userId": 3,
-      "text": "그래요"
+      "text": "그래요",
+      "likedUserIds": [],
+      "likes": 0
     },
     {
       "postId": 1,
       "userId": 1,
-      "text": "asdf",
-      "id": 7
+      "text": "1234",
+      "id": 8,
+      "likes": 1,
+      "likedUserIds": [
+        "4"
+      ]
     }
   ],
   "users": [
@@ -261,7 +275,7 @@
       "id": "4",
       "loginId": "changmin",
       "password": "4444",
-      "name": "김창민"
+      "name": "이창민"
     },
     {
       "id": "5",

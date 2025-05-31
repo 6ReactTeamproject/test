@@ -1,15 +1,18 @@
+import { useUser } from "../Travel/UserContext";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 function PostDetail() {
-  const currentUser = { id: 1, name: "강희준" }; // 강제 로그인
+  const { user: currentUser } = useUser();
   const { id } = useParams();
   const navigate = useNavigate();
   const [post, setPost] = useState(null);
   const [postUser, setPostUser] = useState(null);
   const [comments, setComments] = useState([]);
   const [users, setUsers] = useState([]);
-  const [likedComments, setLikedComments] = useState([]);
+  // 댓글 수정 관련 상태
+  const [editingCommentId, setEditingCommentId] = useState(null);
+  const [editingText, setEditingText] = useState("");
 
   useEffect(() => {
     fetch("http://localhost:3001/users")
@@ -30,7 +33,7 @@ function PostDetail() {
         });
       });
 
-    // 댓글 목록 가져올 때 createdAt과 likes 자동 추가
+    // 댓글 목록 가져올 때 createdAt, likes, likedUserIds 자동 추가
     fetch(`http://localhost:3001/comments?postId=${id}`)
       .then((res) => res.json())
       .then((data) => {
@@ -38,6 +41,7 @@ function PostDetail() {
           ...c,
           createdAt: c.createdAt || new Date().toISOString(), // 댓글 작성 시간
           likes: c.likes || 0, // 댓글 좋아요 수
+          likedUserIds: Array.isArray(c.likedUserIds) ? c.likedUserIds : [], // 좋아요 누른 유저 목록
         }));
         setComments(enriched);
       });
@@ -90,61 +94,122 @@ function PostDetail() {
         {comments.map((c) => {
           const user = users.find((u) => String(u.id) === String(c.userId));
           const isOwner = currentUser && currentUser.id === c.userId;
+          // likedUserIds가 없을 경우를 대비하여 기본값 처리(최종적으로는 항상 있음)
+          const likedUserIds = Array.isArray(c.likedUserIds)
+            ? c.likedUserIds
+            : [];
+          const alreadyLiked = likedUserIds.includes(currentUser.id);
           return (
             <li key={c.id}>
-              {c.text} (작성자 : {user ? user.name : "알 수 없음"}){" "}
-              <span>({new Date(c.createdAt).toLocaleString()})</span>{" "}
-              {/* 댓글 작성 시각 표시 */}
-              <button
-                onClick={() => {
-                  const alreadyLiked = likedComments.includes(c.id);
-                  const updatedLikes = alreadyLiked ? c.likes - 1 : c.likes + 1;
-
-                  fetch(`http://localhost:3001/comments/${c.id}`, {
-                    method: "PATCH",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ likes: updatedLikes }),
-                  }).then(() => {
-                    setComments((prev) =>
-                      prev.map((cm) =>
-                        cm.id === c.id ? { ...cm, likes: updatedLikes } : cm
-                      )
-                    );
-                    setLikedComments((prev) =>
-                      alreadyLiked
-                        ? prev.filter((id) => id !== c.id)
-                        : [...prev, c.id]
-                    );
-                  });
-                }}
-              >
-                {likedComments.includes(c.id) ? "💔" : "❤️"} {c.likes}{" "}
-                {/* 좋아요 수 표시 */}
-              </button>
-              {isOwner && (
+              {editingCommentId === c.id ? (
                 <>
+                  <input
+                    type="text"
+                    value={editingText}
+                    onChange={(e) => setEditingText(e.target.value)}
+                  />
                   <button
                     onClick={() => {
-                      navigate(`/edit/${id}`);
+                      fetch(`http://localhost:3001/comments/${c.id}`, {
+                        method: "PATCH",
+                        headers: {
+                          "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ text: editingText }),
+                      }).then(() => {
+                        setComments((prev) =>
+                          prev.map((cm) =>
+                            cm.id === c.id ? { ...cm, text: editingText } : cm
+                          )
+                        );
+                        setEditingCommentId(null);
+                        setEditingText("");
+                      });
                     }}
                   >
-                    수정
+                    저장
                   </button>
                   <button
                     onClick={() => {
-                      if (window.confirm("정말 삭제할까요?")) {
-                        fetch(`http://localhost:3001/comments/${c.id}`, {
-                          method: "DELETE",
-                        }).then(() => {
-                          setComments((prev) =>
-                            prev.filter((cm) => cm.id !== c.id)
-                          );
-                        });
+                      setEditingCommentId(null);
+                      setEditingText("");
+                    }}
+                  >
+                    취소
+                  </button>
+                </>
+              ) : (
+                <>
+                  {c.text} (작성자 : {user ? user.name : "알 수 없음"}){" "}
+                  <span>({new Date(c.createdAt).toLocaleString()})</span>{" "}
+                  {/* 댓글 작성 시각 표시 */}
+                  <button
+                    onClick={() => {
+                      // 중복 좋아요 방지
+                      let updatedLikes, updatedLikedUserIds;
+                      if (alreadyLiked) {
+                        // 좋아요 취소
+                        updatedLikes = Math.max(0, c.likes - 1);
+                        updatedLikedUserIds = likedUserIds.filter(
+                          (uid) => uid !== currentUser.id
+                        );
+                      } else {
+                        // 좋아요 추가
+                        updatedLikes = c.likes + 1;
+                        updatedLikedUserIds = [...likedUserIds, currentUser.id];
                       }
+                      fetch(`http://localhost:3001/comments/${c.id}`, {
+                        method: "PATCH",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                          likes: updatedLikes,
+                          likedUserIds: updatedLikedUserIds,
+                        }),
+                      }).then(() => {
+                        setComments((prev) =>
+                          prev.map((cm) =>
+                            cm.id === c.id
+                              ? {
+                                  ...cm,
+                                  likes: updatedLikes,
+                                  likedUserIds: updatedLikedUserIds,
+                                }
+                              : cm
+                          )
+                        );
+                      });
                     }}
                   >
-                    삭제
+                    {alreadyLiked ? "💔" : "❤️"} {c.likes}{" "}
+                    {/* 좋아요 수 표시 */}
                   </button>
+                  {isOwner && (
+                    <>
+                      <button
+                        onClick={() => {
+                          setEditingCommentId(c.id);
+                          setEditingText(c.text);
+                        }}
+                      >
+                        수정
+                      </button>
+                      <button
+                        onClick={() => {
+                          if (window.confirm("정말 삭제할까요?")) {
+                            fetch(`http://localhost:3001/comments/${c.id}`, {
+                              method: "DELETE",
+                            }).then(() => {
+                              setComments((prev) =>
+                                prev.filter((cm) => cm.id !== c.id)
+                              );
+                            });
+                          }
+                        }}
+                      >
+                        삭제
+                      </button>
+                    </>
+                  )}
                 </>
               )}
             </li>
@@ -172,7 +237,17 @@ function PostDetail() {
               e.target.reset();
               fetch(`http://localhost:3001/comments?postId=${id}`)
                 .then((res) => res.json())
-                .then((data) => setComments(data));
+                .then((data) => {
+                  const enriched = data.map((c) => ({
+                    ...c,
+                    createdAt: c.createdAt || new Date().toISOString(),
+                    likes: c.likes || 0,
+                    likedUserIds: Array.isArray(c.likedUserIds)
+                      ? c.likedUserIds
+                      : [],
+                  }));
+                  setComments(enriched);
+                });
             });
           }}
         >
