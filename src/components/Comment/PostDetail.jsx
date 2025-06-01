@@ -1,6 +1,10 @@
 import { useUser } from "../Travel/UserContext";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import PostHeader from "./PostHeader";
+import PostActions from "./PostActions";
+import CommentList from "./CommentList";
+import CommentForm from "./CommentForm";
 
 function PostDetail() {
   const { user: currentUser } = useUser();
@@ -10,9 +14,6 @@ function PostDetail() {
   const [postUser, setPostUser] = useState(null);
   const [comments, setComments] = useState([]);
   const [users, setUsers] = useState([]);
-  // 댓글 수정 관련 상태
-  const [editingCommentId, setEditingCommentId] = useState(null);
-  const [editingText, setEditingText] = useState("");
 
   // 페이지가 로드될 때 localStorage에서 user 정보를 가져와 콘솔에 출력
   useEffect(() => {
@@ -74,202 +75,28 @@ function PostDetail() {
 
   return (
     <div>
-      <h2>{post.title}</h2>
-      <p>{post.content}</p>
-      <p>조회수: {post.views || 0}회</p> {/* 조회수 표시 */}
-      <p>
-        작성자: {postUser ? postUser.name : "알 수 없음"}
-        {currentUser && String(currentUser.id) === String(post.userId) && (
-          <>
-            <button
-              onClick={() => {
-                navigate(`/edit/${id}`);
-              }}
-            >
-              수정
-            </button>
-            <button
-              onClick={() => {
-                if (window.confirm("게시글을 삭제할까요?")) {
-                  fetch(`http://localhost:3001/posts/${id}`, {
-                    method: "DELETE",
-                  }).then(() => {
-                    navigate("/");
-                  });
-                }
-              }}
-            >
-              삭제
-            </button>
-          </>
-        )}
-      </p>
+      <PostHeader post={post} />
+      <PostActions
+        post={post}
+        postUser={postUser}
+        currentUser={currentUser}
+        id={id}
+        navigate={navigate}
+      />
       <hr />
       <h3>댓글</h3>
-      <ul>
-        {comments.map((c) => {
-          const user = users.find((u) => String(u.id) === String(c.userId));
-          const isOwner = currentUser && currentUser.id === c.userId;
-          // likedUserIds가 없을 경우를 대비하여 기본값 처리(최종적으로는 항상 있음)
-          const likedUserIds = Array.isArray(c.likedUserIds)
-            ? c.likedUserIds
-            : [];
-          const alreadyLiked = likedUserIds.includes(currentUser.id);
-          return (
-            <li key={c.id}>
-              {editingCommentId === c.id ? (
-                <>
-                  <input
-                    type="text"
-                    value={editingText}
-                    onChange={(e) => setEditingText(e.target.value)}
-                  />
-                  <button
-                    onClick={() => {
-                      fetch(`http://localhost:3001/comments/${c.id}`, {
-                        method: "PATCH",
-                        headers: {
-                          "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({ text: editingText }),
-                      }).then(() => {
-                        setComments((prev) =>
-                          prev.map((cm) =>
-                            cm.id === c.id ? { ...cm, text: editingText } : cm
-                          )
-                        );
-                        setEditingCommentId(null);
-                        setEditingText("");
-                      });
-                    }}
-                  >
-                    저장
-                  </button>
-                  <button
-                    onClick={() => {
-                      setEditingCommentId(null);
-                      setEditingText("");
-                    }}
-                  >
-                    취소
-                  </button>
-                </>
-              ) : (
-                <>
-                  {c.text} (작성자 : {user ? user.name : "알 수 없음"}){" "}
-                  <span>({new Date(c.createdAt).toLocaleString()})</span>{" "}
-                  {/* 댓글 작성 시각 표시 */}
-                  <button
-                    onClick={() => {
-                      // 중복 좋아요 방지
-                      let updatedLikes, updatedLikedUserIds;
-                      if (alreadyLiked) {
-                        // 좋아요 취소
-                        updatedLikes = Math.max(0, c.likes - 1);
-                        updatedLikedUserIds = likedUserIds.filter(
-                          (uid) => uid !== currentUser.id
-                        );
-                      } else {
-                        // 좋아요 추가
-                        updatedLikes = c.likes + 1;
-                        updatedLikedUserIds = [...likedUserIds, currentUser.id];
-                      }
-                      fetch(`http://localhost:3001/comments/${c.id}`, {
-                        method: "PATCH",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                          likes: updatedLikes,
-                          likedUserIds: updatedLikedUserIds,
-                        }),
-                      }).then(() => {
-                        setComments((prev) =>
-                          prev.map((cm) =>
-                            cm.id === c.id
-                              ? {
-                                  ...cm,
-                                  likes: updatedLikes,
-                                  likedUserIds: updatedLikedUserIds,
-                                }
-                              : cm
-                          )
-                        );
-                      });
-                    }}
-                  >
-                    {alreadyLiked ? "💔" : "❤️"} {c.likes}{" "}
-                    {/* 좋아요 수 표시 */}
-                  </button>
-                  {isOwner && (
-                    <>
-                      <button
-                        onClick={() => {
-                          setEditingCommentId(c.id);
-                          setEditingText(c.text);
-                        }}
-                      >
-                        수정
-                      </button>
-                      <button
-                        onClick={() => {
-                          if (window.confirm("정말 삭제할까요?")) {
-                            fetch(`http://localhost:3001/comments/${c.id}`, {
-                              method: "DELETE",
-                            }).then(() => {
-                              setComments((prev) =>
-                                prev.filter((cm) => cm.id !== c.id)
-                              );
-                            });
-                          }
-                        }}
-                      >
-                        삭제
-                      </button>
-                    </>
-                  )}
-                </>
-              )}
-            </li>
-          );
-        })}
-      </ul>
+      <CommentList
+        comments={comments}
+        setComments={setComments}
+        users={users}
+        currentUser={currentUser}
+      />
       {currentUser ? (
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            const formData = new FormData(e.target);
-            const text = formData.get("text");
-            if (!text.trim()) return;
-            fetch("http://localhost:3001/comments", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                postId: Number(id),
-                userId: currentUser?.id,
-                text,
-              }),
-            }).then(() => {
-              e.target.reset();
-              fetch(`http://localhost:3001/comments?postId=${id}`)
-                .then((res) => res.json())
-                .then((data) => {
-                  const enriched = data.map((c) => ({
-                    ...c,
-                    createdAt: c.createdAt || new Date().toISOString(),
-                    likes: c.likes || 0,
-                    likedUserIds: Array.isArray(c.likedUserIds)
-                      ? c.likedUserIds
-                      : [],
-                  }));
-                  setComments(enriched);
-                });
-            });
-          }}
-        >
-          <input type="text" name="text" placeholder="댓글을 입력하세요" />
-          <button type="submit">댓글 작성</button>
-        </form>
+        <CommentForm
+          currentUser={currentUser}
+          id={id}
+          setComments={setComments}
+        />
       ) : (
         <div>댓글을 작성하려면 로그인하세요.</div>
       )}
