@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import PostForm from "./PostForm";
+import { useUser } from "../Travel/UserContext";
 
 const WritePost = () => {
   const { id } = useParams(); // 수정이면 id 존재
   const navigate = useNavigate();
   const [post, setPost] = useState({ title: "", content: "" });
+  const { user: currentUser } = useUser();
 
   useEffect(() => {
     if (id) {
@@ -16,7 +18,20 @@ const WritePost = () => {
     }
   }, [id]);
 
+  useEffect(() => {
+    console.log("현재 로그인된 유저:", currentUser);
+  }, [currentUser]);
+
   const handleSubmit = () => {
+    console.log("handleSubmit 실행됨");
+    console.log("currentUser:", currentUser);
+    console.log("작성될 userId:", currentUser?.id);
+
+    if (!currentUser || !currentUser.id) {
+      alert("로그인된 사용자 정보가 없습니다.");
+      return;
+    }
+
     const method = id ? "PATCH" : "POST";
     const url = id
       ? `http://localhost:3001/posts/${id}`
@@ -32,12 +47,12 @@ const WritePost = () => {
         ...(id
           ? {}
           : {
-              userId: 1,
+              userId: currentUser.id,
               createdAt: new Date().toISOString().slice(0, 10),
               views: 0,
             }),
       }),
-    }).then(() => navigate("/"));
+    }).then(() => navigate(-1));
   };
 
   return (

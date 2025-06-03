@@ -10,7 +10,11 @@ const PostForm = ({ post, setPost, onSubmit }) => {
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        onSubmit();
+        if (onSubmit) {
+          console.log("작성 버튼 클릭됨");
+          console.log("handleSubmit 호출됨");
+          onSubmit();
+        }
       }}
     >
       <input

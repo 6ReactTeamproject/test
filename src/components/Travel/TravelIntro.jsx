@@ -24,6 +24,7 @@ export default function TravelIntro() {
           </div>
         ))}
       </div>
+      <button onClick={() => navigate("/")} className="back-button">🏠 홈으로</button>
       <button onClick={() => navigate("/intro/new")} className="floating-add-button">➕ 소개 추가</button>
     </div>
   );
