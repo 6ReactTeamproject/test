@@ -40,8 +40,8 @@
       "profileImage": "사진링크",
       "introduction": "추가설명"
     },
-    { 
-      "id": "6",  
+    {
+      "id": "6",
       "authorId": "1",
       "name": "qwe",
       "role": "qwe",
@@ -100,7 +100,7 @@
       "title": "첫 게시글입니다!",
       "content": "안녕하세요. 첫 글이에요.",
       "createdAt": "2025-05-22",
-      "views": 20
+      "views": 21
     },
     {
       "id": "2",
@@ -122,7 +122,8 @@
       "userId": 1,
       "title": "그래요",
       "content": "이제 많이 올려라",
-      "createdAt": "2025-05-23"
+      "createdAt": "2025-05-23",
+      "views": 1
     },
     {
       "id": "5",

@@ -8,8 +8,6 @@ const Board = () => {
   const [filtered, setFiltered] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 3;
-
-  // 🔹 새 게시물 제목/내용 상태
   const [newTitle, setNewTitle] = useState("");
   const [newContent, setNewContent] = useState("");
 
