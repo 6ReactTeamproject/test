@@ -7,8 +7,9 @@ function CommentList({ comments, setComments, users, currentUser }) {
   return (
     <ul>
       {comments.map((comment) => {
-        const user = users.find((u) => String(u.id) === String(comment.userId));
-        const isOwner = currentUser && currentUser.id === comment.userId;
+        const user = users.find((u) => u.id == comment.userId);
+        const isOwner =
+          currentUser && String(currentUser.id) === String(comment.userId);
         const likedUserIds = Array.isArray(comment.likedUserIds)
           ? comment.likedUserIds
           : [];

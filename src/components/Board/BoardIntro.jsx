@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { useUser } from "../Travel/UserContext";
+
 const Board = () => {
   const [posts, setPosts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -12,6 +14,7 @@ const Board = () => {
   const [newContent, setNewContent] = useState("");
 
   const navigate = useNavigate();
+  const { user: currentUser } = useUser();
 
   useEffect(() => {
     fetch("http://localhost:3001/posts")
@@ -32,8 +35,10 @@ const Board = () => {
     }
 
     const results = posts.filter((post) => {
-      const title = typeof post.title === "string" ? post.title.toLowerCase() : "";
-      const content = typeof post.content === "string" ? post.content.toLowerCase() : "";
+      const title =
+        typeof post.title === "string" ? post.title.toLowerCase() : "";
+      const content =
+        typeof post.content === "string" ? post.content.toLowerCase() : "";
       const userId = post.userId?.toString();
 
       switch (searchType) {
@@ -81,7 +86,7 @@ const Board = () => {
       id: Date.now(), // 임시 ID
       title: newTitle,
       content: newContent,
-      userId: 1, // 예시용 ID
+      userId: currentUser?.id, // 예시용 ID
       createdAt: new Date().toISOString(),
       views: 0,
     };
@@ -161,7 +166,8 @@ const Board = () => {
                 <h3>{post.title}</h3>
                 <p>{post.content}</p>
                 <p>
-                  작성자 ID: {post.userId} / {post.createdAt} / 조회수: {post.views}
+                  작성자 ID: {post.userId} / {post.createdAt} / 조회수:{" "}
+                  {post.views}
                 </p>
               </li>
             ))
@@ -180,7 +186,10 @@ const Board = () => {
             <span>
               {currentPage} / {totalPages}
             </span>
-            <button onClick={goToNextPage} disabled={currentPage === totalPages}>
+            <button
+              onClick={goToNextPage}
+              disabled={currentPage === totalPages}
+            >
               다음
             </button>
           </div>

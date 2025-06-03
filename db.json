@@ -100,7 +100,7 @@
       "title": "첫 게시글입니다!",
       "content": "안녕하세요. 첫 글이에요.",
       "createdAt": "2025-05-22",
-      "views": 32
+      "views": 49
     },
     {
       "id": "2",
@@ -108,7 +108,7 @@
       "title": "두 번째 글",
       "content": "게시판 잘 작동하네요 :)",
       "createdAt": "2025-05-23",
-      "views": 8
+      "views": 9
     },
     {
       "id": "3",
@@ -143,7 +143,7 @@
       "views": 3
     },
     {
-      "id": 1748340648348,
+      "id": "1748340648348",
       "title": "테스트입니다",
       "content": "잘 작동하나요?",
       "userId": 1,
@@ -151,7 +151,7 @@
       "views": 0
     },
     {
-      "id": 1748612405100,
+      "id": "1748612405100",
       "title": "김성민",
       "content": "ㄱㅁㅇㅁㄴㅇ",
       "userId": 1,
@@ -159,7 +159,7 @@
       "views": 2
     },
     {
-      "id": 1748612444040,
+      "id": "1748612444040",
       "title": "김성민",
       "content": "다시 태어났어요\n",
       "userId": 1,
@@ -167,7 +167,7 @@
       "views": 0
     },
     {
-      "id": 1748614931831,
+      "id": "1748614931831",
       "title": "asf",
       "content": "asf",
       "userId": 1,
@@ -175,7 +175,7 @@
       "views": 1
     },
     {
-      "id": 1748616834464,
+      "id": "1748616834464",
       "title": "asdf",
       "content": "asdf",
       "userId": 1,
@@ -183,7 +183,7 @@
       "views": 1
     },
     {
-      "id": 1748616937098,
+      "id": "1748616937098",
       "title": "asfd",
       "content": "asdf",
       "userId": 1,
@@ -193,7 +193,7 @@
   ],
   "comments": [
     {
-      "id": 1,
+      "id": "1",
       "postId": 1,
       "userId": 4,
       "text": "축하드립니다!",
@@ -204,7 +204,7 @@
       ]
     },
     {
-      "id": 2,
+      "id": "2",
       "postId": 1,
       "userId": 2,
       "text": "잘 보고 갑니다~",
@@ -215,7 +215,7 @@
       ]
     },
     {
-      "id": 3,
+      "id": "3",
       "postId": 2,
       "userId": 1,
       "text": "응원합니다 :)",
@@ -226,7 +226,7 @@
       "postId": 1,
       "userId": 3,
       "text": "ㅁㄴㅇㄹ",
-      "id": 5,
+      "id": "5",
       "likes": 1,
       "likedUserIds": [
         "1"
@@ -236,7 +236,7 @@
       "postId": 1,
       "userId": 3,
       "text": "123",
-      "id": 6,
+      "id": "6",
       "likes": 1,
       "likedUserIds": [
         "1"
@@ -252,11 +252,20 @@
       "postId": 1,
       "userId": 1,
       "text": "asdf",
-      "id": 7,
+      "id": "7",
       "likes": 1,
       "likedUserIds": [
         "1"
       ]
+    },
+    {
+      "id": "ae58",
+      "postId": 1,
+      "userId": "4",
+      "text": "ㅇㅇㅇㅇㅇ",
+      "createdAt": "2025-06-03T06:41:05.539Z",
+      "likes": 0,
+      "likedUserIds": []
     }
   ],
   "users": [
