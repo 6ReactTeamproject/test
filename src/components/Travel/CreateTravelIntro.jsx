@@ -14,10 +14,10 @@ export default function CreateTravelIntro() {
 
   useEffect(() => {
     if (!user) {
-      alert("로그인이 필요한 기능입니다.");
       navigate("/login");
+      alert("로그인이 필요한 기능입니다.");
     }
-  }, [user, navigate]);
+  }, []);
 
   function handleCreatePost() {
     if (!travelTitle.trim() || !travelContent.trim()) {

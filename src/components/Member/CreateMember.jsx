@@ -12,14 +12,6 @@ function CreateMember() {
   const [memberContent, setMemberContent] = useState("");
   const [memberPicture, setMemberPicture] = useState("");
 
-  // 비로그인 사용자는 진입 차단
-  useEffect(() => {
-    if (!user) {
-      alert("로그인이 필요한 기능입니다.");
-      navigate("/login");
-    }
-  }, [user, navigate]);
-
   const handleSubmit = () => {
     fetch(`${API_URL}`, {
       method: "POST",

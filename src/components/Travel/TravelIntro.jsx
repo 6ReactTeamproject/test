@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './travel.css';
-
+import { useUser } from "./UserContext";
+import HandleAuth from "./HandleAuth";
 export default function TravelIntro() {
   const [travelPlaces, setTravelPlaces] = useState([]);
   const navigate = useNavigate();
-
+  const { user } = useUser();
   useEffect(() => {
     fetch("http://localhost:3001/semester")
       .then(res => res.json())
@@ -25,7 +26,7 @@ export default function TravelIntro() {
         ))}
       </div>
       <button onClick={() => navigate("/")} className="back-button">🏠 홈으로</button>
-      <button onClick={() => navigate("/intro/new")} className="floating-add-button">➕ 소개 추가</button>
+      <button onClick={() => HandleAuth(user, navigate,"/intro/new")} className="floating-add-button">➕ 소개 추가</button>
     </div>
   );
 }

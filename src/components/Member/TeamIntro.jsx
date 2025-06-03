@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../travel/travel.css";
+import { useUser } from "../Travel/UserContext";
+import HandleAuth from "../Travel/HandleAuth";
 const API_URL = "http://localhost:3001/members";
 
 export default function TeamIntro() {
   const [members, setMembers] = useState([]);
   const navigate = useNavigate();
-
+  const { user } = useUser();
   useEffect(() => {
     fetch(API_URL)
       .then((res) => res.json())
@@ -15,7 +17,6 @@ export default function TeamIntro() {
 
   return (
     <div className="page-container">
-      {/* ✅ 왼쪽 상단 홈 버튼 */}
       <button onClick={() => navigate("/")} className="back-button-fixed">🏠 홈으로</button>
 
       <h1>조원 소개</h1>
@@ -33,7 +34,7 @@ export default function TeamIntro() {
         ))}
       </div>
       <button
-        onClick={() => navigate("/team/new")}
+        onClick={() => HandleAuth(user, navigate,"/intro/new")}
         className="floating-add-button"
       >
         ➕ 멤버 추가
