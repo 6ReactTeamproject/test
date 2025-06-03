@@ -13,7 +13,9 @@ function CommentList({ comments, setComments, users, currentUser }) {
         const likedUserIds = Array.isArray(comment.likedUserIds)
           ? comment.likedUserIds
           : [];
-        const alreadyLiked = likedUserIds.includes(currentUser.id);
+        const alreadyLiked = currentUser
+          ? likedUserIds.includes(currentUser.id)
+          : false;
 
         return (
           <li key={comment.id}>
