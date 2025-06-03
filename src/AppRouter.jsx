@@ -18,7 +18,7 @@ import Home from "./Home.jsx";
 import Login from "./components/Login/Login.jsx";
 import Signup from "./components/Login/Signup.jsx";
 
-export default function AppRouter({ setUser }) {
+export default function AppRouter({ user, setUser }) {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
@@ -37,8 +37,9 @@ export default function AppRouter({ setUser }) {
 
       {/* 게시판 관련 라우팅 */}
       <Route path="/post" element={<PostBoard />} />
-      <Route path="/post/:id" element={<PostDetail />} />
+      <Route path="/post/:id" element={<PostDetail currentUser={user} />} />
       <Route path="/post/write" element={<WritePost />} />
+      <Route path="/edit/:id" element={<WritePost />} />
     </Routes>
   );
 }
