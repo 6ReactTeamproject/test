@@ -14,15 +14,16 @@ export function Signup() {
 
   const navigate = useNavigate();
 
-  const nameRegex = /^[가-힣a-zA-Z]+$/;     // 이름에 공백 허용x
-  const idRegex = /^[a-zA-Z0-9]+$/;         // 아이디에 영문, 숫자만 허용
-  const passwordRegex = /^[^\u3131-\uD79D]+$/;  // 비밀번호에 한글 x, (u3131-\uD79D는 유니코드 문자 범위에서 한글)
+  const nameRegex = /^[가-힣a-zA-Z]+$/; // 이름에 공백 허용x
+  const idRegex = /^[a-zA-Z0-9]+$/; // 아이디에 영문, 숫자만 허용
+  const passwordRegex = /^[^\u3131-\uD79D]+$/; // 비밀번호에 한글 x, (u3131-\uD79D는 유니코드 문자 범위에서 한글)
 
   const isNameValid = nameRegex.test(name);
   const isUserIdValid = idRegex.test(userId);
   const isPasswordValid = passwordRegex.test(passwd);
 
-  const checkDuplicateId = async () => {      // 아이디 입력칸에 입력하고 중복확인 버튼을 눌렀을때 실행
+  const checkDuplicateId = async () => {
+    // 아이디 입력칸에 입력하고 중복확인 버튼을 눌렀을때 실행
     if (!userId) {
       setIdCheckMsg("아이디를 입력하세요.");
       setIdCheckColor("red");
@@ -35,10 +36,11 @@ export function Signup() {
     }
 
     try {
-      const res = await fetch(`${API_URL}?loginId=${userId}`);    // api_url?loginId=입력값 으로 fetch 요청
-      const users = await res.json();     // json 배열을 받음
+      const res = await fetch(`${API_URL}?loginId=${userId}`); // api_url?loginId=입력값 으로 fetch 요청
+      const users = await res.json(); // json 배열을 받음
 
-      if (users.length > 0) {           // json 배열을 받아서 길이가 0이면 사용가능, 1 이상이면 이미 존재하는 아이디입니다
+      if (users.length > 0) {
+        // json 배열을 받아서 길이가 0이면 사용가능, 1 이상이면 이미 존재하는 아이디입니다
         setIdCheckMsg("이미 존재하는 아이디입니다.");
         setIdCheckColor("red");
       } else {
@@ -110,7 +112,9 @@ export function Signup() {
 
   return (
     <div className="signup-page">
-      <button onClick={() => navigate("/")} className="back-button">🏠 홈으로</button>
+      <button onClick={() => navigate("/")} className="back-button">
+        🏠 홈으로
+      </button>
 
       <div className="signup-box">
         <h2>회원가입</h2>
@@ -121,7 +125,9 @@ export function Signup() {
           placeholder="이름 (한글/영어만)"
         />
         {name && !isNameValid && (
-          <div className="warn">이름에는 숫자나 특수문자를 사용할 수 없습니다.</div>
+          <div className="warn">
+            이름에는 숫자나 특수문자를 사용할 수 없습니다.
+          </div>
         )}
 
         <div className="id-check">
@@ -138,9 +144,7 @@ export function Signup() {
         {userId && !isUserIdValid && (
           <div className="warn">특수문자 또는 한글은 사용할 수 없습니다.</div>
         )}
-        {idCheckMsg && (
-          <div style={{ color: idCheckColor }}>{idCheckMsg}</div>
-        )}
+        {idCheckMsg && <div style={{ color: idCheckColor }}>{idCheckMsg}</div>}
 
         <input
           type="password"
