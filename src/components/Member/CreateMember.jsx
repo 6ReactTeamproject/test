@@ -26,10 +26,6 @@ function CreateMember() {
     }).then(() => {
       alert("멤버가 생성되었습니다.");
       navigate("/team");
-      setMemberName("");
-      setMemberPicture("");
-      setMemberRole("");
-      setMemberContent("");
     });
   };
 

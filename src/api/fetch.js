@@ -16,15 +16,21 @@ export async function apiQuery(endpoint, queryObj) {
 }
 
 // POST: 데이터 생성
-export async function apiPost(endpoint, data) {
-  const res = await fetch(`${API_BASE}/${endpoint}`, {
+export async function apiPost(table, data, onSuccess) {
+  const res = await fetch(`${API_BASE}/${table}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
+
   if (!res.ok) throw new Error("POST 실패");
-  return await res.json();
+
+  const result = await res.json();
+
+  if (onSuccess) onSuccess();
+  return result;
 }
+
 
 // PUT: 전체 수정
 export async function apiPut(endpoint, id, data) {

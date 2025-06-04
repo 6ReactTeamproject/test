@@ -39,6 +39,14 @@
       "role": "",
       "profileImage": "사진링크",
       "introduction": "추가설명"
+    },
+    {
+      "name": "asdf",
+      "role": "",
+      "profileImage": "",
+      "introduction": "asdf",
+      "authorId": "1",
+      "id": "0eGyW-u"
     }
   ],
   "semester": [
