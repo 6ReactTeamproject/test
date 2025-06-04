@@ -6,7 +6,7 @@ export default function CreateMember() {
   const [inputs, setInputs] = useState({});
 
   const isFilled = (data) =>
-    data.name?.trim() && data.role?.trim() && data.introduction?.trim();
+    data.name?.trim() && data.introduction?.trim();
 
   return (
     <CreateButton
@@ -17,14 +17,13 @@ export default function CreateMember() {
       setInputs={setInputs}
     >
       <input name="name" placeholder="이름" />
-      <input name="role" placeholder="역할" />
-      <textarea name="introduction" placeholder="조원 소개" />
       <ImageUpload
         name="profileImage"
         onLoad={(result) =>
           setInputs((prev) => ({ ...prev, profileImage: result }))
         }
       />
+      <textarea name="introduction" placeholder="조원 소개" />
     </CreateButton>
   );
 }

@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import "./travel.css";
-import HandleAuth from "./HandleAuth";
 import { useUser } from "./UserContext";
 import { useEffect, useState } from "react";
 import { apiGet } from "../../api/fetch";
@@ -23,6 +22,15 @@ export default function IntroList({
       .catch(err => console.error("데이터 불러오기 실패:", err));
   }, [endpoint]);
 
+  const handleAddClick = () => {
+    if (!user) {
+      alert("로그인이 필요한 기능입니다.");
+      navigate("/login");
+    } else {
+      navigate(`/${pathPrefix}/new`);
+    }
+  };
+
   return (
     <div className="page-container">
       <h1>{heading}</h1>
@@ -40,7 +48,7 @@ export default function IntroList({
         ))}
       </div>
       <button
-        onClick={() => HandleAuth(user, navigate, `/${pathPrefix}/new`)}
+        onClick={handleAddClick}
         className="floating-add-button"
       >
         ➕ 추가

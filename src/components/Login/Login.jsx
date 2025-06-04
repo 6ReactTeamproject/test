@@ -7,7 +7,7 @@ export default function Login() {
   const [loginId, setLoginId] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { setUser } = useUser(); // context에서 setUser 가져옴
+  const { setUser } = useUser();
 
   const handleLogin = () => {
     fetch(`http://localhost:3001/users?loginId=${loginId}&password=${password}`)
@@ -16,8 +16,7 @@ export default function Login() {
         if (data.length > 0) {
           const user = data[0];
           localStorage.setItem("user", JSON.stringify(user));
-          setUser(user); // context로 업데이트
-          // 세션에 저장된 마지막 비인증 페이지 경로 가져오기
+          setUser(user); 
           const lastPublic = sessionStorage.getItem("lastPublicPath") || "/";
           // 만약 lastPublic이 로그인 또는 회원가입 페이지라면 기본값을 "/"
           const target =
@@ -33,9 +32,6 @@ export default function Login() {
 
   return (
     <div className="login-page">
-      <button onClick={() => navigate("/")} className="back-button">
-        🏠 홈으로
-      </button>
       <div className="login-box">
         <input
           value={loginId}

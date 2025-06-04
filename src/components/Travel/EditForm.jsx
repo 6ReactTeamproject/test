@@ -18,11 +18,22 @@ export default function EditForm({
     return initial;
   });
 
+  const isFilled = (data) =>
+    fields.every(({ key }) => {
+      const value = data[key];
+      return typeof value === "string" ? value.trim() !== "" : Boolean(value);
+    });
+
   const handleChange = (key, value) => {
     setFormData((prev) => ({ ...prev, [key]: value }));
   };
 
   const handleUpdate = () => {
+    if (!isFilled(formData)) {
+      alert("모든 필수 항목을 입력해주세요.");
+      return;
+    }
+
     apiPatch(endpoint, data.id, formData).then(() => {
       alert("수정이 완료되었습니다.");
       onDone({ ...data, ...formData });
