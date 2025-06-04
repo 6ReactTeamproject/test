@@ -58,7 +58,7 @@ const WritePost = () => {
   return (
     <div>
       <h2>{id ? "게시글 수정" : "새 글 작성"}</h2>
-      <PostForm post={post} setPost={setPost} onSubmit={handleSubmit} />
+      <PostForm post={post} setPost={setPost} onSubmit={handleSubmit} id={id} />
     </div>
   );
 };

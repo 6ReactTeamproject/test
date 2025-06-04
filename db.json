@@ -100,7 +100,7 @@
       "title": "첫 게시글입니다!",
       "content": "안녕하세요. 첫 글이에요.",
       "createdAt": "2025-05-22",
-      "views": 66
+      "views": 70
     },
     {
       "id": "2",
@@ -188,14 +188,6 @@
       "content": "asdf",
       "userId": 1,
       "createdAt": "2025-05-30T14:55:37.098Z",
-      "views": 0
-    },
-    {
-      "id": "2a7c",
-      "title": "1234",
-      "content": "23123224",
-      "userId": "4",
-      "createdAt": "2025-06-04",
       "views": 0
     }
   ],

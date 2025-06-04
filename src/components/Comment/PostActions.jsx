@@ -10,7 +10,7 @@ function PostActions({ post, postUser, currentUser, id, navigate }) {
               if (window.confirm("게시글을 삭제할까요?")) {
                 fetch(`http://localhost:3001/posts/${id}`, {
                   method: "DELETE",
-                }).then(() => navigate("/"));
+                }).then(() => navigate(-1));
               }
             }}
           >
