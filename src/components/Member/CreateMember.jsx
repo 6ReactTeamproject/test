@@ -1,56 +1,25 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useUser } from "../Travel/UserContext";
+import { useState } from "react";
+import CreateButton from "../Travel/CreateButton";
 
-const API_URL = "http://localhost:3001/members";
+export default function CreateMember() {
+  const [profileImage, setProfileImage] = useState("");
 
-function CreateMember() {
-  const navigate = useNavigate();
-  const { user } = useUser();
-  const [memberName, setMemberName] = useState("");
-  const [memberRole, setMemberRole] = useState("");
-  const [memberContent, setMemberContent] = useState("");
-  const [memberPicture, setMemberPicture] = useState("");
-
-  const handleSubmit = () => {
-    fetch(`${API_URL}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: memberName,
-        role: memberRole,
-        profileImage: memberPicture,
-        introduction: memberContent,
-        authorId: user.id, // 작성자 ID 포함
-      }),
-    }).then(() => {
-      alert("멤버가 생성되었습니다.");
-      navigate("/team");
-    });
-  };
+  const isFilled = (data) =>
+    data.name?.trim() &&
+    data.role?.trim() &&
+    data.introduction?.trim();
 
   return (
-    <>
-      <h2>조원 추가</h2>
-      <div>
-        <input
-          value={memberName}
-          onChange={(e) => setMemberName(e.target.value)}
-          placeholder="이름"
-        />
-        <br />
-        <input
-          value={memberRole}
-          onChange={(e) => setMemberRole(e.target.value)}
-          placeholder="역할"
-        />
-        <br />
-        <textarea
-          value={memberContent}
-          onChange={(e) => setMemberContent(e.target.value)}
-          placeholder="내용"
-        />
-        <br />
+    <CreateButton
+      table="members"
+      redirect="/team"
+      empty={isFilled}
+    >
+      <>
+        <input name="name" placeholder="이름" />
+        <input name="role" placeholder="역할" />
+        <textarea name="introduction" placeholder="조원 소개" />
+        
         <input
           type="file"
           accept="image/*"
@@ -59,17 +28,15 @@ function CreateMember() {
             if (file) {
               const reader = new FileReader();
               reader.onloadend = () => {
-                setMemberPicture(reader.result);
+                setProfileImage(reader.result);
               };
               reader.readAsDataURL(file);
             }
           }}
         />
-        <br />
-        <button onClick={handleSubmit}>추가</button>
-      </div>
-    </>
+        {/* 이미지 값은 inputs가 아닌 profileImage로 따로 관리되므로, props로는 넘기지 않음 */}
+        <input type="hidden" name="profileImage" value={profileImage} />
+      </>
+    </CreateButton>
   );
 }
-
-export default CreateMember;
