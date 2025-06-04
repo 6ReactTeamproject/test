@@ -1,12 +1,11 @@
 import { Routes, Route } from "react-router-dom";
-import TravelIntro from "./components/Travel/TravelIntro";
-import CreateButton from "./components/Travel/CreateButton.jsx";
-import DetailTravel from "./components/Travel/DetailTravel";
+import TravelIntro from "./pages/TravelIntro.jsx";
+import DetailTravel from "./pages/DetailTravel.jsx";
 
 // 팀 소개 관련 컴포넌트
-import TeamIntro from "./components/Member/TeamIntro";
-import CreateMember from "./components/Member/CreateMember";
-import ReadMember from "./components/Member/ReadMember";
+import TeamIntro from "./pages/TeamIntro.jsx";
+import CreateMember from "./pages/CreateMember.jsx";
+import DetailMember from "./pages/DetailMember.jsx";
 
 // 게시판 관련 컴포넌트
 import PostBoard from "./components/Board/Board.jsx";
@@ -17,7 +16,7 @@ import WritePost from "./components/Comment/WritePost";
 import Home from "./Home.jsx";
 import Login from "./components/Login/Login.jsx";
 import Signup from "./components/Login/Signup.jsx";
-import CreateTravelIntro from "./components/Travel/CreateTravelIntro.jsx";
+import CreateTravelIntro from "./pages/CreateTravelIntro.jsx";
 
 import Layout from "./layout/layout.jsx";
 
@@ -37,7 +36,7 @@ export default function AppRouter({ user, setUser }) {
         {/* 팀 소개 관련 라우팅 */}
         <Route path="/team" element={<TeamIntro />} />
         <Route path="/team/new" element={<CreateMember />} />
-        <Route path="/team/:id" element={<ReadMember />} />
+        <Route path="/team/:id" element={<DetailMember />} />
 
         {/* 게시판 관련 라우팅 */}
         <Route path="/post" element={<PostBoard />} />

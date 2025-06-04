@@ -1,23 +1,24 @@
 import { useState } from "react";
-import CreateButton from "./CreateButton";
+import CreateButton from "../components/Travel/CreateButton";
 
-export default function CreateTravelIntro() {
-  const [imageUrl, setImageUrl] = useState("");
+export default function CreateMember() {
+  const [profileImage, setProfileImage] = useState("");
   const [inputs, setInputs] = useState({});
 
   const isFilled = (data) =>
-    data.title?.trim() && data.description?.trim(); // 이미지 제외
+    data.name?.trim() && data.role?.trim() && data.introduction?.trim();
 
   return (
     <CreateButton
-      table="semester"
-      redirect="/intro"
+      endpoint="members"
+      redirect="/team"
       empty={isFilled}
       inputs={inputs}
       setInputs={setInputs}
     >
-      <input name="title" placeholder="현지학기제 장소" />
-      <textarea name="description" placeholder="현지학기제 소개" />
+      <input name="name" placeholder="이름" />
+      <input name="role" placeholder="역할" />
+      <textarea name="introduction" placeholder="조원 소개" />
 
       <input
         type="file"
@@ -27,10 +28,10 @@ export default function CreateTravelIntro() {
           if (file) {
             const reader = new FileReader();
             reader.onloadend = () => {
-              setImageUrl(reader.result);
+              setProfileImage(reader.result);
               setInputs(prev => ({
                 ...prev,
-                imageUrl: reader.result
+                profileImage: reader.result
               }));
             };
             reader.readAsDataURL(file);

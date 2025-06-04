@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import DeleteButton from "./DeleteButton";
+import DeleteButton from "../components/Travel/DeleteButton";
 import EditTravelIntro from "./EditTravelIntro";
-import { useUser } from "./UserContext";
-import './travel.css';
+import { useUser } from "../components/Travel/UserContext";
+import '../components/Travel/travel.css';
 
 export default function DetailTravel() {
   const [travelPlace, setTravelPlace] = useState(null);
@@ -41,7 +41,7 @@ export default function DetailTravel() {
             {isOwner && (
               <div className="button-group">
                 <button onClick={() => setIsEditing(true)} className="add-button">✏️ 수정</button>
-                <DeleteButton table="semester" Id={travelPlace.id} backaddress="/intro" />
+                <DeleteButton endpoint="semester" Id={travelPlace.id} backaddress="/intro" />
               </div>
             )}
           </>
