@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import TravelIntro from "./components/Travel/TravelIntro";
-import CreateTravelIntro from "./components/Travel/CreateTravelIntro";
+import CreateButton from "./components/Travel/CreateButton.jsx";
 import DetailTravel from "./components/Travel/DetailTravel";
 
 // 팀 소개 관련 컴포넌트
@@ -17,6 +17,7 @@ import WritePost from "./components/Comment/WritePost";
 import Home from "./Home.jsx";
 import Login from "./components/Login/Login.jsx";
 import Signup from "./components/Login/Signup.jsx";
+import CreateTravelIntro from "./components/Travel/CreateTravelIntro.jsx";
 
 import Layout from "./layout/layout.jsx";
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import DeleteTravelIntro from "./DeleteTravelIntro";
+import DeleteButton from "./DeleteButton";
 import EditTravelIntro from "./EditTravelIntro";
 import { useUser } from "./UserContext";
 import './travel.css';
@@ -41,7 +41,7 @@ export default function DetailTravel() {
             {isOwner && (
               <div className="button-group">
                 <button onClick={() => setIsEditing(true)} className="add-button">✏️ 수정</button>
-                <DeleteTravelIntro travelId={travelPlace.id} />
+                <DeleteButton table="semester" Id={travelPlace.id} backaddress="/intro" />
               </div>
             )}
           </>
