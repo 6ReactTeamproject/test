@@ -27,8 +27,8 @@ const DropdownMenu = ({ trigger, options = [] }) => {
           style={{
             position: "absolute",
             top: "100%",
-            left: 0,
-            right: "auto",
+            left: "auto",
+            right: 0,
             background: "#fff",
             border: "1px solid #ccc",
             borderRadius: "8px",

@@ -26,15 +26,23 @@ const Layout = ({ children }) => {
         </div>
       </header>
 
-      <nav style={{ backgroundColor: "#e9ecef", padding: "10px" }}>
-        <DropdownMenu
-          trigger={<p>메뉴</p>}
-          options={[
-            { label: "여행 소개", onClick: () => nav("/intro") },
-            { label: "멤버 소개", onClick: () => nav("/team") },
-            { label: "게시판", onClick: () => nav("/post") },
-          ]}
-        />
+      <nav
+        style={{
+          backgroundColor: "#e9ecef",
+          padding: "10px",
+          display: "flex",
+        }}
+      >
+        <div style={{ marginLeft: "auto" }}>
+          <DropdownMenu
+            trigger={<p>메뉴</p>}
+            options={[
+              { label: "여행 소개", onClick: () => nav("/intro") },
+              { label: "멤버 소개", onClick: () => nav("/team") },
+              { label: "게시판", onClick: () => nav("/post") },
+            ]}
+          />
+        </div>
       </nav>
 
       <main style={{ padding: "20px" }}>{children}</main>
