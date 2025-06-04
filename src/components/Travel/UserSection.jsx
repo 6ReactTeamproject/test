@@ -37,20 +37,8 @@ export function UserSection() {
           <p>{user?.name ?? "Guest"}님 환영합니다!</p>
           {!user && (
             <>
-              <button
-                onClick={() => {
-                  nav("/login");
-                }}
-              >
-                로그인
-              </button>
-              <button
-                onClick={() => {
-                  nav("/signup");
-                }}
-              >
-                회원가입
-              </button>
+              <button onClick={() => nav("/login")}>로그인</button>
+              <button onClick={() => nav("/signup")}>회원가입</button>
             </>
           )}
         </>
