@@ -22,13 +22,13 @@ export default function Home() {
             <br />
           </>
         )} */}
-        <button onClick={() => navigate("/intro")}>여행 소개</button>
+        {/* <button onClick={() => navigate("/intro")}>여행 소개</button>
         <br />
         <br />
         <button onClick={() => navigate("/team")}>멤버 소개</button>
         <br />
         <br />
-        <button onClick={() => navigate("/post")}>게시판</button>
+        <button onClick={() => navigate("/post")}>게시판</button> */}
       </div>
     </>
   );
