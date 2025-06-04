@@ -28,13 +28,13 @@ export function UserSection() {
       {user ? (
         <>
           {" "}
-          <p>{user?.name ?? "Guest"}님 환영합니다!</p>
+          <p>{user.name}님 환영합니다!</p>
           {user && <button onClick={handleLogout}>로그아웃</button>}
         </>
       ) : (
         <>
           {" "}
-          <p>{user?.name ?? "Guest"}님 환영합니다!</p>
+          <p>Guest님 환영합니다!</p>
           {!user && (
             <>
               <button onClick={() => nav("/login")}>로그인</button>
