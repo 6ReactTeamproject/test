@@ -4,7 +4,6 @@
       "id": "1",
       "authorId": "2",
       "name": "",
-      "role": "",
       "profileImage": "",
       "introduction": ""
     },
@@ -12,7 +11,6 @@
       "id": "2",
       "authorId": "3",
       "name": "권혁빈",
-      "role": "",
       "profileImage": "사진링크",
       "introduction": "추가설명."
     },
@@ -20,33 +18,29 @@
       "id": "3",
       "authorId": "4",
       "name": "김성민",
-      "role": "",
       "profileImage": "사진링크",
       "introduction": "추가설명"
     },
     {
       "id": "4",
       "authorId": "1",
-      "name": "김창민",
-      "role": "게시판 담당",
-      "profileImage": "사진링크",
+      "name": "김창민ㅁ",
+      "profileImage": "사진링크ㅁ",
       "introduction": "추가설명"
     },
     {
       "id": "5",
       "authorId": "1",
-      "name": "이유찬",
-      "role": "",
-      "profileImage": "사진링크",
-      "introduction": "추가설명"
+      "name": "이유찬ㅁ",
+      "profileImage": "사진링크ㅁ",
+      "introduction": "추가설명ㅁㅁ"
     },
     {
-      "name": "asdf",
-      "role": "",
-      "profileImage": "",
-      "introduction": "asdf",
+      "name": "aㅁ",
+      "introduction": "aㅁㅁ",
       "authorId": "1",
-      "id": "0eGyW-u"
+      "id": "po6DFM7",
+      "profileImage": "ㅁㅁ"
     }
   ],
   "semester": [
@@ -77,6 +71,24 @@
       "title": "asdf",
       "description": "asdf",
       "imageUrl": "https://plus.unsplash.com/premium_photo-1666700698920-d2d2bba589f8?q=80&w=3132&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {
+      "description": "ㅁ",
+      "title": "ㅁ",
+      "authorId": "1",
+      "id": "Z4ghxoR"
+    },
+    {
+      "title": "ㅁ",
+      "description": "ㅁ",
+      "authorId": "1",
+      "id": "onSTg3G"
+    },
+    {
+      "title": "a",
+      "description": "a",
+      "authorId": "1",
+      "id": "Ud3r7md"
     }
   ],
   "posts": [
@@ -151,7 +163,6 @@
       "userId": 1,
       "createdAt": "2025-05-30T13:40:44.040Z",
       "views": 1
-
     },
     {
       "id": "1748614931831",

@@ -16,8 +16,8 @@ export async function apiQuery(endpoint, queryObj) {
 }
 
 // POST: 데이터 생성
-export async function apiPost(table, data, onSuccess) {
-  const res = await fetch(`${API_BASE}/${table}`, {
+export async function apiPost(endpoint, data, onSuccess) {
+  const res = await fetch(`${API_BASE}/${endpoint}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),

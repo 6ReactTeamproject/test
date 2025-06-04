@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import EditMember from "./EditMember";
-import DeleteButton from "../Travel/DeleteButton";
-import { useUser } from "../Travel/UserContext";
-import '../travel/travel.css';
+import DeleteButton from "../components/Travel/DeleteButton";
+import { useUser } from "../components/Travel/UserContext";
+import '../components/Travel/travel.css';
 
 const API_URL = "http://localhost:3001/members";
 
-function ReadMember() {
+function DetailMember() {
   const [members, setMembers] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const { id } = useParams();
@@ -44,13 +44,13 @@ function ReadMember() {
             <>
               <img src={members.profileImage} alt="preview" style={{ width: "100%", borderRadius: "8px" }} />
               <br />
-              <strong>{members.name}</strong> - {members.role}
+              <strong>{members.name}</strong>
               <p>{members.introduction}</p>
 
               {isOwner && (
                 <div className="button-group">
                   <button onClick={() => setIsEditing(true)} className="add-button">✏️ 수정</button>
-                  <DeleteButton table="members" Id={members.id} backaddress="/team" />
+                  <DeleteButton endpoint="members" Id={members.id} backaddress="/team" />
                 </div>
               )}
             </>
@@ -61,4 +61,4 @@ function ReadMember() {
   );
 }
 
-export default ReadMember;
+export default DetailMember;
