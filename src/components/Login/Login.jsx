@@ -11,13 +11,13 @@ export default function Login() {
 
   const handleLogin = () => {
     fetch(`http://localhost:3001/users?loginId=${loginId}&password=${password}`)
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         if (data.length > 0) {
           const user = data[0];
           localStorage.setItem("user", JSON.stringify(user));
           setUser(user); // context로 업데이트
-          navigate("/");
+          navigate(-1);
         } else {
           alert("로그인 실패");
         }
@@ -26,17 +26,19 @@ export default function Login() {
 
   return (
     <div className="login-page">
-      <button onClick={() => navigate("/")} className="back-button">🏠 홈으로</button>
+      <button onClick={() => navigate("/")} className="back-button">
+        🏠 홈으로
+      </button>
       <div className="login-box">
         <input
           value={loginId}
-          onChange={e => setLoginId(e.target.value)}
+          onChange={(e) => setLoginId(e.target.value)}
           placeholder="아이디"
         />
         <input
           type="password"
           value={password}
-          onChange={e => setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
           placeholder="비밀번호"
         />
         <button onClick={handleLogin}>로그인</button>
