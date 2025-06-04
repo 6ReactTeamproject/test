@@ -41,12 +41,12 @@
       "introduction": "추가설명"
     },
     {
-      "id": "6",
-      "authorId": "1",
-      "name": "qwe",
-      "role": "qwe",
+      "name": "asdf",
+      "role": "",
       "profileImage": "",
-      "introduction": "qwe"
+      "introduction": "asdf",
+      "authorId": "1",
+      "id": "0eGyW-u"
     }
   ],
   "semester": [
@@ -77,20 +77,6 @@
       "title": "asdf",
       "description": "asdf",
       "imageUrl": "https://plus.unsplash.com/premium_photo-1666700698920-d2d2bba589f8?q=80&w=3132&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-    },
-    {
-      "id": "dae8",
-      "authorId": "1",
-      "title": "ㅁㄴㅇㄹ",
-      "description": "ㅁㄴㅇㄹ",
-      "imageUrl": "https://plus.unsplash.com/premium_photo-1666700698920-d2d2bba589f8?q=80&w=3132&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-    },
-    {
-      "id": "24AJNyd",
-      "title": "asdf",
-      "authorId": "1",
-      "description": "asdf",
-      "imageUrl": "https://plus.unsplash.com/premium_photo-1666700698920-d2d2bba589f8?q=80&w=3132&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     }
   ],
   "posts": [
@@ -108,7 +94,7 @@
       "title": "두 번째 글",
       "content": "게시판 잘 작동하네요 :)",
       "createdAt": "2025-05-23",
-      "views": 9
+      "views": 10
     },
     {
       "id": "3",
@@ -116,7 +102,7 @@
       "title": "안녕하세요",
       "content": "처음 달아봐요",
       "createdAt": "2025-05-23",
-      "views": 2
+      "views": 6
     },
     {
       "id": "4",
@@ -124,7 +110,7 @@
       "title": "그래요",
       "content": "이제 많이 올려라",
       "createdAt": "2025-05-23",
-      "views": 1
+      "views": 4
     },
     {
       "id": "5",
@@ -132,7 +118,7 @@
       "title": "ㅎㅇ",
       "content": "ㅇㅇ",
       "createdAt": "2025-05-23",
-      "views": 1
+      "views": 4
     },
     {
       "id": "6",
@@ -165,6 +151,7 @@
       "userId": 1,
       "createdAt": "2025-05-30T13:40:44.040Z",
       "views": 1
+
     },
     {
       "id": "1748614931831",
@@ -266,6 +253,24 @@
       "createdAt": "2025-06-04T02:40:35.503Z",
       "likes": 0,
       "likedUserIds": []
+    },
+    {
+      "postId": 4,
+      "userId": "1",
+      "text": "asdf",
+      "createdAt": "2025-06-03T06:49:50.804Z",
+      "likes": 0,
+      "likedUserIds": [],
+      "id": "yCAWc07"
+    },
+    {
+      "postId": 3,
+      "userId": "1",
+      "text": "sasdfadsf",
+      "createdAt": "2025-06-03T06:50:00.225Z",
+      "likes": 0,
+      "likedUserIds": [],
+      "id": "4k7KOLQ"
     }
   ],
   "users": [

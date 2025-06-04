@@ -16,13 +16,12 @@ function Root() {
   }, []);
 
   return (
-    <StrictMode>
+    
       <UserContext.Provider value={{ user, setUser }}>
         <BrowserRouter>
           <AppRouter setUser={setUser} />
         </BrowserRouter>
       </UserContext.Provider>
-    </StrictMode>
   );
 }
 
