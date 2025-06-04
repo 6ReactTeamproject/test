@@ -4,8 +4,11 @@ import { useUser } from "../Travel/UserContext";
 import { apiPost } from "../../api/fetch";
 import './travel.css';
 
-export default function CreateButton({ table, redirect, empty, children }) {
-  const [inputs, setInputs] = useState({});
+export default function CreateButton({ table, redirect, empty, children, inputs: outerInputs, setInputs: setOuterInputs }) {
+  const [innerInputs, setInnerInputs] = useState({});
+  const inputs = outerInputs ?? innerInputs;
+  const setInputs = setOuterInputs ?? setInnerInputs;
+
   const navigate = useNavigate();
   const { user } = useUser();
 
