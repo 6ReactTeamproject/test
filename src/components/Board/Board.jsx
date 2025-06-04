@@ -34,11 +34,16 @@ const Board = () => {
       const content = post.content?.toLowerCase() || "";
       const userId = post.userId?.toString();
       switch (searchType) {
-        case "title": return title.includes(keyword);
-        case "content": return content.includes(keyword);
-        case "title_content": return title.includes(keyword) || content.includes(keyword);
-        case "userId": return userId === keyword;
-        default: return false;
+        case "title":
+          return title.includes(keyword);
+        case "content":
+          return content.includes(keyword);
+        case "title_content":
+          return title.includes(keyword) || content.includes(keyword);
+        case "userId":
+          return userId === keyword;
+        default:
+          return false;
       }
     });
 
@@ -48,7 +53,10 @@ const Board = () => {
 
   const displayPosts = searchTerm.trim() ? filtered : posts;
   const indexOfLastPost = currentPage * postsPerPage;
-  const currentPosts = displayPosts.slice(indexOfLastPost - postsPerPage, indexOfLastPost);
+  const currentPosts = displayPosts.slice(
+    indexOfLastPost - postsPerPage,
+    indexOfLastPost
+  );
   const totalPages = Math.ceil(displayPosts.length / postsPerPage);
 
   const handleAddPost = (newPost) => {
@@ -60,20 +68,24 @@ const Board = () => {
       .then((res) => res.json())
       .then((data) => setPosts([data, ...posts]))
       .catch((err) => console.error("에러:", err));
-
   };
 
   return (
     <div>
       <h2>게시판</h2>
-      <PostForm onAddPost={handleAddPost} />
-      <SearchBar
-        searchTerm={searchTerm}
-        searchType={searchType}
-        onTermChange={setSearchTerm}
-        onTypeChange={setSearchType}
+      <button
+        onClick={() => {
+          navigate("/post/write");
+        }}
+      >
+        게시글 작성
+      </button>
+      {/* <PostForm onAddPost={handleAddPost} /> */}
+
+      <PostList
+        posts={currentPosts}
+        onClickPost={(id) => navigate(`/post/${id}`)}
       />
-      <PostList posts={currentPosts} onClickPost={(id) => navigate(`/post/${id}`)} />
       {displayPosts.length > 0 && (
         <Pagination
           currentPage={currentPage}
@@ -82,6 +94,12 @@ const Board = () => {
           onNext={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
         />
       )}
+      <SearchBar
+        searchTerm={searchTerm}
+        searchType={searchType}
+        onTermChange={setSearchTerm}
+        onTypeChange={setSearchType}
+      />
     </div>
   );
 };
