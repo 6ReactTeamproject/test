@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import EditMember from "./EditMember";
-import DeleteMember from "./DeleteMember";
+import DeleteButton from "../Travel/DeleteButton";
 import { useUser } from "../Travel/UserContext";
 import '../travel/travel.css';
 
@@ -50,7 +50,7 @@ function ReadMember() {
               {isOwner && (
                 <div className="button-group">
                   <button onClick={() => setIsEditing(true)} className="add-button">✏️ 수정</button>
-                  <DeleteMember memberId={members.id} onDelete={() => navigate("/team")} />
+                  <DeleteButton table="members" Id={members.id} backaddress="/team" />
                 </div>
               )}
             </>

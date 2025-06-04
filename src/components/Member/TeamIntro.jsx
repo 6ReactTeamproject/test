@@ -34,7 +34,7 @@ export default function TeamIntro() {
         ))}
       </div>
       <button
-        onClick={() => HandleAuth(user, navigate,"/intro/new")}
+        onClick={() => HandleAuth(user, navigate,"/team/new")}
         className="floating-add-button"
       >
         ➕ 멤버 추가
