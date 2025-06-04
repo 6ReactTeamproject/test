@@ -9,7 +9,7 @@ export default function EditTravelIntro({ travelPlace, onDone }) {
       onDone={onDone}
       fields={[
         { label: "장소명", key: "title" },
-        { label: "이미지 링크", key: "imageUrl" },
+        { label: "이미지 업로드", key: "imageUrl", type: "image" },
         { label: "장소 소개", key: "description", type: "textarea" }
       ]}
     />

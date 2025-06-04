@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./travel.css";
 import { apiPatch } from "../../api/fetch";
+import ImageUpload from "../common/ImageUpload";
 
 export default function EditForm({
   data,
@@ -38,6 +39,11 @@ export default function EditForm({
             <textarea
               value={formData[key]}
               onChange={(e) => handleChange(key, e.target.value)}
+            />
+          ) : type === "image" ? (
+            <ImageUpload
+              name={key}
+              onLoad={(result) => handleChange(key, result)}
             />
           ) : (
             <input

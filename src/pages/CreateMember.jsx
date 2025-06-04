@@ -1,8 +1,8 @@
 import { useState } from "react";
 import CreateButton from "../components/Travel/CreateButton";
+import ImageUpload from "../components/common/ImageUpload";
 
 export default function CreateMember() {
-  const [profileImage, setProfileImage] = useState("");
   const [inputs, setInputs] = useState({});
 
   const isFilled = (data) =>
@@ -19,24 +19,11 @@ export default function CreateMember() {
       <input name="name" placeholder="이름" />
       <input name="role" placeholder="역할" />
       <textarea name="introduction" placeholder="조원 소개" />
-
-      <input
-        type="file"
-        accept="image/*"
-        onChange={(e) => {
-          const file = e.target.files[0];
-          if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-              setProfileImage(reader.result);
-              setInputs(prev => ({
-                ...prev,
-                profileImage: reader.result
-              }));
-            };
-            reader.readAsDataURL(file);
-          }
-        }}
+      <ImageUpload
+        name="profileImage"
+        onLoad={(result) =>
+          setInputs((prev) => ({ ...prev, profileImage: result }))
+        }
       />
     </CreateButton>
   );
