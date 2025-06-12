@@ -2,6 +2,7 @@ import { useState } from "react";
 import CommentEditForm from "./CommentEditForm";
 import CommentActions from "./CommentActions";
 import LikeButton from "./LikeButton";
+import { apiPatch } from "../../api/fetch";
 import "../../styles/comment.css";
 
 export default function CommentList({
@@ -29,21 +30,33 @@ export default function CommentList({
     }
   };
 
-  const handleLike = (comment, alreadyLiked) => {
-    const updatedLikes = alreadyLiked
-      ? Math.max(0, comment.likes - 1)
-      : comment.likes + 1;
-    const updatedLikedUserIds = alreadyLiked
-      ? comment.likedUserIds.filter((id) => id !== currentUser.id)
-      : [...comment.likedUserIds, currentUser.id];
+  const handleLike = async (comment, alreadyLiked) => {
+    try {
+      const updatedLikes = alreadyLiked
+        ? Math.max(0, comment.likes - 1)
+        : comment.likes + 1;
+      const updatedLikedUserIds = alreadyLiked
+        ? comment.likedUserIds.filter((id) => id !== currentUser.id)
+        : [...comment.likedUserIds, currentUser.id];
 
-    setComments((prev) =>
-      prev.map((c) =>
-        c.id === comment.id
-          ? { ...c, likes: updatedLikes, likedUserIds: updatedLikedUserIds }
-          : c
-      )
-    );
+      // 서버에 좋아요 상태 업데이트
+      await apiPatch("comments", comment.id, {
+        likes: updatedLikes,
+        likedUserIds: updatedLikedUserIds,
+      });
+
+      // 클라이언트 상태 업데이트
+      setComments((prev) =>
+        prev.map((c) =>
+          c.id === comment.id
+            ? { ...c, likes: updatedLikes, likedUserIds: updatedLikedUserIds }
+            : c
+        )
+      );
+    } catch (error) {
+      console.error("좋아요 업데이트 실패:", error);
+      alert("좋아요 업데이트에 실패했습니다.");
+    }
   };
 
   return (
