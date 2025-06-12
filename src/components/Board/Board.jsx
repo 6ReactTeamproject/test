@@ -15,12 +15,16 @@ const Board = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchType, setSearchType] = useState("title_content");
   const [filtered, setFiltered] = useState([]);
+  const [members, setMembers] = useState([]);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     apiGet("posts")
       .then((data) => setPosts(data))
+      .catch((err) => console.error("에러:", err));
+    apiGet("members")
+      .then((data) => setMembers(data))
       .catch((err) => console.error("에러:", err));
   }, []);
 
@@ -60,6 +64,7 @@ const Board = () => {
       </button>
 
       <PostList
+        members={members}
         posts={currentPosts}
         onClickPost={(id) => navigate(`/post/${id}`)}
       />
