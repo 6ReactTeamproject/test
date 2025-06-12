@@ -1,0 +1,41 @@
+/* 게시글 상세 */
+.post-detail-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  padding: 40px 32px;
+  max-width: 800px;
+  margin: 40px auto 24px auto;
+}
+
+.post-detail-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 16px;
+}
+
+.post-detail-meta {
+  color: #888;
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+.post-detail-content {
+  font-size: 1.1rem;
+  color: #333;
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #ececec;
+  margin: 32px 0 24px 0;
+}
+
+h3 {
+  margin-top: 32px;
+  font-size: 1.2rem;
+  color: #2c3e50;
+}

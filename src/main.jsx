@@ -2,8 +2,7 @@ import { StrictMode, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import AppRouter from "./AppRouter";
-import { UserContext } from "./components/Travel/UserContext";
-import "./index.css";
+import { UserContext } from "./hooks/UserContext";
 
 function Root() {
   const [user, setUser] = useState(null);
@@ -16,12 +15,11 @@ function Root() {
   }, []);
 
   return (
-    
-      <UserContext.Provider value={{ user, setUser }}>
-        <BrowserRouter>
-          <AppRouter setUser={setUser} />
-        </BrowserRouter>
-      </UserContext.Provider>
+    <UserContext.Provider value={{ user, setUser }}>
+      <BrowserRouter>
+        <AppRouter setUser={setUser} />
+      </BrowserRouter>
+    </UserContext.Provider>
   );
 }
 
