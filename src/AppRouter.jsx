@@ -1,24 +1,24 @@
 import { Routes, Route } from "react-router-dom";
-import TravelIntro from "./pages/TravelIntro.jsx";
-import DetailTravel from "./pages/DetailTravel.jsx";
+import TravelIntro from "./pages/Travel/TravelIntro.jsx";
+import DetailTravel from "./pages/Travel/DetailTravel.jsx";
 
 // 팀 소개 관련 컴포넌트
-import TeamIntro from "./pages/TeamIntro.jsx";
-import CreateMember from "./pages/CreateMember.jsx";
-import DetailMember from "./pages/DetailMember.jsx";
+import TeamIntro from "./pages/Member/TeamIntro.jsx";
+import CreateMember from "./pages/Member/CreateMember.jsx";
+import DetailMember from "./pages/Member/DetailMember.jsx";
 
 // 게시판 관련 컴포넌트
 import PostBoard from "./components/Board/Board.jsx";
-import PostDetail from "./components/Comment/PostDetail.jsx";
-import WritePost from "./components/Comment/WritePost";
+import PostDetail from "./components/Post/PostDetail.jsx";
+import WritePost from "./components/Post/WritePost";
 
 // 기타 기본 페이지
-import Home from "./Home.jsx";
-import Login from "./components/Login/Login.jsx";
-import Signup from "./components/Login/Signup.jsx";
-import CreateTravelIntro from "./pages/CreateTravelIntro.jsx";
+import Home from "./pages/Home.jsx";
+import Login from "./pages/Auth/Login.jsx";
+import Signup from "./pages/Auth/Signup.jsx";
+import CreateTravelIntro from "./pages/Travel/CreateTravelIntro.jsx";
 
-import Layout from "./layout/layout.jsx";
+import Layout from "./layout/Layout.jsx";
 
 export default function AppRouter({ user, setUser }) {
   return (

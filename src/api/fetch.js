@@ -31,7 +31,6 @@ export async function apiPost(endpoint, data, onSuccess) {
   return result;
 }
 
-
 // PUT: 전체 수정
 export async function apiPut(endpoint, id, data) {
   const res = await fetch(`${API_BASE}/${endpoint}/${id}`, {

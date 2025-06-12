@@ -1,45 +1,44 @@
-function CommentForm({ currentUser, id, setComments }) {
+import { apiPost } from "../../api/fetch";
+import FormInput from "../common/FormInput";
+import FormButton from "../common/FormButton";
+import { useForm } from "../../hooks/useForm";
+import { MESSAGES } from "../../constants";
+import "../../styles/form.css";
+
+export default function CommentForm({ currentUser, id, setComments }) {
+  const { values, handleChange, reset } = useForm({ text: "" });
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
-    const text = formData.get("text").trim();
-    if (!text) return;
+    if (!values.text.trim()) {
+      alert(MESSAGES.REQUIRED_FIELD);
+      return;
+    }
 
-    fetch("http://localhost:3001/comments", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        postId: Number(id),
-        userId: currentUser?.id,
-        text,
-        createdAt: new Date().toISOString(),
-        likes: 0,
-        likedUserIds: [],
-      }),
-    }).then(() => {
-      e.target.reset();
-      fetch(`http://localhost:3001/comments?postId=${id}`)
-        .then((res) => res.json())
-        .then((data) => {
-          const enriched = data.map((c) => ({
-            ...c,
-            createdAt: c.createdAt || new Date().toISOString(),
-            likes: c.likes || 0,
-            likedUserIds: Array.isArray(c.likedUserIds) ? c.likedUserIds : [],
-          }));
-          setComments(enriched);
-        });
+    apiPost("comments", {
+      text: values.text,
+      postId: id,
+      userId: currentUser.id,
+      createdAt: new Date().toISOString(),
+      likes: 0,
+      likedUserIds: [],
+    }).then((newComment) => {
+      setComments((prev) => [...prev, newComment]);
+      reset();
     });
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" name="text" placeholder="댓글을 입력하세요" />
-      <button type="submit">댓글 작성</button>
+    <form onSubmit={handleSubmit} className="form-container">
+      <FormInput
+        name="text"
+        value={values.text}
+        onChange={handleChange}
+        placeholder="댓글을 입력하세요"
+      />
+      <FormButton type="submit" className="add-button">
+        댓글 작성
+      </FormButton>
     </form>
   );
 }
-
-export default CommentForm;

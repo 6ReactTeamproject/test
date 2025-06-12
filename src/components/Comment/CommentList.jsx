@@ -1,126 +1,91 @@
 import { useState } from "react";
+import CommentEditForm from "./CommentEditForm";
+import CommentActions from "./CommentActions";
+import LikeButton from "./LikeButton";
+import "../../styles/comment.css";
 
-function CommentList({ comments, setComments, users, currentUser }) {
+export default function CommentList({
+  comments,
+  setComments,
+  users,
+  currentUser,
+}) {
   const [editingCommentId, setEditingCommentId] = useState(null);
-  const [editingText, setEditingText] = useState("");
+
+  const handleEdit = (comment) => {
+    setEditingCommentId(comment.id);
+  };
+
+  const handleSave = (commentId, newText) => {
+    setComments((prev) =>
+      prev.map((c) => (c.id === commentId ? { ...c, text: newText } : c))
+    );
+    setEditingCommentId(null);
+  };
+
+  const handleDelete = (comment) => {
+    if (window.confirm("삭제할까요?")) {
+      setComments((prev) => prev.filter((c) => c.id !== comment.id));
+    }
+  };
+
+  const handleLike = (comment, alreadyLiked) => {
+    const updatedLikes = alreadyLiked
+      ? Math.max(0, comment.likes - 1)
+      : comment.likes + 1;
+    const updatedLikedUserIds = alreadyLiked
+      ? comment.likedUserIds.filter((id) => id !== currentUser.id)
+      : [...comment.likedUserIds, currentUser.id];
+
+    setComments((prev) =>
+      prev.map((c) =>
+        c.id === comment.id
+          ? { ...c, likes: updatedLikes, likedUserIds: updatedLikedUserIds }
+          : c
+      )
+    );
+  };
 
   return (
-    <ul>
+    <div className="comment-list">
       {comments.map((comment) => {
-        const user = users.find((u) => u.id == comment.userId);
-        const isOwner =
-          currentUser && String(currentUser.id) === String(comment.userId);
-        const likedUserIds = Array.isArray(comment.likedUserIds)
-          ? comment.likedUserIds
-          : [];
-        const alreadyLiked = currentUser
-          ? likedUserIds.includes(currentUser.id)
-          : false;
-
+        const user = users.find((u) => String(u.id) === String(comment.userId));
         return (
-          <li key={comment.id}>
+          <div className="comment-item" key={comment.id}>
+            <span className="comment-author">
+              {user?.name || comment.authorName || comment.authorId}
+            </span>
             {editingCommentId === comment.id ? (
-              <>
-                <input
-                  value={editingText}
-                  onChange={(e) => setEditingText(e.target.value)}
-                />
-                <button
-                  onClick={() => {
-                    fetch(`http://localhost:3001/comments/${comment.id}`, {
-                      method: "PATCH",
-                      headers: { "Content-Type": "application/json" },
-                      body: JSON.stringify({ text: editingText }),
-                    }).then(() => {
-                      setComments((prev) =>
-                        prev.map((c) =>
-                          c.id === comment.id ? { ...c, text: editingText } : c
-                        )
-                      );
-                      setEditingCommentId(null);
-                      setEditingText("");
-                    });
-                  }}
-                >
-                  저장
-                </button>
-                <button onClick={() => setEditingCommentId(null)}>취소</button>
-              </>
+              <CommentEditForm
+                comment={comment}
+                onSave={(newText) => handleSave(comment.id, newText)}
+                onCancel={() => setEditingCommentId(null)}
+              />
             ) : (
               <>
-                <span>{comment.text}</span> (작성자:{" "}
-                {user?.name || "알 수 없음"})
+                <span className="comment-content">{comment.text}</span>
+                <span className="comment-date">{comment.createdAt}</span>
                 <span> | 좋아요: {comment.likes}</span>
-                <button
-                  onClick={() => {
-                    const updatedLikes = alreadyLiked
-                      ? Math.max(0, comment.likes - 1)
-                      : comment.likes + 1;
-                    const updatedLikedUserIds = alreadyLiked
-                      ? likedUserIds.filter((id) => id !== currentUser.id)
-                      : [...likedUserIds, currentUser.id];
-
-                    fetch(`http://localhost:3001/comments/${comment.id}`, {
-                      method: "PATCH",
-                      headers: { "Content-Type": "application/json" },
-                      body: JSON.stringify({
-                        likes: updatedLikes,
-                        likedUserIds: updatedLikedUserIds,
-                      }),
-                    }).then(() => {
-                      setComments((prev) =>
-                        prev.map((c) =>
-                          c.id === comment.id
-                            ? {
-                                ...c,
-                                likes: updatedLikes,
-                                likedUserIds: updatedLikedUserIds,
-                              }
-                            : c
-                        )
-                      );
-                    });
-                  }}
-                >
-                  {alreadyLiked ? "💔" : "❤️"}
-                </button>
-                {isOwner && (
-                  <>
-                    <button
-                      onClick={() => {
-                        setEditingCommentId(comment.id);
-                        setEditingText(comment.text);
-                      }}
-                    >
-                      수정
-                    </button>
-                    <button
-                      onClick={() => {
-                        if (window.confirm("삭제할까요?")) {
-                          fetch(
-                            `http://localhost:3001/comments/${comment.id}`,
-                            {
-                              method: "DELETE",
-                            }
-                          ).then(() => {
-                            setComments((prev) =>
-                              prev.filter((c) => c.id !== comment.id)
-                            );
-                          });
-                        }
-                      }}
-                    >
-                      삭제
-                    </button>
-                  </>
+                {currentUser && (
+                  <LikeButton
+                    comment={comment}
+                    currentUser={currentUser}
+                    onLike={handleLike}
+                  />
                 )}
+                <span className="comment-actions">
+                  <CommentActions
+                    comment={comment}
+                    currentUser={currentUser}
+                    onEdit={handleEdit}
+                    onDelete={handleDelete}
+                  />
+                </span>
               </>
             )}
-          </li>
+          </div>
         );
       })}
-    </ul>
+    </div>
   );
 }
-
-export default CommentList;

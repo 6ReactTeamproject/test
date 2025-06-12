@@ -1,71 +1,49 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import PostForm from "./PostF";
+import PostForm from "../Post/PostForm";
 import SearchBar from "./SearchBar";
 import PostList from "./PostList";
 import Pagination from "./Pagination";
+import { apiGet, apiPost } from "../../api/fetch";
+import { filterPosts } from "../../utils/search";
+import { getPaginatedItems, getTotalPages } from "../../utils/pagination";
 
 const Board = () => {
   const [posts, setPosts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 5;
   const [searchTerm, setSearchTerm] = useState("");
   const [searchType, setSearchType] = useState("title_content");
   const [filtered, setFiltered] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 5;
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:3001/posts")
-      .then((res) => res.json())
+    apiGet("posts")
       .then((data) => setPosts(data))
       .catch((err) => console.error("에러:", err));
   }, []);
 
   useEffect(() => {
-    const keyword = searchTerm.trim().toLowerCase();
-    if (keyword === "") {
-      setFiltered([]);
-      return;
-    }
-
-    const results = posts.filter((post) => {
-      const title = post.title?.toLowerCase() || "";
-      const content = post.content?.toLowerCase() || "";
-      const userId = post.userId?.toString();
-      switch (searchType) {
-        case "title":
-          return title.includes(keyword);
-        case "content":
-          return content.includes(keyword);
-        case "title_content":
-          return title.includes(keyword) || content.includes(keyword);
-        case "userId":
-          return userId === keyword;
-        default:
-          return false;
-      }
-    });
-
+    const results = filterPosts(
+      posts,
+      searchTerm.trim().toLowerCase(),
+      searchType
+    );
     setFiltered(results);
     setCurrentPage(1);
   }, [searchTerm, searchType, posts]);
 
   const displayPosts = searchTerm.trim() ? filtered : posts;
-  const indexOfLastPost = currentPage * postsPerPage;
-  const currentPosts = displayPosts.slice(
-    indexOfLastPost - postsPerPage,
-    indexOfLastPost
+  const currentPosts = getPaginatedItems(
+    displayPosts,
+    currentPage,
+    postsPerPage
   );
-  const totalPages = Math.ceil(displayPosts.length / postsPerPage);
+  const totalPages = getTotalPages(displayPosts, postsPerPage);
 
   const handleAddPost = (newPost) => {
-    fetch("http://localhost:3001/posts", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newPost),
-    })
-      .then((res) => res.json())
+    apiPost("posts", newPost)
       .then((data) => setPosts([data, ...posts]))
       .catch((err) => console.error("에러:", err));
   };
@@ -80,7 +58,6 @@ const Board = () => {
       >
         게시글 작성
       </button>
-      {/* <PostForm onAddPost={handleAddPost} /> */}
 
       <PostList
         posts={currentPosts}
