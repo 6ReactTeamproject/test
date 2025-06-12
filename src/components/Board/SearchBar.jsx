@@ -1,9 +1,4 @@
-const SearchBar = ({
-  searchTerm,
-  searchType,
-  onSearchTermChange,
-  onSearchTypeChange,
-}) => (
+const SearchBar = ({ searchTerm, searchType, onTermChange, onTypeChange }) => (
   <div
     style={{
       display: "flex",
@@ -17,7 +12,7 @@ const SearchBar = ({
     <input
       type="text"
       value={searchTerm}
-      onChange={(e) => onSearchTermChange(e.target.value)}
+      onChange={(e) => onTermChange(e.target.value)}
       placeholder="검색어를 입력하세요"
       style={{
         flex: 1,
@@ -29,7 +24,7 @@ const SearchBar = ({
     />
     <select
       value={searchType}
-      onChange={(e) => onSearchTypeChange(e.target.value)}
+      onChange={(e) => onTypeChange(e.target.value)}
       style={{
         padding: "8px 12px",
         border: "1px solid #ddd",
@@ -40,7 +35,7 @@ const SearchBar = ({
     >
       <option value="title">제목</option>
       <option value="content">내용</option>
-      <option value="title+content">제목+내용</option>
+      <option value="title_content">제목+내용</option>
       <option value="userId">작성자</option>
     </select>
   </div>

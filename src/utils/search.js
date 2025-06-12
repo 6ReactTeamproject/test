@@ -1,5 +1,5 @@
 export const filterPosts = (posts, keyword, searchType) => {
-  if (!keyword.trim()) return [];
+  if (!keyword.trim()) return posts;
 
   return posts.filter((post) => {
     const title =
