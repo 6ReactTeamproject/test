@@ -104,7 +104,7 @@
       "title": "첫 게시글입니다!",
       "content": "안녕하세요. 첫 글이에요.",
       "createdAt": "2025-05-22",
-      "views": 74
+      "views": 76
     },
     {
       "id": "2",
@@ -268,8 +268,10 @@
       "userId": "4",
       "text": "댓글 수정 테스트",
       "createdAt": "2025-06-04T02:40:35.503Z",
-      "likes": 0,
-      "likedUserIds": []
+      "likes": 1,
+      "likedUserIds": [
+        "4"
+      ]
     },
     {
       "postId": 4,
