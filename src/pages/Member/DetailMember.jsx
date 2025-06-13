@@ -42,11 +42,13 @@ function DetailMember() {
             />
           ) : (
             <>
-              <img
-                src={members.imageUrl}
-                alt="preview"
-                style={{ width: "100%", borderRadius: "8px" }}
-              />
+              {members.imageUrl && (
+                <img
+                  src={members.imageUrl}
+                  alt="preview"
+                  style={{ width: "100%", borderRadius: "8px" }}
+                />
+              )}
               <br />
               <strong>{members.name}</strong>
               <p>{members.introduction}</p>

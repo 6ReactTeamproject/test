@@ -28,17 +28,18 @@ export default function EditForm({
   });
 
   const handleUpdate = async () => {
-    if (!empty || empty(editValues)) {
-      try {
-        await apiPatch(endpoint, data.id, editValues);
-        alert(MESSAGES.UPDATE_SUCCESS);
-        onDone(editValues);
-      } catch (err) {
-        alert(MESSAGES.UPDATE_FAIL);
-        console.error(err);
-      }
-    } else {
+    if (!empty(editValues)) {
       alert(MESSAGES.REQUIRED_FIELD);
+      return;
+    }
+
+    try {
+      await apiPatch(endpoint, data.id, editValues);
+      alert(MESSAGES.UPDATE_SUCCESS);
+      onDone(editValues);
+    } catch (err) {
+      alert(MESSAGES.UPDATE_FAIL);
+      console.error(err);
     }
   };
 

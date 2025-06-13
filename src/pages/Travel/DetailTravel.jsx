@@ -35,11 +35,13 @@ export default function DetailTravel() {
           />
         ) : (
           <>
-            <img
-              src={travelPlace.imageUrl}
-              alt="preview"
-              style={{ width: "100%", borderRadius: "8px" }}
-            />
+            {travelPlace.imageUrl && (
+              <img
+                src={travelPlace.imageUrl}
+                alt="preview"
+                style={{ width: "100%", borderRadius: "8px" }}
+              />
+            )}
             <h3>{travelPlace.title}</h3>
             <p>{travelPlace.description}</p>
             {isOwner && (
