@@ -1,4 +1,3 @@
-// src/components/Travel/UserContext.jsx
 import { createContext, useContext } from "react";
 
 export const UserContext = createContext({

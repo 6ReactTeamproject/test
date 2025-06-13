@@ -1,49 +1,58 @@
+import { useState, Children, cloneElement } from "react";
 import { apiPatch } from "../../api/fetch";
-import FormInput from "../common/FormInput";
-import FormTextarea from "../common/FormTextarea";
 import FormButton from "../common/FormButton";
-import { useForm } from "../../hooks/useForm";
 import { MESSAGES } from "../../constants";
 import "../../styles/form.css";
-import "../../styles/modal.css";
 
-export default function EditForm({ data, endpoint, heading, fields, onDone }) {
-  const { values: formData, handleChangeDirect } = useForm(() => {
-    const initial = {};
-    fields.forEach(({ key }) => {
-      initial[key] = data[key] || "";
+export default function EditForm({
+  endpoint,
+  empty,
+  children,
+  data,
+  onDone
+}) {
+  const [editValues, setEditValues] = useState({ ...data });
+
+  const enhancedChildren = Children.map(children, (child) => {
+    if (!child?.props?.name) {
+      return cloneElement(child, { setInputs: setEditValues });
+    }
+    return cloneElement(child, {
+      value: editValues[child.props.name] || "",
+      onChange: (e) =>
+        setEditValues((prev) => ({
+          ...prev,
+          [child.props.name]: e.target.value,
+        })),
     });
-    return initial;
   });
 
-  const handleUpdate = () => {
-    apiPatch(endpoint, data.id, formData).then(() => {
-      alert(MESSAGES.UPDATE_SUCCESS);
-      onDone({ ...data, ...formData });
-    });
+  const handleUpdate = async () => {
+    if (!empty || empty(editValues)) {
+      try {
+        await apiPatch(endpoint, data.id, editValues);
+        alert(MESSAGES.UPDATE_SUCCESS);
+        onDone(editValues);
+      } catch (err) {
+        alert(MESSAGES.UPDATE_FAIL);
+        console.error(err);
+      }
+    } else {
+      alert(MESSAGES.REQUIRED_FIELD);
+    }
   };
 
   return (
     <div className="form-container">
-      <h2>{heading}</h2>
-      {fields.map(({ label, key, type }) => (
-        <div key={key}>
-          <label>{label}</label>
-          {type === "textarea" ? (
-            <FormTextarea
-              name={key}
-              value={formData[key]}
-              onChange={(e) => handleChangeDirect(key, e.target.value)}
-            />
-          ) : (
-            <FormInput
-              name={key}
-              value={formData[key]}
-              onChange={(e) => handleChangeDirect(key, e.target.value)}
-            />
-          )}
-        </div>
-      ))}
+      {enhancedChildren}
+
+      {editValues.imageUrl && (
+        <img
+          src={editValues.imageUrl}
+          alt="미리보기"
+          style={{ maxWidth: "100%", marginTop: "10px" }}
+        />
+      )}
 
       <div className="button-group">
         <FormButton onClick={handleUpdate} className="add-button">

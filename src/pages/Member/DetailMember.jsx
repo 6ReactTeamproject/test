@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import EditMember from "../../components/Travel&Member/EditMember";
+import EditMember from "./EditMember";
 import DeleteButton from "../../components/Travel&Member/DeleteButton";
 import { useUser } from "../../hooks/UserContext";
 import "../../styles/travel.css";
@@ -43,7 +43,7 @@ function DetailMember() {
           ) : (
             <>
               <img
-                src={members.profileImage}
+                src={members.imageUrl}
                 alt="preview"
                 style={{ width: "100%", borderRadius: "8px" }}
               />

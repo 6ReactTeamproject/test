@@ -2,7 +2,7 @@ import React from "react";
 import { useUser } from "../../hooks/UserContext";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import "./MyPage.css"; // 추가!
+import "./MyPage.css";
 
 export default function MyPage() {
   const { user } = useUser();

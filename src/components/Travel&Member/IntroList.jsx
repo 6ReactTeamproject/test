@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import "../../styles/travel.css";
-import HandleAuth from "./HandleAuth";
 import { useUser } from "../../hooks/UserContext";
 import { useEffect, useState } from "react";
 import { apiGet } from "../../api/fetch";
+import HandleAuth from "../common/HandleAuth";
 
 export default function IntroList({
   heading,

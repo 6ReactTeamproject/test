@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import DeleteButton from "../../components/Travel&Member/DeleteButton";
-import EditTravelIntro from "../../components/Travel&Member/EditTravelIntro";
+import EditTravelIntro from "./EditTravelIntro";
 import { useUser } from "../../hooks/UserContext";
 import "../../styles/travel.css";
 
