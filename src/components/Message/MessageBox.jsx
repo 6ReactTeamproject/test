@@ -11,9 +11,6 @@ const MessageBox = () => {
   const [activeTab, setActiveTab] = useState("received");
   const [showForm, setShowForm] = useState(false);
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
   if (!user) {
     return null;
   }
