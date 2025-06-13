@@ -104,7 +104,7 @@
       "title": "첫 게시글입니다!",
       "content": "안녕하세요. 첫 글이에요.",
       "createdAt": "2025-05-22",
-      "views": 87
+      "views": 93
     },
     {
       "id": "2",
@@ -329,7 +329,7 @@
       "id": "4",
       "loginId": "changmin",
       "password": "4444",
-      "name": "김창민"
+      "name": "이창민"
     },
     {
       "id": "5",
@@ -354,6 +354,53 @@
       "loginId": "qwer1234",
       "password": "qwer1234",
       "id": "_wFK0j2"
+    }
+  ],
+  "messages": [
+    {
+      "id": 1,
+      "senderId": "1",
+      "receiverId": "4",
+      "title": "테스트용 쪽지 제목",
+      "content": "테스트용 쪽지",
+      "createdAt": "2024-03-21T10:00:00",
+      "isRead": true
+    },
+    {
+      "title": "1",
+      "content": "1",
+      "receiverId": "4",
+      "senderId": "1",
+      "createdAt": "2025-06-13T06:25:47.245Z",
+      "id": 2,
+      "isRead": true
+    },
+    {
+      "title": "1",
+      "content": "1",
+      "receiverId": "4",
+      "senderId": "1",
+      "createdAt": "2025-06-13T06:30:02.475Z",
+      "id": 3,
+      "isRead": true
+    },
+    {
+      "senderId": "4",
+      "receiverId": "_wFK0j2",
+      "title": "123",
+      "content": "123",
+      "createdAt": "2025-06-13T06:34:39.141Z",
+      "isRead": false,
+      "id": 4
+    },
+    {
+      "senderId": "4",
+      "receiverId": "3",
+      "title": "123",
+      "content": "123",
+      "createdAt": "2025-06-13T06:41:10.545Z",
+      "isRead": false,
+      "id": 5
     }
   ]
 }
