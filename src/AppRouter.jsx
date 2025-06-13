@@ -20,6 +20,7 @@ import MyPage from "./pages/Auth/MyPage.jsx";
 import CreateTravelIntro from "./pages/Travel/CreateTravelIntro.jsx";
 
 import Layout from "./layout/Layout.jsx";
+import MessageBox from "./components/Message/MessageBox.jsx";
 
 export default function AppRouter({ user, setUser }) {
   return (
@@ -45,6 +46,9 @@ export default function AppRouter({ user, setUser }) {
         <Route path="/post/:id" element={<PostDetail currentUser={user} />} />
         <Route path="/post/write" element={<WritePost />} />
         <Route path="/edit/:id" element={<WritePost />} />
+
+        {/* 쪽지 관련 라우팅 */}
+        <Route path="/message" element={<MessageBox />} />
       </Routes>
     </Layout>
   );

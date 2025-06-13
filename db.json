@@ -19,7 +19,7 @@
       "authorId": "4",
       "name": "김성민",
       "profileImage": "사진링크",
-      "introduction": "추가설명"
+      "introduction": "추가설명ㅠㅘㅏ"
     },
     {
       "id": "4",
@@ -117,7 +117,11 @@
       "title": "첫 게시글입니다!",
       "content": "안녕하세요. 첫 글이에요.",
       "createdAt": "2025-05-22",
+<<<<<<< feature/detail
+      "views": 93
+=======
       "views": 98
+>>>>>>> main
     },
     {
       "id": "2",
@@ -133,7 +137,7 @@
       "title": "안녕하세요",
       "content": "처음 달아봐요",
       "createdAt": "2025-05-23",
-      "views": 6
+      "views": 8
     },
     {
       "id": "4",
@@ -157,7 +161,7 @@
       "title": "김성민",
       "content": "김성민",
       "createdAt": "2025-05-23",
-      "views": 3
+      "views": 5
     },
     {
       "id": "1748340648348",
@@ -230,10 +234,11 @@
       "postId": 1,
       "userId": 4,
       "text": "축하드립니다!",
-      "likes": 3,
+      "likes": 4,
       "createdAt": "2025-05-22",
       "likedUserIds": [
-        "1"
+        "1",
+        "4"
       ]
     },
     {
@@ -316,9 +321,22 @@
       "userId": "1",
       "text": "sasdfadsf",
       "createdAt": "2025-06-03T06:50:00.225Z",
-      "likes": 0,
-      "likedUserIds": [],
+      "likes": 1,
+      "likedUserIds": [
+        "4"
+      ],
       "id": "4k7KOLQ"
+    },
+    {
+      "text": "123",
+      "postId": "3",
+      "userId": "4",
+      "createdAt": "2025-06-12T07:26:18.936Z",
+      "likes": 1,
+      "likedUserIds": [
+        "4"
+      ],
+      "id": "DGk21DQ"
     }
   ],
   "users": [
@@ -344,7 +362,7 @@
       "id": "4",
       "loginId": "changmin",
       "password": "4444",
-      "name": "김창민"
+      "name": "이창민"
     },
     {
       "id": "5",
@@ -369,6 +387,53 @@
       "loginId": "qwer1234",
       "password": "qwer1234",
       "id": "_wFK0j2"
+    }
+  ],
+  "messages": [
+    {
+      "id": 1,
+      "senderId": "1",
+      "receiverId": "4",
+      "title": "테스트용 쪽지 제목",
+      "content": "테스트용 쪽지",
+      "createdAt": "2024-03-21T10:00:00",
+      "isRead": true
+    },
+    {
+      "title": "1",
+      "content": "1",
+      "receiverId": "4",
+      "senderId": "1",
+      "createdAt": "2025-06-13T06:25:47.245Z",
+      "id": 2,
+      "isRead": true
+    },
+    {
+      "title": "1",
+      "content": "1",
+      "receiverId": "4",
+      "senderId": "1",
+      "createdAt": "2025-06-13T06:30:02.475Z",
+      "id": 3,
+      "isRead": true
+    },
+    {
+      "senderId": "4",
+      "receiverId": "_wFK0j2",
+      "title": "123",
+      "content": "123",
+      "createdAt": "2025-06-13T06:34:39.141Z",
+      "isRead": false,
+      "id": 4
+    },
+    {
+      "senderId": "4",
+      "receiverId": "3",
+      "title": "123",
+      "content": "123",
+      "createdAt": "2025-06-13T06:41:10.545Z",
+      "isRead": false,
+      "id": 5
     }
   ]
 }

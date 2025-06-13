@@ -23,14 +23,20 @@ const Board = () => {
   const [searchType, setSearchType] = useState("title_content");
   const [filtered, setFiltered] = useState([]);
   const [members, setMembers] = useState([]);
+<<<<<<< feature/detail
+=======
   const [sortType, setSortType] = useState("views")
   const postsPerPage = 5;
+>>>>>>> main
 
   const navigate = useNavigate();
 
   useEffect(() => {
     apiGet("posts")
       .then((data) => setPosts([...data].reverse()))
+      .catch((err) => console.error("에러:", err));
+    apiGet("members")
+      .then((data) => setMembers(data))
       .catch((err) => console.error("에러:", err));
     apiGet("members")
       .then((data) => setMembers(data))
