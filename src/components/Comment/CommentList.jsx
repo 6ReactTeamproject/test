@@ -59,6 +59,7 @@ export default function CommentList({
     }
   };
 
+  
   return (
     <div className="comment-list">
       {comments.map((comment) => {
