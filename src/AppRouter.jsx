@@ -16,6 +16,7 @@ import WritePost from "./components/Post/WritePost";
 import Home from "./pages/Home.jsx";
 import Login from "./pages/Auth/Login.jsx";
 import Signup from "./pages/Auth/Signup.jsx";
+import MyPage from "./pages/Auth/MyPage.jsx";
 import CreateTravelIntro from "./pages/Travel/CreateTravelIntro.jsx";
 
 import Layout from "./layout/Layout.jsx";
@@ -28,6 +29,7 @@ export default function AppRouter({ user, setUser }) {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/mypage" element={<MyPage />} />
 
         {/* 여행 소개 관련 라우팅 */}
         <Route path="/intro" element={<TravelIntro />} />

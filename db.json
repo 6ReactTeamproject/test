@@ -41,6 +41,13 @@
       "authorId": "1",
       "id": "po6DFM7",
       "profileImage": "ㅁㅁ"
+    },
+    {
+      "name": "ㅂㄴ",
+      "role": "ㄴㅂ",
+      "introduction": "ㄴㅂ",
+      "authorId": "3",
+      "id": "v3emm_4"
     }
   ],
   "semester": [
@@ -95,6 +102,12 @@
       "description": "d",
       "authorId": "_wFK0j2",
       "id": "b0NqUcT"
+    },
+    {
+      "description": "ㅓㄹ",
+      "title": "ㅠㅗㅓㅏㅎ",
+      "authorId": "3",
+      "id": "e6mRFxS"
     }
   ],
   "posts": [
@@ -104,7 +117,11 @@
       "title": "첫 게시글입니다!",
       "content": "안녕하세요. 첫 글이에요.",
       "createdAt": "2025-05-22",
+<<<<<<< feature/detail
       "views": 93
+=======
+      "views": 98
+>>>>>>> main
     },
     {
       "id": "2",
@@ -136,7 +153,7 @@
       "title": "ㅎㅇ",
       "content": "ㅇㅇ",
       "createdAt": "2025-05-23",
-      "views": 4
+      "views": 5
     },
     {
       "id": "6",
@@ -168,7 +185,7 @@
       "content": "다시 태어났어요\n",
       "userId": 1,
       "createdAt": "2025-05-30T13:40:44.040Z",
-      "views": 1
+      "views": 2
     },
     {
       "id": "1748614931831",
@@ -176,7 +193,7 @@
       "content": "asf",
       "userId": 1,
       "createdAt": "2025-05-30T14:22:11.831Z",
-      "views": 1
+      "views": 5
     },
     {
       "id": "1748616834464",
@@ -184,7 +201,7 @@
       "content": "asdf",
       "userId": 1,
       "createdAt": "2025-05-30T14:53:54.464Z",
-      "views": 1
+      "views": 2
     },
     {
       "id": "1748616937098",
@@ -192,7 +209,23 @@
       "content": "asdf",
       "userId": 1,
       "createdAt": "2025-05-30T14:55:37.098Z",
-      "views": 0
+      "views": 6
+    },
+    {
+      "title": "ㅇㅈㅇㅈ",
+      "content": "ㅇㅈㅇㅈㅇㅈ",
+      "userId": "3",
+      "createdAt": "2025-06-12",
+      "views": 0,
+      "id": "tgbDaJ0"
+    },
+    {
+      "title": "ㅁㄴㅊㅋㅌㅋㅊㅍㅊㅋㅇㄴ",
+      "content": "ㅋㅌㅊㅋㅌㅊㅋㅌ",
+      "userId": "3",
+      "createdAt": "2025-06-12",
+      "views": 1,
+      "id": "pn8Vnt9"
     }
   ],
   "comments": [
@@ -317,7 +350,7 @@
       "id": "2",
       "loginId": "hyukbin",
       "password": "2222",
-      "name": "권혁빈"
+      "name": "권나까무라혁빈333"
     },
     {
       "id": "3",
