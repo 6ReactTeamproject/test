@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useUser } from "../../hooks/UserContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "../../styles/travel.css";
 
 export function UserSection() {
   const { user, setUser } = useUser();
   const [isLoading, setIsLoading] = useState(true);
   const nav = useNavigate();
+  const location = useLocation();
 
   // localStorage로부터 초기 로딩 완료 여부 판단
   useEffect(() => {
@@ -25,23 +26,19 @@ export function UserSection() {
   if (isLoading) return <p>로딩 중...</p>;
 
   return (
-    <div>
+    <div className="user-section" style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+      <p>{user?.name ?? "Guest"}님 환영합니다!</p>
       {user ? (
         <>
-          {" "}
-          <p>{user?.name ?? "Guest"}님 환영합니다!</p>
-          {user && <button onClick={handleLogout}>로그아웃</button>}
+          {location.pathname !== "/mypage" && (
+            <button onClick={() => nav("/mypage")}>마이페이지</button>
+          )}
+          <button onClick={handleLogout}>로그아웃</button>
         </>
       ) : (
         <>
-          {" "}
-          <p>{user?.name ?? "Guest"}님 환영합니다!</p>
-          {!user && (
-            <>
-              <button onClick={() => nav("/login")}>로그인</button>
-              <button onClick={() => nav("/signup")}>회원가입</button>
-            </>
-          )}
+          <button onClick={() => nav("/login")}>로그인</button>
+          <button onClick={() => nav("/signup")}>회원가입</button>
         </>
       )}
     </div>

@@ -44,8 +44,23 @@ const WritePost = () => {
   };
 
   return (
-    <div>
-      <h2>{id ? "게시글 수정" : "새 글 작성"}</h2>
+    <div
+      style={{
+        maxWidth: "1200px",
+        margin: "0 auto",
+        padding: "20px",
+      }}
+    >
+      <h2
+        style={{
+          marginBottom: "30px",
+          fontSize: "24px",
+          fontWeight: "600",
+          color: "#333",
+        }}
+      >
+        {id ? "게시글 수정" : "새 글 작성"}
+      </h2>
       <PostForm post={post} setPost={setPost} onSubmit={handleSubmit} id={id} />
     </div>
   );

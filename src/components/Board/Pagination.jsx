@@ -1,9 +1,9 @@
 const Pagination = ({ currentPage, totalPages, onPrev, onNext }) => (
-  <div>
-    <button onClick={onPrev} disabled={currentPage === 1}>이전</button>
+  <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "10px", marginTop: "5px",  }}>
+    <span onClick={onPrev} style={{ cursor: "pointer" }}>&lt;</span>
     <span>{currentPage} / {totalPages}</span>
-    <button onClick={onNext} disabled={currentPage === totalPages}>다음</button>
-  </div>
+    <span onClick={onNext} style={{ cursor: "pointer" }}>&gt;</span>
+</div>
 );
 
 export default Pagination;
