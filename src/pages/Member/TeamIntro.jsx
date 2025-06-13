@@ -7,7 +7,7 @@ export default function TeamIntro() {
       endpoint="members"
       primaryKey="name"
       secondaryKey="introduction"
-      imageKey="profileImage"
+      imageKey="imageUrl"
       pathPrefix="team"
     />
   );

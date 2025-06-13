@@ -1,5 +1,6 @@
 import { useState } from "react";
 import CreateButton from "../../components/Travel&Member/CreateButton";
+import SelectImage from "../../utils/SelectImage.jsx";
 
 export default function CreateTravelIntro() {
   const [imageUrl, setImageUrl] = useState("");
@@ -17,24 +18,14 @@ export default function CreateTravelIntro() {
     >
       <input name="title" placeholder="현지학기제 장소" />
       <textarea name="description" placeholder="현지학기제 소개" />
-      <input
-        type="file"
-        accept="image/*"
-        onChange={(e) => {
-          const file = e.target.files[0];
-          if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-              setImageUrl(reader.result);
-              setInputs((prev) => ({
-                ...prev,
-                imageUrl: reader.result,
-              }));
-            };
-            reader.readAsDataURL(file);
-          }
-        }}
-      />
+      <SelectImage setInputs={setInputs} setProfileImage={setImageUrl} />
+      {imageUrl && (
+        <img
+          src={imageUrl}
+          alt="미리보기"
+          style={{ maxWidth: "100%", marginTop: "10px" }}
+        />
+      )}
     </CreateButton>
   );
 }
