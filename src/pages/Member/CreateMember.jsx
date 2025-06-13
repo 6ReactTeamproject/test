@@ -1,5 +1,6 @@
 import { useState } from "react";
 import CreateButton from "../../components/Travel&Member/CreateButton";
+import SelectImage from "../../utils/SelectImage.jsx";
 
 export default function CreateMember() {
   const [profileImage, setProfileImage] = useState("");
@@ -20,24 +21,15 @@ export default function CreateMember() {
       <input name="role" placeholder="역할" />
       <textarea name="introduction" placeholder="조원 소개" />
 
-      <input
-        type="file"
-        accept="image/*"
-        onChange={(e) => {
-          const file = e.target.files[0];
-          if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-              setProfileImage(reader.result);
-              setInputs((prev) => ({
-                ...prev,
-                profileImage: reader.result,
-              }));
-            };
-            reader.readAsDataURL(file);
-          }
-        }}
-      />
+      <SelectImage setInputs={setInputs} setProfileImage={setProfileImage} />
+      {profileImage && (
+        <img
+          src={profileImage}
+          alt="미리보기"
+          style={{ maxWidth: "100%", marginTop: "10px" }}
+        />
+      )}
+
     </CreateButton>
   );
 }

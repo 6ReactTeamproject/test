@@ -4,35 +4,35 @@
       "id": "1",
       "authorId": "2",
       "name": "",
-      "profileImage": "",
+      "imageUrl": "",
       "introduction": ""
     },
     {
       "id": "2",
       "authorId": "3",
       "name": "권혁빈",
-      "profileImage": "사진링크",
+      "imageUrl": "사진링크",
       "introduction": "추가설명."
     },
     {
       "id": "3",
       "authorId": "4",
       "name": "김성민",
-      "profileImage": "사진링크",
+      "imageUrl": "사진링크",
       "introduction": "추가설명"
     },
     {
       "id": "4",
       "authorId": "1",
       "name": "김창민ㅁ",
-      "profileImage": "사진링크ㅁ",
+      "imageUrl": "사진링크ㅁ",
       "introduction": "추가설명"
     },
     {
       "id": "5",
       "authorId": "1",
       "name": "이유찬ㅁ",
-      "profileImage": "사진링크ㅁ",
+      "imageUrl": "사진링크ㅁ",
       "introduction": "추가설명ㅁㅁ"
     },
     {
@@ -40,7 +40,7 @@
       "introduction": "aㅁㅁ",
       "authorId": "1",
       "id": "po6DFM7",
-      "profileImage": "ㅁㅁ"
+      "imageUrl": "ㅁㅁ"
     }
   ],
   "semester": [

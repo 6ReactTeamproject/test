@@ -3,9 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../../hooks/UserContext";
 import { apiPost } from "../../api/fetch";
 import FormButton from "../common/FormButton";
-import { isEmpty } from "../../utils/validation";
-import { useForm } from "../../hooks/useForm";
-import { MESSAGES, ROUTES } from "../../constants";
+import { MESSAGES } from "../../constants";
 import "../../styles/form.css";
 
 export default function CreateButton({
@@ -13,14 +11,9 @@ export default function CreateButton({
   redirect,
   empty,
   children,
-  inputs: outerInputs,
-  setInputs: setOuterInputs,
+  inputs,
+  setInputs,
 }) {
-  const {
-    values: inputs,
-    handleChange,
-    setValues: setInputs,
-  } = useForm(outerInputs);
   const navigate = useNavigate();
   const { user } = useUser();
 
@@ -52,7 +45,11 @@ export default function CreateButton({
     if (!child?.props?.name) return child;
     return cloneElement(child, {
       value: inputs[child.props.name] || "",
-      onChange: handleChange,
+      onChange: (e) =>
+        setInputs((prev) => ({
+          ...prev,
+          [child.props.name]: e.target.value,
+        })),
     });
   });
 
