@@ -27,18 +27,20 @@ export default function CommentForm({ currentUser, id, setComments }) {
       reset();
     });
   };
-
+  
   return (
+    <>
     <form onSubmit={handleSubmit} className="form-container">
       <FormInput
         name="text"
         value={values.text}
         onChange={handleChange}
         placeholder="댓글을 입력하세요"
-      />
+        />
       <FormButton type="submit" className="add-button">
         댓글 작성
       </FormButton>
     </form>
+    </>
   );
 }
