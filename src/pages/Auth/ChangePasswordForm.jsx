@@ -1,9 +1,14 @@
 import React, { useState } from "react";
+import { useUser } from "../../hooks/UserContext";
 
-export default function ChangePasswordForm({ userId }) {
+export default function ChangePasswordForm() {
+  const { user } = useUser();
+
   const [currentPw, setCurrentPw] = useState("");
   const [newPw, setNewPw] = useState("");
   const [confirmPw, setConfirmPw] = useState("");
+
+  if (!user) return <p>로그인이 필요합니다.</p>; // 로그인 안 된 경우 처리
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,15 +24,15 @@ export default function ChangePasswordForm({ userId }) {
     }
 
     try {
-      const res = await fetch(`http://localhost:3001/users/${userId}`);
-      const user = await res.json();
+      const res = await fetch(`http://localhost:3001/users/${user.id}`);
+      const userData = await res.json();
 
-      if (user.password !== currentPw) {
+      if (userData.password !== currentPw) {
         alert("현재 비밀번호가 틀립니다.");
         return;
       }
 
-      const updateRes = await fetch(`http://localhost:3001/users/${userId}`, {
+      const updateRes = await fetch(`http://localhost:3001/users/${user.id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ password: newPw }),

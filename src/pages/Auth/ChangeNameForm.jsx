@@ -1,32 +1,36 @@
 import React, { useState } from 'react';
 import { useUser } from "../../hooks/UserContext";
 
-export default function ChangeNameForm({ userId, currentName }) {
+export default function ChangeNameForm() {
   const { user, setUser } = useUser();
   const [name, setName] = useState("");
   const [isValid, setIsValid] = useState(true);
+
+  if (!user) return <p>로그인이 필요합니다.</p>;
 
   // 한글, 영문, 숫자만 허용 (특수문자 제외)
   const nameRegex = /^[가-힣a-zA-Z0-9]+$/;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!nameRegex.test(name)) {
       setIsValid(false);
       return;
     }
 
-    if (name === currentName) {
+    if (name === user.name) {
       alert('현재 닉네임과 동일합니다.');
       return;
     }
 
     try {
-      const res = await fetch(`http://localhost:3001/users/${userId}`, {
+      const res = await fetch(`http://localhost:3001/users/${user.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name })
       });
+
       const updatedUser = await res.json();
 
       // Context와 localStorage 동기화
@@ -44,7 +48,7 @@ export default function ChangeNameForm({ userId, currentName }) {
   const handleChange = (e) => {
     const input = e.target.value;
     setName(input);
-    // 입력이 없을 때는 메시지 숨기기
+
     if (input === '') {
       setIsValid(true);
     } else {
@@ -69,7 +73,6 @@ export default function ChangeNameForm({ userId, currentName }) {
           />
           <button type="submit">변경하기</button>
         </div>
-        {/* 입력값이 있을 때만 유효성 경고 출력 */}
         {!isValid && name && (
           <p style={{ color: 'red', fontSize: '0.9rem', margin: '4px 0 0 0' }}>
             특수문자는 사용할 수 없어요!
