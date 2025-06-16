@@ -65,7 +65,12 @@ function PostDetail() {
         navigate={navigate}
       />
       <hr />
-      <h3>댓글</h3>
+      <div className="comment-count-box">
+        <span className="comment-count-icon">💬</span>
+        <span className="comment-count-text">
+          댓글 <b>{comments.length}</b>개
+        </span>
+      </div>
       <CommentList
         comments={comments}
         setComments={setComments}

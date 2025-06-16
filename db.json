@@ -100,7 +100,7 @@
       "title": "첫 게시글입니다!",
       "content": "안녕하세요. 첫 글이에요.",
       "createdAt": "2025-05-22",
-      "views": 100
+      "views": 124
     },
     {
       "id": "2",
@@ -326,6 +326,76 @@
       "likes": 0,
       "likedUserIds": [],
       "id": "RPNyPUd"
+    },
+    {
+      "text": "가나다",
+      "postId": "1",
+      "userId": "4",
+      "parentId": null,
+      "createdAt": "2025-06-16T11:20:11.696Z",
+      "likes": 0,
+      "likedUserIds": [],
+      "id": "zj6Y7MK"
+    },
+    {
+      "text": "안녕하세요",
+      "postId": 1,
+      "userId": "4",
+      "parentId": null,
+      "createdAt": "2025-06-16T11:25:08.628Z",
+      "likes": 0,
+      "likedUserIds": [],
+      "id": "0udvWLt"
+    },
+    {
+      "text": "안녕하세요",
+      "postId": 1,
+      "userId": "4",
+      "parentId": null,
+      "createdAt": "2025-06-16T11:26:45.935Z",
+      "likes": 0,
+      "likedUserIds": [],
+      "id": "7vuidVQ"
+    },
+    {
+      "text": "123",
+      "postId": "1",
+      "userId": "4",
+      "parentId": null,
+      "createdAt": "2025-06-16T11:28:29.165Z",
+      "likes": 0,
+      "likedUserIds": [],
+      "id": "cWQP0hA"
+    },
+    {
+      "text": "123",
+      "postId": "1",
+      "userId": "4",
+      "parentId": "RPNyPUd",
+      "createdAt": "2025-06-16T11:29:36.197Z",
+      "likes": 0,
+      "likedUserIds": [],
+      "id": "3Cdh6Id"
+    },
+    {
+      "text": "1234",
+      "postId": 1,
+      "userId": "4",
+      "parentId": "2",
+      "createdAt": "2025-06-16T11:30:43.511Z",
+      "likes": 0,
+      "likedUserIds": [],
+      "id": "mYjOchJ"
+    },
+    {
+      "text": "123",
+      "postId": 1,
+      "userId": "4",
+      "parentId": "2",
+      "createdAt": "2025-06-16T11:33:37.313Z",
+      "likes": 0,
+      "likedUserIds": [],
+      "id": "PGRJgqz"
     }
   ],
   "users": [
