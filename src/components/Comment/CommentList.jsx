@@ -12,6 +12,7 @@ export default function CommentList({
   currentUser,
 }) {
   const [editingCommentId, setEditingCommentId] = useState(null);
+  const [sortType, setSortType] = useState("likes"); 
 
   const handleEdit = (comment) => {
     setEditingCommentId(comment.id);
@@ -59,10 +60,19 @@ export default function CommentList({
     }
   };
 
-  
+  const sortedComments = [...comments].sort((a, b) => {
+    if (sortType === "likes") return b.likes - a.likes;
+    return new Date(b.createdAt) - new Date(a.createdAt);
+  });
+
   return (
     <div className="comment-list">
-      {comments.map((comment) => {
+      <div>
+        <button onClick={() => setSortType("latest")}>최신순</button>
+        <button onClick={() => setSortType("likes")}>좋아요순</button>
+      </div>
+
+      {sortedComments.map((comment) => {
         const user = users.find((u) => String(u.id) === String(comment.userId));
         return (
           <div className="comment-item" key={comment.id}>

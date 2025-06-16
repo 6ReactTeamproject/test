@@ -1,19 +1,18 @@
 /* 
 좋아요 순으로 정렬 ✅
 검색기능 버튼 눌렀을 때 실행되도록 ✅
-댓글 좋아요 순으로 
-게시물 들어갔을때 페이지 다음이랑 이전 로 넘기는거거
-
+댓글 좋아요 순으로 ✅
 */
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import PostForm from "../Post/PostForm";
 import SearchBar from "./SearchBar";
 import PostList from "./PostList";
 import Pagination from "./Pagination";
 import { apiGet, apiPost } from "../../api/fetch";
 import { filterPosts } from "../../utils/search";
 import { getPaginatedItems, getTotalPages } from "../../utils/pagination";
+import { useUser } from "../../hooks/UserContext";
+import HandleAuth from "../common/HandleAuth";
 
 const Board = () => {
   const [posts, setPosts] = useState([]);
@@ -24,10 +23,11 @@ const Board = () => {
   const [filtered, setFiltered] = useState([]);
   const [members, setMembers] = useState([]);
   const [sortType, setSortType] = useState("views")
+  const { user } = useUser();
   const postsPerPage = 5;
-
-  const navigate = useNavigate();
-
+  
+  const nav = useNavigate();
+  
   useEffect(() => {
     apiGet("posts")
       .then((data) => setPosts([...data].reverse()))
@@ -76,11 +76,9 @@ const Board = () => {
     <div>
       <h2>게시판</h2>
       <button
-        onClick={() => {
-          navigate("/post/write");
-        }}
+        onClick={() => HandleAuth(user, nav, "/post/write")}
       >
-        게시글 작성
+      게시글 작성
       </button>
       <div style={{ marginTop: "25px" }}>
       <button onClick={() => setSortType("views")}>조회수순</button>
@@ -89,7 +87,7 @@ const Board = () => {
       <PostList
         members={members}
         posts={currentPosts}
-        onClickPost={(id) => navigate(`/post/${id}`)}
+        onClickPost={(id) => nav(`/post/${id}`)}
       />
 
       {displayPosts.length > 0 && (
