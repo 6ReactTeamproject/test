@@ -1,32 +1,23 @@
 import { useNavigate, useLocation } from "react-router-dom";
-import { useState } from "react";
 import { styles } from "./Layout.styles";
 
-const Navigation = ({ onExpand }) => {
+const Navigation = () => {
   const nav = useNavigate();
   const location = useLocation();
-  const [isExpanded, setIsExpanded] = useState(false);
 
   const menuItems = [
     { path: "/intro", label: "여행 소개" },
     { path: "/team", label: "멤버 소개" },
     { path: "/post", label: "게시판" },
+    { path: "/message", label: "쪽지함" },
   ];
 
   return (
     <nav
       style={{
         ...styles.nav,
-        width: isExpanded ? "200px" : "60px",
+        width: "200px",
         transition: "width 0.3s ease",
-      }}
-      onMouseEnter={() => {
-        setIsExpanded(true);
-        onExpand(true);
-      }}
-      onMouseLeave={() => {
-        setIsExpanded(false);
-        onExpand(false);
       }}
     >
       <div
@@ -58,11 +49,12 @@ const Navigation = ({ onExpand }) => {
               {item.path === "/intro" && "🏠"}
               {item.path === "/team" && "👥"}
               {item.path === "/post" && "📝"}
+              {item.path === "/message" && "✉️"}
             </span>
             <span
               style={{
                 marginLeft: "12px",
-                opacity: isExpanded ? 1 : 0,
+                opacity: 1,
                 transition: "opacity 0.2s",
               }}
             >

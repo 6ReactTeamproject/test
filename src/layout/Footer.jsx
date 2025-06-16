@@ -1,8 +1,8 @@
 import { styles } from "./Layout.styles";
 
-const Footer = () => {
+const Footer = ({ style }) => {
   return (
-    <footer style={styles.footer}>
+    <footer style={{ ...styles.footer, ...style }}>
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 20px" }}>
         <div
           style={{
