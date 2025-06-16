@@ -55,6 +55,7 @@ const MessageBox = () => {
             activeTab={activeTab}
             onSelectMessage={setSelectedMessage}
             selectedMessage={selectedMessage}
+            showForm={showForm}
           />
         </div>
 

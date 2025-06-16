@@ -100,7 +100,7 @@
       "title": "첫 게시글입니다!",
       "content": "안녕하세요. 첫 글이에요.",
       "createdAt": "2025-05-22",
-      "views": 99
+      "views": 100
     },
     {
       "id": "2",
@@ -438,6 +438,42 @@
       "createdAt": "2025-06-13T09:33:10.851Z",
       "isRead": true,
       "id": 6
+    },
+    {
+      "senderId": "4",
+      "receiverId": "3",
+      "title": "테스트",
+      "content": "테스트",
+      "createdAt": "2025-06-16T03:26:57.831Z",
+      "isRead": false,
+      "id": 7
+    },
+    {
+      "senderId": "4",
+      "receiverId": "1",
+      "title": "테스트",
+      "content": "테스트",
+      "createdAt": "2025-06-16T03:34:45.668Z",
+      "isRead": false,
+      "id": 8
+    },
+    {
+      "senderId": "4",
+      "receiverId": "1",
+      "title": "테스트2",
+      "content": "테스트2",
+      "createdAt": "2025-06-16T03:35:08.312Z",
+      "isRead": false,
+      "id": 9
+    },
+    {
+      "senderId": "4",
+      "receiverId": "1",
+      "title": "123213",
+      "content": "123123",
+      "createdAt": "2025-06-16T05:44:09.243Z",
+      "isRead": false,
+      "id": 10
     }
   ]
 }

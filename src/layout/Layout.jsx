@@ -1,20 +1,36 @@
-import { styles } from "./Layout.styles";
-import { useRouteHistory } from "../hooks/useRouteHistory";
+import { useState } from "react";
 import Header from "./Header";
-import Navigation from "./Navigation";
 import Footer from "./Footer";
-import { UserSection } from "../components/common/UserSection";
-
+import Navigation from "./Navigation";
+import { styles } from "./Layout.styles";
 
 const Layout = ({ children }) => {
-  useRouteHistory();
+  const [isNavExpanded, setIsNavExpanded] = useState(false);
 
   return (
-    <div style={styles.container}>
-      <Header />
-      <Navigation />
-      <main style={styles.main}>{children}</main>
-      <Footer />
+    <div style={styles.layout}>
+      <Header
+        style={{
+          ...styles.header,
+          ...(isNavExpanded ? styles.headerExpanded : {}),
+        }}
+      />
+      <Navigation onExpand={(expanded) => setIsNavExpanded(expanded)} />
+      <main
+        style={{
+          ...styles.mainContent,
+          ...(isNavExpanded ? styles.mainContentExpanded : {}),
+          marginTop: "60px",
+        }}
+      >
+        {children}
+      </main>
+      <Footer
+        style={{
+          ...styles.footer,
+          ...(isNavExpanded ? styles.footerExpanded : {}),
+        }}
+      />
     </div>
   );
 };

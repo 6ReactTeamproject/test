@@ -3,7 +3,12 @@ import { apiGet, apiPatch } from "../../api/fetch";
 import { useUser } from "../../hooks/UserContext";
 import { useNavigate } from "react-router-dom";
 
-const MessageList = ({ activeTab, onSelectMessage, selectedMessage }) => {
+const MessageList = ({
+  activeTab,
+  onSelectMessage,
+  selectedMessage,
+  showForm,
+}) => {
   const { user } = useUser();
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
@@ -25,7 +30,7 @@ const MessageList = ({ activeTab, onSelectMessage, selectedMessage }) => {
         setMessages(filteredMessages);
       })
       .catch((err) => console.error("메시지 로딩 실패:", err));
-  }, [user, activeTab]);
+  }, [user, activeTab, showForm]);
 
   const handleMessageClick = async (message) => {
     if (activeTab === "received" && !message.isRead) {
