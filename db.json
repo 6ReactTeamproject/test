@@ -100,7 +100,7 @@
       "title": "첫 게시글입니다!",
       "content": "안녕하세요. 첫 글이에요.",
       "createdAt": "2025-05-22",
-      "views": 100
+      "views": 105
     },
     {
       "id": "2",
@@ -480,7 +480,7 @@
       "title": "테스트",
       "content": "테스트",
       "createdAt": "2025-06-16T03:26:57.831Z",
-      "isRead": false,
+      "isRead": true,
       "id": 7
     },
     {
