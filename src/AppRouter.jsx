@@ -44,7 +44,7 @@ export default function AppRouter({ user, setUser }) {
 
         {/* 마이페이지 관련 라우팅 */}
         <Route path="/mypage" element={<MyPage />} />
-        <Route path="/mypage/message" element={<MessageBox />} />
+        <Route path="/message" element={<MessageBox />} />
         <Route path="/mypage/password" element={<ChangePasswordForm />} />
         <Route path="/mypage/nickname" element={<ChangeNameForm />} />
       </Routes>
