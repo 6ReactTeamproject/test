@@ -8,7 +8,7 @@ export default function ChangePasswordForm() {
   const [newPw, setNewPw] = useState("");
   const [confirmPw, setConfirmPw] = useState("");
 
-  if (!user) return <p>로그인이 필요합니다.</p>; // 로그인 안 된 경우 처리
+  if (!user) return <p>로그인이 필요합니다.</p>; // 마이페이지에서 로그아웃 한 경우에 띄우는 메세지예요
 
   const handleSubmit = async (e) => {
     e.preventDefault();
