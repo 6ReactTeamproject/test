@@ -30,3 +30,32 @@
   flex: 1;
   padding: 30px;
 }
+
+.profile-card {
+  display: flex;
+  align-items: center;
+  background-color: #2f3136;
+  padding: 20px 30px;
+  border-radius: 16px;
+  color: white;
+  gap: 45px; /* 이미지와 텍스트 간 거리 조절 */
+}
+
+
+.profile-img {
+  width: 125px;
+  height: 125px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #9cb1eb;
+}
+
+.profile-info h3 {
+  color: #ffffff; 
+  font-weight: 600; 
+}
+
+.profile-info p {
+  color: #eeeeee; 
+}
+

@@ -1,7 +1,8 @@
 import React from "react";
 import { useUser } from "../../hooks/UserContext";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import UploadImg from "./UploadImg";
+import GitForm from "./GitForm";
 import "./MyPage.css";
 
 export default function MyPage() {
@@ -19,7 +20,17 @@ export default function MyPage() {
 
       <div className="mypage-main">
         <h2>마이페이지</h2>
-        <p>여기에 오른쪽 콘텐츠가 표시됩니다.</p>
+        <div className="profile-card">
+          <UploadImg />
+
+          <div className="profile-info">
+            <h3>{user.name}</h3>
+            <p>아이디 : {user.loginId}</p>
+            <p>등급   : {user.grade}</p>
+
+            <GitForm />
+          </div>
+        </div>
       </div>
     </div>
   );
