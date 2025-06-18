@@ -12,7 +12,7 @@ export default function CommentList({
   currentUser,
 }) {
   const [editingCommentId, setEditingCommentId] = useState(null);
-  const [sortType, setSortType] = useState("likes"); 
+  const [sortType, setSortType] = useState(""); 
 
   const handleEdit = (comment) => {
     setEditingCommentId(comment.id);
