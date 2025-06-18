@@ -100,7 +100,7 @@
       "title": "첫 게시글입니다!",
       "content": "안녕하세요. 첫 글이에요.",
       "createdAt": "2025-05-22",
-      "views": 135
+      "views": 141
     },
     {
       "id": "2",
@@ -148,7 +148,7 @@
       "content": "잘 작동하나요?",
       "userId": 1,
       "createdAt": "2025-05-27T10:10:48.348Z",
-      "views": 0
+      "views": 1
     },
     {
       "id": "1748612405100",
@@ -180,7 +180,7 @@
       "content": "asdf",
       "userId": 1,
       "createdAt": "2025-05-30T14:53:54.464Z",
-      "views": 3
+      "views": 4
     },
     {
       "id": "1748616937098",
@@ -218,6 +218,22 @@
       "id": "cef2",
       "title": "123",
       "content": "123",
+      "userId": "4",
+      "createdAt": "2025-06-18",
+      "views": 3
+    },
+    {
+      "id": "1d07",
+      "title": "123",
+      "content": "123",
+      "userId": "4",
+      "createdAt": "2025-06-18",
+      "views": 0
+    },
+    {
+      "id": "bd83",
+      "title": "1253145",
+      "content": "2345245",
       "userId": "4",
       "createdAt": "2025-06-18",
       "views": 0
@@ -440,6 +456,26 @@
       "userId": "4",
       "parentId": "d914",
       "createdAt": "2025-06-18T06:01:26.015Z",
+      "likes": 0,
+      "likedUserIds": []
+    },
+    {
+      "id": "09ef",
+      "text": "123",
+      "postId": "cef2",
+      "userId": "4",
+      "parentId": null,
+      "createdAt": "2025-06-18T06:17:07.056Z",
+      "likes": 0,
+      "likedUserIds": []
+    },
+    {
+      "id": "67a6",
+      "text": "123",
+      "postId": "cef2",
+      "userId": "4",
+      "parentId": "09ef",
+      "createdAt": "2025-06-18T06:17:10.238Z",
       "likes": 0,
       "likedUserIds": []
     }

@@ -29,10 +29,12 @@ function PostActions({ post, postUser, currentUser, id, navigate }) {
       apiDelete("posts", id).then(() => {
         // 게시판에서 왔다면 해당 페이지로 돌아가기
         if (location.state?.fromBoard) {
-          navigate(
-            "/post" +
-              (location.state.page ? `?page=${location.state.page}` : "")
-          );
+          let url = "/post";
+          const params = [];
+          if (location.state.page) params.push(`page=${location.state.page}`);
+          if (location.state.sort) params.push(`sort=${location.state.sort}`);
+          if (params.length > 0) url += "?" + params.join("&");
+          navigate(url);
         } else {
           navigate(-1);
         }
@@ -54,6 +56,7 @@ function PostActions({ post, postUser, currentUser, id, navigate }) {
                 state: {
                   fromBoard: location.state?.fromBoard,
                   page: location.state?.page,
+                  sort: location.state?.sort,
                 },
               })
             }

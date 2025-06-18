@@ -1,6 +1,6 @@
 import PostItem from "./PostItem";
 
-const PostList = ({ members, posts, onClickPost, currentPage }) => (
+const PostList = ({ members, posts, onClickPost, currentPage, sortType }) => (
   <ul>
     {posts.length > 0 ? (
       posts.map((post) => (
@@ -8,7 +8,7 @@ const PostList = ({ members, posts, onClickPost, currentPage }) => (
           key={post.id}
           members={members}
           post={post}
-          onClick={() => onClickPost(post.id, currentPage)}
+          onClick={() => onClickPost(post.id, currentPage, sortType)}
         />
       ))
     ) : (

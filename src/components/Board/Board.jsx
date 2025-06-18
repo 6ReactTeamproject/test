@@ -22,12 +22,12 @@ const Board = () => {
   const [searchType, setSearchType] = useState("title_content");
   const [filtered, setFiltered] = useState([]);
   const [members, setMembers] = useState([]);
-  const [sortType, setSortType] = useState("");
   const { user } = useUser();
   const postsPerPage = 5;
 
-  // URL에서 페이지 정보 가져오기
+  // URL에서 페이지/정렬 정보 가져오기
   const currentPage = parseInt(searchParams.get("page")) || 1;
+  const sortType = searchParams.get("sort") || "";
 
   const nav = useNavigate();
 
@@ -35,6 +35,14 @@ const Board = () => {
   const setCurrentPage = (page) => {
     const newSearchParams = new URLSearchParams(searchParams);
     newSearchParams.set("page", page.toString());
+    setSearchParams(newSearchParams);
+  };
+
+  // 정렬 변경 함수
+  const setSortType = (type) => {
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.set("sort", type);
+    newSearchParams.set("page", "1"); // 정렬 변경 시 1페이지로 이동
     setSearchParams(newSearchParams);
   };
 
@@ -92,6 +100,7 @@ const Board = () => {
               state: {
                 fromBoard: true,
                 page: currentPage,
+                sort: sortType,
               },
             });
           } else {
@@ -109,11 +118,13 @@ const Board = () => {
         members={members}
         posts={currentPosts}
         currentPage={currentPage}
-        onClickPost={(id, page) => {
+        sortType={sortType}
+        onClickPost={(id, page, sort) => {
           nav(`/post/${id}`, {
             state: {
               fromBoard: true,
               page: page,
+              sort: sort,
             },
           });
         }}
