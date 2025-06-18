@@ -82,7 +82,7 @@ export function Signup() {
     }
 
     if (!isIdChecked) {
-      alert("아이디 중복확인 필수"); // 
+      alert("아이디 중복확인 필수"); //
       return;
     }
 
@@ -96,7 +96,7 @@ export function Signup() {
           password: passwd,
           image: defaultImageURL,
           grade: "일반회원",
-          giturl: ""
+          giturl: "",
         }),
       });
 
@@ -128,7 +128,9 @@ export function Signup() {
           placeholder="이름 (한글/영어만)"
         />
         {name && !isNameValid && (
-          <div className="warn">이름에는 숫자나 특수문자를 사용할 수 없습니다.</div>
+          <div className="warn">
+            이름에는 숫자나 특수문자를 사용할 수 없습니다.
+          </div>
         )}
 
         <div className="id-check">
