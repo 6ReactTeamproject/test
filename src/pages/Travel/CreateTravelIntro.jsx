@@ -13,7 +13,7 @@ export default function CreateTravelIntro() {
     >
       <input name="title" placeholder="현지학기제 장소" />
       <textarea name="description" placeholder="현지학기제 소개" />
-      <SelectImage />
+      <SelectImage cropShape="square" />
     </CreateButton>
   );
 }
