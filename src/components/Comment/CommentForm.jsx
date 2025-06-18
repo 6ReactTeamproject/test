@@ -5,7 +5,13 @@ import FormButton from "../common/FormButton";
 import { MESSAGES } from "../../constants";
 import "../../styles/form.css";
 
-export default function CommentForm({ currentUser, id, setComments }) {
+export default function CommentForm({
+  currentUser,
+  id,
+  setComments,
+  onCancel,
+  parentId,
+}) {
   const [values, setValues] = useState({ text: "" });
 
   const handleChange = (e) => {
@@ -28,12 +34,16 @@ export default function CommentForm({ currentUser, id, setComments }) {
       text: values.text,
       postId: id,
       userId: currentUser.id,
+      parentId: parentId || null,
       createdAt: new Date().toISOString(),
       likes: 0,
       likedUserIds: [],
     }).then((newComment) => {
       setComments((prev) => [...prev, newComment]);
       reset();
+      if (onCancel) {
+        onCancel();
+      }
     });
   };
 
@@ -43,11 +53,20 @@ export default function CommentForm({ currentUser, id, setComments }) {
         name="text"
         value={values.text}
         onChange={handleChange}
-        placeholder="댓글을 입력하세요"
+        placeholder={parentId ? "답글을 입력하세요" : "댓글을 입력하세요"}
       />
       <FormButton type="submit" className="add-button">
-        댓글 작성
+        {parentId ? "답글 작성" : "댓글 작성"}
       </FormButton>
+      {onCancel && (
+        <FormButton
+          type="button"
+          onClick={onCancel}
+          style={{ marginLeft: "8" }}
+        >
+          취소
+        </FormButton>
+      )}
     </form>
   );
 }

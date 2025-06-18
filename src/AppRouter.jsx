@@ -16,10 +16,12 @@ import Layout from "./layout/Layout.jsx";
 import MessageBox from "./components/Message/MessageBox.jsx";
 import ChangePasswordForm from "./pages/Auth/ChangePasswordForm.jsx";
 import ChangeNameForm from "./pages/Auth/ChangeNameForm.jsx";
+import { useRouteHistory } from "./hooks/useRouteHistory";
 
 
 
 export default function AppRouter({ user, setUser }) {
+  useRouteHistory();
   return (
     <Layout>
       <Routes>

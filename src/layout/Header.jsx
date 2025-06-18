@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import BackButton from "../components/common/BackButton";
 import { UserSection } from "../components/common/UserSection";
 
 const Header = ({ style }) => {
@@ -35,7 +34,6 @@ const Header = ({ style }) => {
             여행 커뮤니티
           </h1>
         </Link>
-        <BackButton variant="header" />
       </div>
       <div style={{ marginLeft: "auto" }}>
         <UserSection />
