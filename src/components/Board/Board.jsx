@@ -22,6 +22,7 @@ const Board = () => {
   const [searchType, setSearchType] = useState("title_content");
   const [filtered, setFiltered] = useState([]);
   const [members, setMembers] = useState([]);
+
   const { user } = useUser();
   const postsPerPage = 5;
 
@@ -84,12 +85,6 @@ const Board = () => {
   );
   const totalPages = getTotalPages(displayPosts, postsPerPage);
 
-  const handleAddPost = (newPost) => {
-    apiPost("posts", newPost)
-      .then((data) => setPosts([data, ...posts]))
-      .catch((err) => console.error("에러:", err));
-  };
-
   return (
     <div>
       <h2>게시판</h2>
@@ -110,9 +105,9 @@ const Board = () => {
       >
         게시글 작성
       </button>
-      <div style={{ marginTop: "25px" }}>
-        <button onClick={() => setSortType("views")}>조회수순</button>
-        <button onClick={() => setSortType("")}>최신순</button>
+      <div>
+      <button onClick={() => setSortType("views")}>조회수순</button>
+      <button onClick={() => setSortType("")}>최신순</button>
       </div>
       <PostList
         members={members}

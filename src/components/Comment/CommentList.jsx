@@ -21,6 +21,7 @@ export default function CommentList({
     comments.filter((c) => c.parentId === parentId);
 
   const [replyTo, setReplyTo] = useState(null);
+  const [sortType, setSortType] = useState(""); 
 
   const handleEdit = (comment) => {
     setEditingCommentId(comment.id);
