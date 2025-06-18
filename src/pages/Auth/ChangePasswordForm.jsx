@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useUser } from "../../hooks/UserContext";
+import Sidebar from "./Sidebar";
 
 export default function ChangePasswordForm() {
   const { user } = useUser();
@@ -53,9 +54,11 @@ export default function ChangePasswordForm() {
   };
 
   return (
-    <div>
-      <h3>비밀번호 변경</h3>
+    <div className="mypage-container">
+      <Sidebar/>
+      
       <form onSubmit={handleSubmit}>
+        <h3>비밀번호 변경</h3>
         <div style={{ display: "flex", flexDirection: "column", gap: "10px", maxWidth: "250px" }}>
           <input
             type="password"

@@ -106,7 +106,11 @@ export default function CommentList({
                   onEdit={handleEdit}
                   onDelete={handleDelete}
                 />
-                <button onClick={() => setReplyTo(comment.id)}>답글달기</button>
+                {currentUser && (
+                  <button onClick={() => setReplyTo(comment.id)}>
+                    답글달기
+                  </button>
+                )}
               </span>
             </div>
 
