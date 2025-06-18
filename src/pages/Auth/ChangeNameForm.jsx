@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useUser } from "../../hooks/UserContext";
+import Sidebar from "./Sidebar";
 
 export default function ChangeNameForm() {
   const { user, setUser } = useUser();
@@ -57,7 +58,8 @@ export default function ChangeNameForm() {
   };
 
   return (
-    <>
+    <div className="mypage-container">
+      <Sidebar/>
       <div style={{ maxWidth: '300px', margin: '40px 0' }}>
         <hr />
       </div>
@@ -79,6 +81,6 @@ export default function ChangeNameForm() {
           </p>
         )}
       </form>
-    </>
+    </div>
   );
 }
