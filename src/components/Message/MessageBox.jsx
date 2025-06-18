@@ -4,16 +4,21 @@ import MessageList from "./MessageList";
 import MessageDetail from "./MessageDetail";
 import MessageForm from "./MessageForm";
 import "./Message.css";
+import { useNavigate } from "react-router-dom";
 
 const MessageBox = () => {
   const { user } = useUser();
   const [selectedMessage, setSelectedMessage] = useState(null);
   const [activeTab, setActiveTab] = useState("received");
   const [showForm, setShowForm] = useState(false);
+  const nav = useNavigate();
 
-  if (!user) {
-    return null;
-  }
+  useEffect(() => {
+    if (!user) {
+      alert("로그인 후 이용해주세요.");
+      nav("/login");
+    }
+  }, [user, nav]);
 
   return (
     <div className="message-box">
