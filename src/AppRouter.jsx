@@ -17,6 +17,8 @@ import MessageBox from "./components/Message/MessageBox.jsx";
 import ChangePasswordForm from "./pages/Auth/ChangePasswordForm.jsx";
 import ChangeNameForm from "./pages/Auth/ChangeNameForm.jsx";
 
+
+
 export default function AppRouter({ user, setUser }) {
   return (
     <Layout>
@@ -24,27 +26,22 @@ export default function AppRouter({ user, setUser }) {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/mypage" element={<MyPage />} />
-
-        {/* 여행 소개 관련 라우팅 */}
+       
         <Route path="/intro" element={<TravelIntro />} />
         <Route path="/intro/new" element={<CreateTravelIntro />} />
         <Route path="/intro/:id" element={<DetailTravel />} />
 
-        {/* 팀 소개 관련 라우팅 */}
         <Route path="/team" element={<TeamIntro />} />
         <Route path="/team/new" element={<CreateMember />} />
         <Route path="/team/:id" element={<DetailMember />} />
 
-        {/* 게시판 관련 라우팅 */}
         <Route path="/post" element={<PostBoard />} />
         <Route path="/post/:id" element={<PostDetail currentUser={user} />} />
         <Route path="/post/write" element={<WritePost />} />
         <Route path="/edit/:id" element={<WritePost />} />
 
-        {/* 마이페이지 관련 라우팅 */}
         <Route path="/mypage" element={<MyPage />} />
-        <Route path="/mypage/message" element={<MessageBox />} />
+        <Route path="/message" element={<MessageBox />} />
         <Route path="/mypage/password" element={<ChangePasswordForm />} />
         <Route path="/mypage/nickname" element={<ChangeNameForm />} />
       </Routes>
