@@ -3,6 +3,8 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import AppRouter from "./AppRouter";
 import { UserContext } from "./hooks/UserContext";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function Root() {
   const [user, setUser] = useState(null);

@@ -1,46 +1,45 @@
+import { useState, useRef } from "react";
+import CropModal from "../../pages/Auth/CropModal";
+
 export default function SelectImage({ setInputs }) {
+  const [imageSrc, setImageSrc] = useState(null);
+  const fileInputRef = useRef();
+
+  const handleImageSelect = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setImageSrc(reader.result); // CropModal에 전달할 원본 이미지
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleCropComplete = (croppedDataUrl) => {
+    setInputs((prev) => ({
+      ...prev,
+      imageUrl: croppedDataUrl,
+    }));
+    setImageSrc(null); // 모달 닫기
+  };
+
   return (
-    <input
-      type="file"
-      accept="image/*"
-      onChange={(e) => {
-        const file = e.target.files[0];
-        if (file) {
-          const reader = new FileReader();
-          reader.onloadend = () => {
-            const img = new Image();
-            img.onload = () => {
-              const MAX_WIDTH = 900;
-              const MAX_HEIGHT = 700;
+    <>
+      <input
+        type="file"
+        accept="image/*"
+        onChange={handleImageSelect}
+        ref={fileInputRef}
+      />
 
-              let width = img.width;
-              let height = img.height;
-
-              if (width > MAX_WIDTH || height > MAX_HEIGHT) {
-                const widthRatio = MAX_WIDTH / width;
-                const heightRatio = MAX_HEIGHT / height;
-                const ratio = Math.min(widthRatio, heightRatio);
-                width = width * ratio;
-                height = height * ratio;
-              }
-
-              const canvas = document.createElement("canvas");
-              canvas.width = width;
-              canvas.height = height;
-              const ctx = canvas.getContext("2d");
-              ctx.drawImage(img, 0, 0, width, height);
-              const resizedDataUrl = canvas.toDataURL("image/jpeg");
-
-              setInputs((prev) => ({
-                ...prev,
-                imageUrl: resizedDataUrl,
-              }));
-            };
-            img.src = reader.result;
-          };
-          reader.readAsDataURL(file);
-        }
-      }}
-    />
+      {imageSrc && (
+        <CropModal
+          imageSrc={imageSrc}
+          onClose={() => setImageSrc(null)}
+          onCropComplete={handleCropComplete}
+        />
+      )}
+    </>
   );
 }
