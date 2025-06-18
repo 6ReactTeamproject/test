@@ -10,8 +10,12 @@ const MessageDetail = ({ message, onClose }) => {
 
   useEffect(() => {
     apiGet("users").then((users) => {
-      const foundSender = users.find((u) => u.id === message.senderId);
-      const foundReceiver = users.find((u) => u.id === message.receiverId);
+      const foundSender = users.find(
+        (u) => String(u.id) === String(message.senderId)
+      );
+      const foundReceiver = users.find(
+        (u) => String(u.id) === String(message.receiverId)
+      );
       setSender(foundSender);
       setReceiver(foundReceiver);
     });

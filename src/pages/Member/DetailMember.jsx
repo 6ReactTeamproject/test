@@ -26,7 +26,7 @@ function DetailMember() {
 
   if (!members) return <p>로딩 중...</p>;
 
-  const isOwner = user?.id === members.authorId;
+  const isOwner = String(user?.id) === String(members.authorId);
 
   return (
     <>
