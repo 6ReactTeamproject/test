@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import DeleteButton from "../../components/Travel&Member/DeleteButton";
 import EditTravelIntro from "./EditTravelIntro";
 import { useUser } from "../../hooks/UserContext";
+import "../../styles/post.css";
 import "../../styles/travel.css";
 
 export default function DetailTravel() {
@@ -23,8 +24,23 @@ export default function DetailTravel() {
   const isOwner = user?.id === travelPlace.authorId;
 
   return (
-    <div className="modal-overlay" onClick={() => navigate("/intro")}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+      <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{ position: "relative" }}>
+        <button
+        className="close-button"
+        onClick={() => navigate(-1)}
+        style={{
+          position: "absolute",
+          top: "12px",
+          right: "20px",
+          background: "none",
+          border: "none",
+          fontSize: "2rem",
+          color: "#888",
+          cursor: "pointer",
+          zIndex: 10,
+        }}
+        aria-label="닫기"
+      > × </button>
         {isEditing ? (
           <EditTravelIntro
             travelPlace={travelPlace}
@@ -62,6 +78,5 @@ export default function DetailTravel() {
           </>
         )}
       </div>
-    </div>
   );
 }
