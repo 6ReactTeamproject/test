@@ -13,15 +13,11 @@ export default function CommentList({
   currentUser,
 }) {
   const [editingCommentId, setEditingCommentId] = useState(null);
-  const [sortType, setSortType] = useState("likes");
-
-  const parentComments = comments.filter((c) => !c.parentId);
+  const [sortType, setSortType] = useState("");
+  const [replyTo, setReplyTo] = useState(null);
 
   const getReplies = (parentId) =>
     comments.filter((c) => c.parentId === parentId);
-
-  const [replyTo, setReplyTo] = useState(null);
-  const [sortType, setSortType] = useState(""); 
 
   const handleEdit = (comment) => {
     setEditingCommentId(comment.id);
@@ -49,13 +45,11 @@ export default function CommentList({
         ? comment.likedUserIds.filter((id) => id !== currentUser.id)
         : [...comment.likedUserIds, currentUser.id];
 
-      // 서버에 좋아요 상태 업데이트
       await apiPatch("comments", comment.id, {
         likes: updatedLikes,
         likedUserIds: updatedLikedUserIds,
       });
 
-      // 클라이언트 상태 업데이트
       setComments((prev) =>
         prev.map((c) =>
           c.id === comment.id
@@ -73,6 +67,8 @@ export default function CommentList({
     if (sortType === "likes") return b.likes - a.likes;
     return new Date(b.createdAt) - new Date(a.createdAt);
   });
+
+  const parentComments = sortedComments.filter((c) => !c.parentId);
 
   return (
     <div className="comment-list">
@@ -113,6 +109,7 @@ export default function CommentList({
                 <button onClick={() => setReplyTo(comment.id)}>답글달기</button>
               </span>
             </div>
+
             {replyTo === comment.id && (
               <CommentForm
                 currentUser={currentUser}
@@ -122,6 +119,7 @@ export default function CommentList({
                 onCancel={() => setReplyTo(null)}
               />
             )}
+
             <div style={{ marginLeft: 32, width: "100%" }}>
               {getReplies(comment.id).map((reply) => {
                 const replyUser = users.find(

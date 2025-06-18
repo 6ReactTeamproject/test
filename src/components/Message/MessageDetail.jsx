@@ -9,7 +9,6 @@ const MessageDetail = ({ message, onClose }) => {
   const [receiver, setReceiver] = useState(null);
 
   useEffect(() => {
-    // 발신자와 수신자 정보 가져오기
     apiGet("users").then((users) => {
       const foundSender = users.find((u) => u.id === message.senderId);
       const foundReceiver = users.find((u) => u.id === message.receiverId);
