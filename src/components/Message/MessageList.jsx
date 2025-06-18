@@ -24,8 +24,8 @@ const MessageList = ({
       .then((data) => {
         const filteredMessages = data.filter((message) =>
           activeTab === "received"
-            ? message.receiverId === user.id
-            : message.senderId === user.id
+            ? String(message.receiverId) === String(user.id)
+            : String(message.senderId) === String(user.id)
         );
         setMessages(filteredMessages);
       })
@@ -53,7 +53,7 @@ const MessageList = ({
   }
 
   const getSenderName = (userId) => {
-    const foundUser = users.find((u) => u.id === userId);
+    const foundUser = users.find((u) => String(u.id) === String(userId));
     return foundUser ? foundUser.name : "알 수 없음";
   };
 

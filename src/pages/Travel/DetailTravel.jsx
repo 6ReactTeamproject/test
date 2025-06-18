@@ -21,7 +21,7 @@ export default function DetailTravel() {
 
   if (!travelPlace) return <p>로딩 중...</p>;
 
-  const isOwner = user?.id === travelPlace.authorId;
+  const isOwner = String(user?.id) === String(travelPlace.authorId);
 
   return (
       <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{ position: "relative" }}>
