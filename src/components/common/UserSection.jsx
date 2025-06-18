@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { useUser } from "../../hooks/UserContext";
 import { useNavigate, useLocation } from "react-router-dom";
-
 import "../../styles/travel.css";
 
 export function UserSection() {
   const { user, setUser } = useUser();
-  const [preview, setPreview] = useState(user?.image || "");
+  const [preview, setPreview] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const nav = useNavigate();
   const location = useLocation();
@@ -14,7 +13,9 @@ export function UserSection() {
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
-      setUser(JSON.parse(storedUser));
+      const parsedUser = JSON.parse(storedUser);
+      setUser(parsedUser);
+      setPreview(parsedUser.image || "");
     }
     setIsLoading(false);
   }, [setUser]);
@@ -25,21 +26,31 @@ export function UserSection() {
     }
   }, [user?.image]);
 
-  if (isLoading || !user) return <p>로딩 중...</p>;
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setUser(null);
+    nav("/login");
+  };
+
+  if (isLoading) return <p>로딩 중...</p>;
 
   return (
-    <>
-      <img src={preview} alt="프로필" className="profile-img" />
-      <div className="user-section">
-        <p>{user.name}님 환영합니다!</p>
+  <div>
+    {user && <img src={preview} alt="프로필" className="profile-img" />}
+    <p>{user ? `${user.name}님 환영합니다!` : "Guest님 환영합니다!"}</p>
+    {user ? (
+      <>
         {location.pathname !== "/mypage" && (
           <button onClick={() => nav("/mypage")}>마이페이지</button>
         )}
-        <button onClick={() => {
-          localStorage.removeItem("user");
-          setUser(null);
-        }}>로그아웃</button>
-      </div>
-    </>
-  );
+        <button onClick={handleLogout}>로그아웃</button>
+      </>
+    ) : (
+      <>
+        <button onClick={() => nav("/login")}>로그인</button>
+        <button onClick={() => nav("/signup")}>회원가입</button>
+      </>
+    )}
+  </div>
+);
 }
