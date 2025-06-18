@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import PostForm from "./PostForm";
 import { useUser } from "../../hooks/UserContext";
 import { apiGet, apiPost, apiPatch } from "../../api/fetch";
@@ -7,6 +7,7 @@ import { apiGet, apiPost, apiPatch } from "../../api/fetch";
 const WritePost = () => {
   const { id } = useParams(); // 수정이면 id 존재
   const navigate = useNavigate();
+  const location = useLocation();
   const [post, setPost] = useState({ title: "", content: "" });
   const { user: currentUser } = useUser();
 
@@ -36,10 +37,24 @@ const WritePost = () => {
           }),
     };
 
+    const handleSuccess = () => {
+      // 게시판에서 왔다면 해당 페이지로 돌아가기
+      if (location.state?.fromBoard) {
+        let url = "/post";
+        const params = [];
+        if (location.state.page) params.push(`page=${location.state.page}`);
+        if (location.state.sort) params.push(`sort=${location.state.sort}`);
+        if (params.length > 0) url += "?" + params.join("&");
+        navigate(url);
+      } else {
+        navigate(-1);
+      }
+    };
+
     if (id) {
-      apiPatch("posts", id, postData).then(() => navigate(-1));
+      apiPatch("posts", id, postData).then(handleSuccess);
     } else {
-      apiPost("posts", postData).then(() => navigate(-1));
+      apiPost("posts", postData).then(handleSuccess);
     }
   };
 

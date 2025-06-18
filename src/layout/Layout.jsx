@@ -1,11 +1,11 @@
-import { useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Navigation from "./Navigation";
 import { styles } from "./Layout.styles";
 
 const Layout = ({ children }) => {
-  const [isNavExpanded, setIsNavExpanded] = useState(false);
+  // 항상 펼친 상태로 고정
+  const isNavExpanded = true;
 
   return (
     <div style={styles.layout}>
@@ -15,7 +15,7 @@ const Layout = ({ children }) => {
           ...(isNavExpanded ? styles.headerExpanded : {}),
         }}
       />
-      <Navigation onExpand={(expanded) => setIsNavExpanded(expanded)} />
+      <Navigation onExpand={() => {}} /> {/* onExpand는 더 이상 필요 없음 */}
       <main
         style={{
           ...styles.mainContent,

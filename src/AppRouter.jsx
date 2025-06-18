@@ -16,8 +16,10 @@ import Layout from "./layout/Layout.jsx";
 import MessageBox from "./components/Message/MessageBox.jsx";
 import ChangePasswordForm from "./pages/Auth/ChangePasswordForm.jsx";
 import ChangeNameForm from "./pages/Auth/ChangeNameForm.jsx";
+import { useRouteHistory } from "./hooks/useRouteHistory";
 
 export default function AppRouter({ user, setUser }) {
+  useRouteHistory();
   return (
     <Layout>
       <Routes>
@@ -44,7 +46,7 @@ export default function AppRouter({ user, setUser }) {
 
         {/* 마이페이지 관련 라우팅 */}
         <Route path="/mypage" element={<MyPage />} />
-        <Route path="/mypage/message" element={<MessageBox />} />
+        <Route path="/message" element={<MessageBox />} />
         <Route path="/mypage/password" element={<ChangePasswordForm />} />
         <Route path="/mypage/nickname" element={<ChangeNameForm />} />
       </Routes>

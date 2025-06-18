@@ -4,7 +4,7 @@
 댓글 좋아요 순으로 ✅
 */
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import PostList from "./PostList";
 import Pagination from "./Pagination";
@@ -15,19 +15,38 @@ import { useUser } from "../../hooks/UserContext";
 import HandleAuth from "../common/HandleAuth";
 
 const Board = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [posts, setPosts] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
   const [inputTerm, setInputTerm] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [searchType, setSearchType] = useState("title_content");
   const [filtered, setFiltered] = useState([]);
   const [members, setMembers] = useState([]);
-  const [sortType, setSortType] = useState("")
+
   const { user } = useUser();
   const postsPerPage = 5;
-  
+
+  // URL에서 페이지/정렬 정보 가져오기
+  const currentPage = parseInt(searchParams.get("page")) || 1;
+  const sortType = searchParams.get("sort") || "";
+
   const nav = useNavigate();
-  
+
+  // 페이지 변경 함수
+  const setCurrentPage = (page) => {
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.set("page", page.toString());
+    setSearchParams(newSearchParams);
+  };
+
+  // 정렬 변경 함수
+  const setSortType = (type) => {
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.set("sort", type);
+    newSearchParams.set("page", "1"); // 정렬 변경 시 1페이지로 이동
+    setSearchParams(newSearchParams);
+  };
+
   useEffect(() => {
     apiGet("posts")
       .then((data) => setPosts([...data].reverse()))
@@ -50,13 +69,13 @@ const Board = () => {
     setFiltered(results);
     setSearchTerm(inputTerm);
     setCurrentPage(1);
-  }
+  };
 
   const source = searchTerm.trim() ? filtered : posts;
   const sortedPosts = [...source].sort((a, b) => {
     if (sortType === "views") return b.views - a.views;
     return 0;
-  })
+  });
 
   const displayPosts = searchTerm.trim() ? filtered : posts;
   const currentPosts = getPaginatedItems(
@@ -70,9 +89,21 @@ const Board = () => {
     <div>
       <h2>게시판</h2>
       <button
-        onClick={() => HandleAuth(user, nav, "/post/write")}
+        onClick={() => {
+          if (user) {
+            nav("/post/write", {
+              state: {
+                fromBoard: true,
+                page: currentPage,
+                sort: sortType,
+              },
+            });
+          } else {
+            HandleAuth(user, nav, "/post/write");
+          }
+        }}
       >
-      게시글 작성
+        게시글 작성
       </button>
       <div>
       <button onClick={() => setSortType("views")}>조회수순</button>
@@ -81,15 +112,25 @@ const Board = () => {
       <PostList
         members={members}
         posts={currentPosts}
-        onClickPost={(id) => nav(`/post/${id}`)}
+        currentPage={currentPage}
+        sortType={sortType}
+        onClickPost={(id, page, sort) => {
+          nav(`/post/${id}`, {
+            state: {
+              fromBoard: true,
+              page: page,
+              sort: sort,
+            },
+          });
+        }}
       />
 
       {displayPosts.length > 0 && (
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
-          onPrev={() => setCurrentPage((p) => Math.max(p - 1, 1))}
-          onNext={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
+          onPrev={() => setCurrentPage(Math.max(currentPage - 1, 1))}
+          onNext={() => setCurrentPage(Math.min(currentPage + 1, totalPages))}
         />
       )}
       <SearchBar

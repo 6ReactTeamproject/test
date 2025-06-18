@@ -1,6 +1,6 @@
 import { useUser } from "../../hooks/UserContext";
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import PostHeader from "./PostHeader";
 import PostActions from "./PostActions";
 import CommentList from "../Comment/CommentList";
@@ -12,6 +12,7 @@ function PostDetail() {
   const { user: currentUser } = useUser();
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const [post, setPost] = useState(null);
   const [postUser, setPostUser] = useState(null);
   const [comments, setComments] = useState([]);
@@ -47,10 +48,43 @@ function PostDetail() {
     }
   }, [post, users]);
 
+  // 게시판으로 돌아가는 함수
+  const handleBackToBoard = () => {
+    // 이전 페이지가 게시판이었다면 해당 페이지로 돌아가기
+    if (location.state?.fromBoard) {
+      let url = "/post";
+      const params = [];
+      if (location.state.page) params.push(`page=${location.state.page}`);
+      if (location.state.sort) params.push(`sort=${location.state.sort}`);
+      if (params.length > 0) url += "?" + params.join("&");
+      navigate(url);
+    } else {
+      navigate(-1);
+    }
+  };
+
   if (!post) return <div>Loading...</div>;
 
   return (
-    <div className="post-detail-container">
+    <div className="post-detail-container" style={{ position: "relative" }}>
+      <button
+        className="close-button"
+        onClick={handleBackToBoard}
+        style={{
+          position: "absolute",
+          top: "24px",
+          right: "32px",
+          background: "none",
+          border: "none",
+          fontSize: "2rem",
+          color: "#888",
+          cursor: "pointer",
+          zIndex: 10,
+        }}
+        aria-label="닫기"
+      >
+        ×
+      </button>
       <div className="post-detail-title">{post.title}</div>
       <div className="post-detail-meta">
         작성자: {postUser?.name || post.authorName || post.authorId} |{" "}
@@ -65,7 +99,12 @@ function PostDetail() {
         navigate={navigate}
       />
       <hr />
-      <h3>댓글</h3>
+      <div className="comment-count-box">
+        <span className="comment-count-icon">💬</span>
+        <span className="comment-count-text">
+          댓글 <b>{comments.length}</b>개
+        </span>
+      </div>
       <CommentList
         comments={comments}
         setComments={setComments}

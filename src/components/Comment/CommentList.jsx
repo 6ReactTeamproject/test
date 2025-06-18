@@ -2,6 +2,7 @@ import { useState } from "react";
 import CommentEditForm from "./CommentEditForm";
 import CommentActions from "./CommentActions";
 import LikeButton from "./LikeButton";
+import CommentForm from "./CommentForm";
 import { apiPatch } from "../../api/fetch";
 import "../../styles/comment.css";
 
@@ -12,6 +13,14 @@ export default function CommentList({
   currentUser,
 }) {
   const [editingCommentId, setEditingCommentId] = useState(null);
+  const [sortType, setSortType] = useState("likes");
+
+  const parentComments = comments.filter((c) => !c.parentId);
+
+  const getReplies = (parentId) =>
+    comments.filter((c) => c.parentId === parentId);
+
+  const [replyTo, setReplyTo] = useState(null);
   const [sortType, setSortType] = useState(""); 
 
   const handleEdit = (comment) => {
@@ -72,41 +81,80 @@ export default function CommentList({
         <button onClick={() => setSortType("likes")}>좋아요순</button>
       </div>
 
-      {sortedComments.map((comment) => {
+      {parentComments.map((comment) => {
         const user = users.find((u) => String(u.id) === String(comment.userId));
         return (
-          <div className="comment-item" key={comment.id}>
-            <span className="comment-author">
-              {user?.name || comment.authorName || comment.authorId}
-            </span>
-            {editingCommentId === comment.id ? (
-              <CommentEditForm
-                comment={comment}
-                onSave={(newText) => handleSave(comment.id, newText)}
-                onCancel={() => setEditingCommentId(null)}
+          <div
+            className="comment-item"
+            key={comment.id}
+            style={{ flexDirection: "column", alignItems: "flex-start" }}
+          >
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <span className="comment-author">
+                {user?.name || comment.authorName || comment.authorId}
+              </span>
+              <span className="comment-content">{comment.text}</span>
+              <span className="comment-date">{comment.createdAt}</span>
+              <span> | 좋아요: {comment.likes}</span>
+              {currentUser && (
+                <LikeButton
+                  comment={comment}
+                  currentUser={currentUser}
+                  onLike={handleLike}
+                />
+              )}
+              <span className="comment-actions">
+                <CommentActions
+                  comment={comment}
+                  currentUser={currentUser}
+                  onEdit={handleEdit}
+                  onDelete={handleDelete}
+                />
+                <button onClick={() => setReplyTo(comment.id)}>답글달기</button>
+              </span>
+            </div>
+            {replyTo === comment.id && (
+              <CommentForm
+                currentUser={currentUser}
+                id={comment.postId}
+                setComments={setComments}
+                parentId={comment.id}
+                onCancel={() => setReplyTo(null)}
               />
-            ) : (
-              <>
-                <span className="comment-content">{comment.text}</span>
-                <span className="comment-date">{comment.createdAt}</span>
-                <span> | 좋아요: {comment.likes}</span>
-                {currentUser && (
-                  <LikeButton
-                    comment={comment}
-                    currentUser={currentUser}
-                    onLike={handleLike}
-                  />
-                )}
-                <span className="comment-actions">
-                  <CommentActions
-                    comment={comment}
-                    currentUser={currentUser}
-                    onEdit={handleEdit}
-                    onDelete={handleDelete}
-                  />
-                </span>
-              </>
             )}
+            <div style={{ marginLeft: 32, width: "100%" }}>
+              {getReplies(comment.id).map((reply) => {
+                const replyUser = users.find(
+                  (u) => String(u.id) === String(reply.userId)
+                );
+                return (
+                  <div className="reply-item comment-item" key={reply.id}>
+                    <span className="reply-label">↳ 대댓글</span>
+                    <span className="comment-author">
+                      {replyUser?.name || reply.authorName || reply.authorId}
+                    </span>
+                    <span className="comment-content">{reply.text}</span>
+                    <span className="comment-date">{reply.createdAt}</span>
+                    <span> | 좋아요: {reply.likes}</span>
+                    {currentUser && (
+                      <LikeButton
+                        comment={reply}
+                        currentUser={currentUser}
+                        onLike={handleLike}
+                      />
+                    )}
+                    <span className="comment-actions">
+                      <CommentActions
+                        comment={reply}
+                        currentUser={currentUser}
+                        onEdit={handleEdit}
+                        onDelete={handleDelete}
+                      />
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         );
       })}
