@@ -100,7 +100,7 @@
       "title": "첫 게시글입니다!",
       "content": "안녕하세요. 첫 글이에요.",
       "createdAt": "2025-05-22",
-      "views": 132
+      "views": 135
     },
     {
       "id": "2",
@@ -132,15 +132,15 @@
       "title": "ㅎㅇ",
       "content": "ㅇㅇ",
       "createdAt": "2025-05-23",
-      "views": 7
+      "views": 8
     },
     {
       "id": "6",
       "userId": 4,
       "title": "김성민",
-      "content": "김성민",
+      "content": "김성민123123",
       "createdAt": "2025-05-23",
-      "views": 5
+      "views": 7
     },
     {
       "id": "1748340648348",
@@ -156,7 +156,7 @@
       "content": "ㄱㅁㅇㅁㄴㅇ",
       "userId": 1,
       "createdAt": "2025-05-30T13:40:05.100Z",
-      "views": 2
+      "views": 3
     },
     {
       "id": "1748612444040",
@@ -164,7 +164,7 @@
       "content": "다시 태어났어요\n",
       "userId": 1,
       "createdAt": "2025-05-30T13:40:44.040Z",
-      "views": 5
+      "views": 7
     },
     {
       "id": "1748614931831",
@@ -172,7 +172,7 @@
       "content": "asf",
       "userId": 1,
       "createdAt": "2025-05-30T14:22:11.831Z",
-      "views": 5
+      "views": 6
     },
     {
       "id": "1748616834464",
@@ -188,7 +188,7 @@
       "content": "asdf",
       "userId": 1,
       "createdAt": "2025-05-30T14:55:37.098Z",
-      "views": 7
+      "views": 8
     },
     {
       "title": "ㅇㅈㅇㅈ",
@@ -203,8 +203,24 @@
       "content": "ㅋㅌㅊㅋㅌㅊㅋㅌ",
       "userId": "3",
       "createdAt": "2025-06-12",
-      "views": 3,
+      "views": 5,
       "id": "pn8Vnt9"
+    },
+    {
+      "id": "71ea",
+      "title": "테스트1",
+      "content": "테스트1",
+      "userId": "4",
+      "createdAt": "2025-06-18",
+      "views": 1
+    },
+    {
+      "id": "cef2",
+      "title": "123",
+      "content": "123",
+      "userId": "4",
+      "createdAt": "2025-06-18",
+      "views": 0
     }
   ],
   "comments": [
@@ -396,6 +412,36 @@
       "likes": 0,
       "likedUserIds": [],
       "id": "PGRJgqz"
+    },
+    {
+      "id": "d914",
+      "text": "댓글 테스트",
+      "postId": "pn8Vnt9",
+      "userId": "4",
+      "parentId": null,
+      "createdAt": "2025-06-18T06:01:12.360Z",
+      "likes": 0,
+      "likedUserIds": []
+    },
+    {
+      "id": "bb4b",
+      "text": "대댓글 테스트",
+      "postId": "pn8Vnt9",
+      "userId": "4",
+      "parentId": "d914",
+      "createdAt": "2025-06-18T06:01:18.238Z",
+      "likes": 0,
+      "likedUserIds": []
+    },
+    {
+      "id": "0a34",
+      "text": "대댓글 테스트2",
+      "postId": "pn8Vnt9",
+      "userId": "4",
+      "parentId": "d914",
+      "createdAt": "2025-06-18T06:01:26.015Z",
+      "likes": 0,
+      "likedUserIds": []
     }
   ],
   "users": [
@@ -491,7 +537,7 @@
   ],
   "messages": [
     {
-      "id": 1,
+      "id": "1",
       "senderId": "1",
       "receiverId": "4",
       "title": "테스트용 쪽지 제목",
@@ -505,7 +551,7 @@
       "receiverId": "4",
       "senderId": "1",
       "createdAt": "2025-06-13T06:25:47.245Z",
-      "id": 2,
+      "id": "2",
       "isRead": true
     },
     {
@@ -514,7 +560,7 @@
       "receiverId": "4",
       "senderId": "1",
       "createdAt": "2025-06-13T06:30:02.475Z",
-      "id": 3,
+      "id": "3",
       "isRead": true
     },
     {
@@ -524,7 +570,7 @@
       "content": "123",
       "createdAt": "2025-06-13T06:34:39.141Z",
       "isRead": false,
-      "id": 4
+      "id": "4"
     },
     {
       "senderId": "4",
@@ -533,7 +579,7 @@
       "content": "123",
       "createdAt": "2025-06-13T06:41:10.545Z",
       "isRead": true,
-      "id": 5
+      "id": "5"
     },
     {
       "senderId": "1",
@@ -542,7 +588,7 @@
       "content": "a",
       "createdAt": "2025-06-13T09:33:10.851Z",
       "isRead": true,
-      "id": 6
+      "id": "6"
     },
     {
       "senderId": "4",
@@ -551,7 +597,7 @@
       "content": "테스트",
       "createdAt": "2025-06-16T03:26:57.831Z",
       "isRead": false,
-      "id": 7
+      "id": "7"
     },
     {
       "senderId": "4",
@@ -560,7 +606,7 @@
       "content": "테스트",
       "createdAt": "2025-06-16T03:34:45.668Z",
       "isRead": false,
-      "id": 8
+      "id": "8"
     },
     {
       "senderId": "4",
@@ -569,7 +615,7 @@
       "content": "테스트2",
       "createdAt": "2025-06-16T03:35:08.312Z",
       "isRead": false,
-      "id": 9
+      "id": "9"
     },
     {
       "senderId": "4",
@@ -578,7 +624,7 @@
       "content": "123123",
       "createdAt": "2025-06-16T05:44:09.243Z",
       "isRead": false,
-      "id": 10
+      "id": "10"
     }
   ]
 }

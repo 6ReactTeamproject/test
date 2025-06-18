@@ -12,6 +12,15 @@ const Navigation = () => {
     { path: "/message", label: "쪽지함" },
   ];
 
+  const handleMenuClick = (path) => {
+    // 게시판인 경우 페이지 정보를 포함해서 이동
+    if (path === "/post") {
+      nav("/post?page=1");
+    } else {
+      nav(path);
+    }
+  };
+
   return (
     <nav
       style={{
@@ -27,41 +36,47 @@ const Navigation = () => {
           padding: "20px 0",
         }}
       >
-        {menuItems.map((item) => (
-          <div
-            key={item.path}
-            style={{
-              ...styles.navItem,
-              backgroundColor:
-                location.pathname === item.path ? "#f0f7ff" : "transparent",
-              borderLeft:
-                location.pathname === item.path ? "4px solid #4f46e5" : "none",
-              padding: "12px 20px",
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              whiteSpace: "nowrap",
-              overflow: "hidden",
-            }}
-            onClick={() => nav(item.path)}
-          >
-            <span style={{ minWidth: "24px", textAlign: "center" }}>
-              {item.path === "/intro" && "🏠"}
-              {item.path === "/team" && "👥"}
-              {item.path === "/post" && "📝"}
-              {item.path === "/message" && "✉️"}
-            </span>
-            <span
+        {menuItems.map((item) => {
+          // 게시판의 경우 쿼리 파라미터가 있어도 활성 상태로 표시
+          const isActive =
+            item.path === "/post"
+              ? location.pathname === "/post"
+              : location.pathname === item.path;
+
+          return (
+            <div
+              key={item.path}
               style={{
-                marginLeft: "12px",
-                opacity: 1,
-                transition: "opacity 0.2s",
+                ...styles.navItem,
+                backgroundColor: isActive ? "#f0f7ff" : "transparent",
+                borderLeft: isActive ? "4px solid #4f46e5" : "none",
+                padding: "12px 20px",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                whiteSpace: "nowrap",
+                overflow: "hidden",
               }}
+              onClick={() => handleMenuClick(item.path)}
             >
-              {item.label}
-            </span>
-          </div>
-        ))}
+              <span style={{ minWidth: "24px", textAlign: "center" }}>
+                {item.path === "/intro" && "🏠"}
+                {item.path === "/team" && "👥"}
+                {item.path === "/post" && "📝"}
+                {item.path === "/message" && "✉️"}
+              </span>
+              <span
+                style={{
+                  marginLeft: "12px",
+                  opacity: 1,
+                  transition: "opacity 0.2s",
+                }}
+              >
+                {item.label}
+              </span>
+            </div>
+          );
+        })}
       </div>
     </nav>
   );
