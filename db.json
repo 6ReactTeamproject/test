@@ -100,7 +100,7 @@
       "title": "첫 게시글입니다!",
       "content": "안녕하세요. 첫 글이에요.",
       "createdAt": "2025-05-22",
-      "views": 128
+      "views": 132
     },
     {
       "id": "2",
@@ -132,7 +132,7 @@
       "title": "ㅎㅇ",
       "content": "ㅇㅇ",
       "createdAt": "2025-05-23",
-      "views": 5
+      "views": 7
     },
     {
       "id": "6",
@@ -164,7 +164,7 @@
       "content": "다시 태어났어요\n",
       "userId": 1,
       "createdAt": "2025-05-30T13:40:44.040Z",
-      "views": 2
+      "views": 5
     },
     {
       "id": "1748614931831",
@@ -180,7 +180,7 @@
       "content": "asdf",
       "userId": 1,
       "createdAt": "2025-05-30T14:53:54.464Z",
-      "views": 2
+      "views": 3
     },
     {
       "id": "1748616937098",
@@ -188,14 +188,14 @@
       "content": "asdf",
       "userId": 1,
       "createdAt": "2025-05-30T14:55:37.098Z",
-      "views": 6
+      "views": 7
     },
     {
       "title": "ㅇㅈㅇㅈ",
       "content": "ㅇㅈㅇㅈㅇㅈ",
       "userId": "3",
       "createdAt": "2025-06-12",
-      "views": 0,
+      "views": 3,
       "id": "tgbDaJ0"
     },
     {
@@ -203,7 +203,7 @@
       "content": "ㅋㅌㅊㅋㅌㅊㅋㅌ",
       "userId": "3",
       "createdAt": "2025-06-12",
-      "views": 1,
+      "views": 3,
       "id": "pn8Vnt9"
     }
   ],

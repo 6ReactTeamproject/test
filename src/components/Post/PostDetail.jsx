@@ -50,7 +50,25 @@ function PostDetail() {
   if (!post) return <div>Loading...</div>;
 
   return (
-    <div className="post-detail-container">
+    <div className="post-detail-container" style={{ position: "relative" }}>
+      <button
+        className="close-button"
+        onClick={() => navigate(-1)}
+        style={{
+          position: "absolute",
+          top: "24px",
+          right: "32px",
+          background: "none",
+          border: "none",
+          fontSize: "2rem",
+          color: "#888",
+          cursor: "pointer",
+          zIndex: 10,
+        }}
+        aria-label="닫기"
+      >
+        ×
+      </button>
       <div className="post-detail-title">{post.title}</div>
       <div className="post-detail-meta">
         작성자: {postUser?.name || post.authorName || post.authorId} |{" "}
