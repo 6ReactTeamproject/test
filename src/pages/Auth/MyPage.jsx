@@ -21,7 +21,7 @@ export default function MyPage() {
           <>
             <h2>마이페이지</h2>
             <div className="profile-card">
-              <UploadImg />
+              <UploadImg cropShape="round" />
 
               <div className="profile-info">
                 <h3>{user.name}</h3>

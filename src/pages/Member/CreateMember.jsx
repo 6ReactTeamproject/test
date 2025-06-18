@@ -14,7 +14,7 @@ export default function CreateMember() {
       <input name="name" placeholder="이름" />
       <input name="role" placeholder="역할" />
       <textarea name="introduction" placeholder="조원 소개" />
-      <SelectImage />
+      <SelectImage cropShape="square" />
     </CreateButton>
   );
 }
