@@ -8,16 +8,22 @@ import CommentForm from "../Comment/CommentForm";
 import { apiGet, apiPatch } from "../../api/fetch";
 import "../../styles/post.css";
 
+// 게시글 상세 페이지 컴포넌트
 function PostDetail() {
   const { user: currentUser } = useUser();
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
+  // 게시글 정보 저장
   const [post, setPost] = useState(null);
+  // 게시글 작성자 정보 저장
   const [postUser, setPostUser] = useState(null);
+  // 댓글 목록 저장
   const [comments, setComments] = useState([]);
+  // 사용자 목록 저장
   const [users, setUsers] = useState([]);
 
+  // 사용자 목록 가져오기
   useEffect(() => {
     apiGet("users").then((data) => setUsers(data));
   }, []);
@@ -41,6 +47,7 @@ function PostDetail() {
     });
   }, [id]);
 
+  // 게시글 작성자 정보 찾기
   useEffect(() => {
     if (post && users.length > 0) {
       const user = users.find((u) => String(u.id) === String(post.userId));
@@ -68,9 +75,11 @@ function PostDetail() {
   return (
     <div className="post-detail-wrapper">
       <div className="post-card">
+        {/* 목록으로 돌아가기 버튼 */}
         <button className="back-to-board-button" onClick={handleBackToBoard}>
           &larr; 목록으로
         </button>
+        {/* 게시글 헤더 영역 */}
         <div className="post-header">
           <h1 className="post-title">{post.title}</h1>
           <div className="post-meta">
@@ -81,7 +90,9 @@ function PostDetail() {
             <span>조회수: {post.views}</span>
           </div>
         </div>
+        {/* 게시글 내용 */}
         <div className="post-content">{post.content}</div>
+        {/* 게시글 액션 버튼들 */}
         <PostActions
           post={post}
           postUser={postUser}
@@ -90,19 +101,23 @@ function PostDetail() {
           navigate={navigate}
         />
       </div>
+      {/* 댓글 섹션 */}
       <div className="comment-section">
+        {/* 댓글 개수 표시 */}
         <div className="comment-count-box">
           <span className="comment-count-icon">💬</span>
           <span className="comment-count-text">
             댓글 <b>{comments.length}</b>개
           </span>
         </div>
+        {/* 댓글 목록 */}
         <CommentList
           comments={comments}
           setComments={setComments}
           users={users}
           currentUser={currentUser}
         />
+        {/* 댓글 작성 폼 또는 로그인 안내 */}
         {currentUser ? (
           <CommentForm
             currentUser={currentUser}

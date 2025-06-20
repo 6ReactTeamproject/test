@@ -45,11 +45,7 @@ const PostForm = ({ post, setPost, onSubmit, id }) => {
         className="post-form-textarea"
       />
       <div className="post-form-buttons">
-        <button
-          type="button"
-          onClick={() => nav(-1)}
-          className="post-form-cancel-button"
-        >
+        <button onClick={() => nav(-1)} className="post-form-cancel-button">
           취소
         </button>
         <button type="submit" className="post-form-submit-button">

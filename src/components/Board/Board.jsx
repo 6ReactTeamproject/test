@@ -90,38 +90,44 @@ const Board = () => {
   return (
     <div className="board-container">
       <h2 className="board-title">게시판</h2>
-      <button
-        className="board-write-button"
-        onClick={() => {
-          if (user) {
-            nav("/post/write", {
-              state: {
-                fromBoard: true,
-                page: currentPage,
-                sort: sortType,
-              },
-            });
-          } else {
-            HandleAuth(user, nav, "/post/write");
-          }
-        }}
-      >
-        게시글 작성
-      </button>
-      <div className="board-sort-buttons">
+
+      {/* 상단 액션 영역 */}
+      <div className="board-actions">
+        <div className="board-sort-buttons">
+          <button
+            className={`sort-button ${sortType === "" ? "active" : ""}`}
+            onClick={() => setSortType("")}
+          >
+            최신순
+          </button>
+          <button
+            className={`sort-button ${sortType === "views" ? "active" : ""}`}
+            onClick={() => setSortType("views")}
+          >
+            조회수순
+          </button>
+        </div>
         <button
-          className={`sort-button ${sortType === "views" ? "active" : ""}`}
-          onClick={() => setSortType("views")}
+          className="board-write-button"
+          onClick={() => {
+            if (user) {
+              nav("/post/write", {
+                state: {
+                  fromBoard: true,
+                  page: currentPage,
+                  sort: sortType,
+                },
+              });
+            } else {
+              HandleAuth(user, nav, "/post/write");
+            }
+          }}
         >
-          조회수순
-        </button>
-        <button
-          className={`sort-button ${sortType === "" ? "active" : ""}`}
-          onClick={() => setSortType("")}
-        >
-          최신순
+          게시글 작성
         </button>
       </div>
+
+      {/* 게시글 목록 */}
       <PostList
         users={users}
         posts={currentPosts}
@@ -138,6 +144,7 @@ const Board = () => {
         }}
       />
 
+      {/* 페이지네이션 */}
       {displayPosts.length > 0 && (
         <Pagination
           currentPage={currentPage}
@@ -146,6 +153,8 @@ const Board = () => {
           onNext={() => setCurrentPage(Math.min(currentPage + 1, totalPages))}
         />
       )}
+
+      {/* 검색 영역 */}
       <SearchBar
         searchTerm={searchTerm}
         searchType={searchType}

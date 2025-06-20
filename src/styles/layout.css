@@ -48,8 +48,8 @@
   color: #ccc;
   padding: 40px 20px;
   font-size: 14px;
-  position: relative;  
-  z-index: 2000;        
+  position: relative;
+  z-index: 2000;
 }
 
 .footer-content {
@@ -64,7 +64,8 @@
   flex-wrap: wrap;
 }
 
-.footer-info, .footer-contact {
+.footer-info,
+.footer-contact {
   flex: 1 1 300px;
   margin-bottom: 20px;
 }
