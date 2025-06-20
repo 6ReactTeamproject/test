@@ -16,6 +16,8 @@ function LikeButton({ comment, currentUser, onLike }) {
     >
       {/* 이미 좋아요 눌렀으면 빨간 하트, 아니면 빈 하트 */}
       <span className="like-icon">{alreadyLiked ? "❤️" : "♡"}</span>
+      {/* 좋아요 숫자 표시 */}
+      <span className="like-count">{comment.likes || 0}</span>
     </button>
   );
 }

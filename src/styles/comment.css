@@ -157,6 +157,14 @@
   transition: all 0.2s ease;
 }
 
+/* 좋아요 숫자 스타일 */
+.like-button .like-count {
+  font-size: 12px;
+  font-weight: 500;
+  color: inherit;
+  margin-left: 2px;
+}
+
 .like-button:hover {
   background-color: #f3f4f6;
   color: #374151;
@@ -173,6 +181,10 @@
 }
 
 .like-button.liked .like-icon {
+  color: white;
+}
+
+.like-button.liked .like-count {
   color: white;
 }
 
@@ -271,6 +283,14 @@
   transition: all 0.2s ease;
 }
 
+/* 대댓글 좋아요 숫자 스타일 */
+.reply-item .like-button .like-count {
+  font-size: 12px;
+  font-weight: 500;
+  color: inherit;
+  margin-left: 2px;
+}
+
 .reply-item .like-button:hover {
   background-color: #f3f4f6;
   color: #374151;
@@ -287,6 +307,10 @@
 }
 
 .reply-item .like-button.liked .like-icon {
+  color: white;
+}
+
+.reply-item .like-button.liked .like-count {
   color: white;
 }
 
@@ -634,6 +658,14 @@
   transition: all 0.2s ease;
 }
 
+/* 좋아요 숫자 스타일 */
+.like-button .like-count {
+  font-size: 12px;
+  font-weight: 500;
+  color: inherit;
+  margin-left: 2px;
+}
+
 .like-button:hover {
   background-color: #f3f4f6;
   color: #374151;
@@ -650,6 +682,10 @@
 }
 
 .like-button.liked .like-icon {
+  color: white;
+}
+
+.like-button.liked .like-count {
   color: white;
 }
 
@@ -748,6 +784,14 @@
   transition: all 0.2s ease;
 }
 
+/* 대댓글 좋아요 숫자 스타일 */
+.reply-item .like-button .like-count {
+  font-size: 12px;
+  font-weight: 500;
+  color: inherit;
+  margin-left: 2px;
+}
+
 .reply-item .like-button:hover {
   background-color: #f3f4f6;
   color: #374151;
@@ -764,6 +808,10 @@
 }
 
 .reply-item .like-button.liked .like-icon {
+  color: white;
+}
+
+.reply-item .like-button.liked .like-count {
   color: white;
 }
 
