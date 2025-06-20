@@ -27,7 +27,10 @@ const MessageList = ({
             ? String(message.receiverId) === String(user.id)
             : String(message.senderId) === String(user.id)
         );
-        setMessages(filteredMessages);
+        const sortedMessages = filteredMessages.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        );
+        setMessages(sortedMessages);
       })
       .catch((err) => console.error("메시지 로딩 실패:", err));
   }, [user, activeTab, showForm]);
