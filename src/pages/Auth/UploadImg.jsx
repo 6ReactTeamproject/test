@@ -3,7 +3,7 @@ import { useUser } from "../../hooks/UserContext";
 import "./UploadImg.css";
 import CropModal from "../../utils/CropModal";
 
-export default function UploadImg({cropShape}) {
+export default function UploadImg({Shape = "round"}) {
   const { user, setUser } = useUser();
   const [preview, setPreview] = useState(user.image);
   const [imageSrc, setImageSrc] = useState(null); // 모달용
@@ -56,13 +56,12 @@ export default function UploadImg({cropShape}) {
           />
         </div>
       </div>
-
       {imageSrc && (
         <CropModal
           imageSrc={imageSrc}
           onClose={() => setImageSrc(null)}
           onCropComplete={handleCropComplete}
-          Shape={cropShape}
+          Shape={Shape}
         />
       )}
     </>

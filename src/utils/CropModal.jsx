@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import Cropper from "react-easy-crop";
-import getCroppedImg from "../pages/Auth/cropUtils";
+import getCroppedImg from "./getCroppedImg";
 import "../styles/CropModal.css";
 
 export default function CropModal({ imageSrc, onClose, onCropComplete, Shape }) {
@@ -8,7 +8,7 @@ export default function CropModal({ imageSrc, onClose, onCropComplete, Shape }) 
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
 
-  const [aspect, setAspect] = useState(Shape === 'round' ? 1 / 1 : 3 / 4); // 기본 1:1 비율
+  const [aspect, setAspect] = useState(Shape === 'round' ? 1 / 1 : 4 / 3); // 기본 1:1 비율
 
   const handleCropComplete = useCallback((_, areaPixels) => {
     setCroppedAreaPixels(areaPixels);

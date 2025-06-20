@@ -94,6 +94,13 @@
   font-weight: 400;
 }
 
+.post-form-image {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .form-button {
   width: 100%;
   padding: 14px 20px;

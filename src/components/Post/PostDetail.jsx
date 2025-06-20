@@ -82,6 +82,15 @@ function PostDetail() {
           </div>
         </div>
         <div className="post-content">{post.content}</div>
+        {post.image && (
+          <div className="post-detail-image-box">
+            <img
+              src={post.image} 
+              alt="게시글 이미지"
+              className="post-detail-image"
+            />
+          </div>
+        )}
         <PostActions
           post={post}
           postUser={postUser}

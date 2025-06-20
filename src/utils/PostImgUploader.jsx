@@ -29,7 +29,7 @@ export default function PostImgUploader({ onChangeImage, Shape = "square" }) {
 
   return (
   <>
-    {/* 항상 보이는 업로드 버튼 */}
+    {/* 업로드 버튼 */}
     <button
       type="button"
       className="image-upload-button"
@@ -37,8 +37,8 @@ export default function PostImgUploader({ onChangeImage, Shape = "square" }) {
     >
       이미지 선택
     </button>
-
-    {/* 숨겨진 파일 input */}
+    <br />
+    {/* 이미지 input */}
     <input
       type="file"
       accept="image/*"
@@ -47,7 +47,7 @@ export default function PostImgUploader({ onChangeImage, Shape = "square" }) {
       style={{ display: "none" }}
     />
 
-    {/* 미리보기 or placeholder */}
+    {/* 미리보기 */}
     <div className="post-image-uploader">
       {preview ? (
         <img src={preview} alt="게시글 이미지" className="post-detail-image" />
