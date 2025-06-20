@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useUser } from "../../hooks/UserContext";
-import Sidebar from "./Sidebar";
+import MypageLayout from "./MypageLayout";
 
 export default function ChangeNameForm() {
   const { user, setUser } = useUser();
@@ -9,7 +9,6 @@ export default function ChangeNameForm() {
 
   if (!user) return <p>로그인이 필요합니다.</p>;
 
-  // 한글, 영문, 숫자만 허용 (특수문자 제외)
   const nameRegex = /^[가-힣a-zA-Z0-9]+$/;
 
   const handleSubmit = async (e) => {
@@ -33,8 +32,6 @@ export default function ChangeNameForm() {
       });
 
       const updatedUser = await res.json();
-
-      // Context와 localStorage 동기화
       setUser({ ...user, name: updatedUser.name });
       localStorage.setItem('user', JSON.stringify({ ...user, name: updatedUser.name }));
 
@@ -49,7 +46,6 @@ export default function ChangeNameForm() {
   const handleChange = (e) => {
     const input = e.target.value;
     setName(input);
-
     if (input === '') {
       setIsValid(true);
     } else {
@@ -58,11 +54,7 @@ export default function ChangeNameForm() {
   };
 
   return (
-    <div className="mypage-container">
-      <Sidebar/>
-      <div style={{ maxWidth: '300px', margin: '40px 0' }}>
-        <hr />
-      </div>
+    <MypageLayout>
       <form onSubmit={handleSubmit} className="change-name-form">
         <h3>닉네임 변경</h3>
         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px', maxWidth: '400px' }}>
@@ -81,6 +73,6 @@ export default function ChangeNameForm() {
           </p>
         )}
       </form>
-    </div>
+    </MypageLayout>
   );
 }
