@@ -54,19 +54,22 @@ export default function CommentForm({
         value={values.text}
         onChange={handleChange}
         placeholder={parentId ? "답글을 입력하세요" : "댓글을 입력하세요"}
+        className="form-input"
       />
-      <FormButton type="submit" className="add-button">
-        {parentId ? "답글 작성" : "댓글 작성"}
-      </FormButton>
-      {onCancel && (
-        <FormButton
-          type="button"
-          onClick={onCancel}
-          style={{ marginLeft: "8" }}
-        >
-          취소
+      <div className="button-group">
+        <FormButton type="submit" className="add-button">
+          {parentId ? "답글 작성" : "댓글 작성"}
         </FormButton>
-      )}
+        {onCancel && (
+          <FormButton
+            type="button"
+            onClick={onCancel}
+            className="cancel-button"
+          >
+            취소
+          </FormButton>
+        )}
+      </div>
     </form>
   );
 }

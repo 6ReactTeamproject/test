@@ -1,5 +1,6 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { styles } from "./Layout.styles";
+import "../styles/header.css";
 
 const Navigation = () => {
   const nav = useNavigate();
@@ -11,15 +12,6 @@ const Navigation = () => {
     { path: "/post", label: "게시판" },
     { path: "/message", label: "쪽지함" },
   ];
-
-  const handleMenuClick = (path) => {
-    // 게시판인 경우 페이지 정보를 포함해서 이동
-    if (path === "/post") {
-      nav("/post?page=1");
-    } else {
-      nav(path);
-    }
-  };
 
   return (
     <nav
@@ -46,34 +38,23 @@ const Navigation = () => {
           return (
             <div
               key={item.path}
-              style={{
-                ...styles.navItem,
-                backgroundColor: isActive ? "#f0f7ff" : "transparent",
-                borderLeft: isActive ? "4px solid #4f46e5" : "none",
-                padding: "12px 20px",
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                whiteSpace: "nowrap",
-                overflow: "hidden",
+              className={`nav-item ${isActive ? "active" : ""}`}
+              onClick={() => {
+                // 게시판인 경우 페이지 정보를 포함해서 이동
+                if (item.path === "/post") {
+                  nav("/post?page=1");
+                } else {
+                  nav(item.path);
+                }
               }}
-              onClick={() => handleMenuClick(item.path)}
             >
-              <span style={{ minWidth: "24px", textAlign: "center" }}>
+              <span className="nav-icon">
                 {item.path === "/intro" && "🏠"}
                 {item.path === "/team" && "👥"}
                 {item.path === "/post" && "📝"}
                 {item.path === "/message" && "✉️"}
               </span>
-              <span
-                style={{
-                  marginLeft: "12px",
-                  opacity: 1,
-                  transition: "opacity 0.2s",
-                }}
-              >
-                {item.label}
-              </span>
+              <span className="nav-label">{item.label}</span>
             </div>
           );
         })}

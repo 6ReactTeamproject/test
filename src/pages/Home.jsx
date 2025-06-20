@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../hooks/UserContext";
+import "../styles/layout.css";
 import TopPosts from "../TopPosts";
 import TravelCarousel from "../components/Travel&Member/TravelCarousel";
 
@@ -10,11 +11,11 @@ export default function Home() {
   return (
     <>
       {console.log(currentUser)}
-      <div style={{ textAlign: "center", marginTop: "100px" }}>
-        <h1>메인 화면</h1>
+      <div className="home-container">
+        <h1 className="home-title">메인 화면</h1>
         <TravelCarousel />
       </div>
-      <TopPosts/>
+      <TopPosts />
     </>
   );
 }

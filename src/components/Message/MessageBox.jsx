@@ -11,6 +11,7 @@ const MessageBox = () => {
   const [selectedMessage, setSelectedMessage] = useState(null);
   const [activeTab, setActiveTab] = useState("received");
   const [showForm, setShowForm] = useState(false);
+  const [refreshKey, setRefreshKey] = useState(0);
   const nav = useNavigate();
 
   useEffect(() => {
@@ -19,6 +20,11 @@ const MessageBox = () => {
       nav("/login");
     }
   }, [user, nav]);
+
+  const handleMessageSent = () => {
+    // 메시지 전송 후 목록 새로고침
+    setRefreshKey((prev) => prev + 1);
+  };
 
   return (
     <div className="message-box">
@@ -57,6 +63,7 @@ const MessageBox = () => {
       <div className="message-container">
         <div className="message-list-container">
           <MessageList
+            key={refreshKey}
             activeTab={activeTab}
             onSelectMessage={setSelectedMessage}
             selectedMessage={selectedMessage}
@@ -71,6 +78,7 @@ const MessageBox = () => {
             <MessageDetail
               message={selectedMessage}
               onClose={() => setSelectedMessage(null)}
+              onMessageSent={handleMessageSent}
             />
           ) : (
             <div className="no-selection">

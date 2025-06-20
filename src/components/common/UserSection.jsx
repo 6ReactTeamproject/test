@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useUser } from "../../hooks/UserContext";
 import { useNavigate, useLocation } from "react-router-dom";
 import "../../styles/travel.css";
+import "../../styles/header.css";
 
 export function UserSection() {
   const { user, setUser } = useUser();
@@ -35,22 +36,36 @@ export function UserSection() {
   if (isLoading) return <p>로딩 중...</p>;
 
   return (
-  <div>
-    {user && <img src={preview} alt="프로필" className="profile-img" />}
-    <p>{user ? `${user.name}님 환영합니다!` : "Guest님 환영합니다!"}</p>
-    {user ? (
-      <>
-        {location.pathname !== "/mypage" && (
-          <button onClick={() => nav("/mypage")}>마이페이지</button>
+    <div className="user-section-container">
+      {user && (
+        <img src={preview} alt="프로필" className="user-profile-image" />
+      )}
+      <div className="user-info-container">
+        <span className="user-welcome-text">
+          {user ? `${user.name}님 환영합니다!` : "Guest님 환영합니다!"}
+        </span>
+        {user ? (
+          <>
+            {location.pathname !== "/mypage" && (
+              <button onClick={() => nav("/mypage")} className="user-button">
+                마이페이지
+              </button>
+            )}
+            <button onClick={handleLogout} className="user-button">
+              로그아웃
+            </button>
+          </>
+        ) : (
+          <>
+            <button onClick={() => nav("/login")} className="user-button">
+              로그인
+            </button>
+            <button onClick={() => nav("/signup")} className="user-button">
+              회원가입
+            </button>
+          </>
         )}
-        <button onClick={handleLogout}>로그아웃</button>
-      </>
-    ) : (
-      <>
-        <button onClick={() => nav("/login")}>로그인</button>
-        <button onClick={() => nav("/signup")}>회원가입</button>
-      </>
-    )}
-  </div>
-);
+      </div>
+    </div>
+  );
 }
