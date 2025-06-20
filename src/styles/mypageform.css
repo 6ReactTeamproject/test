@@ -1,47 +1,8 @@
-/* src/styles/Mypage.css */
-.mypage-container {
-  display: flex;
-  min-height: 100vh;
-}
-
-.mypage-main {
-  flex: 1;
-  margin-left: 220px; /* sidebar 가리는 문제 해결 */
-  padding: 30px;
-}
-
-.profile-card {
-  display: flex;
-  align-items: center;
-  background-color: #2f3136;
-  padding: 20px 30px;
-  border-radius: 16px;
-  color: white;
-  gap: 45px;
-}
-
-.profile-img {
-  width: 125px;
-  height: 125px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 3px solid #9cb1eb;
-}
-
-.profile-info h3 {
-  color: #ffffff;
-  font-weight: 600;
-}
-
-.profile-info p {
-  color: #eeeeee;
-}
-
 .mypage-form {
   background-color: white;
   padding: 40px 30px;
   max-width: 600px;
-  margin: 60px auto;
+  margin: 60px ;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
   display: flex;

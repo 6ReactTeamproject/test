@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useUser } from "../../hooks/UserContext";
 import "./UploadImg.css";
-import CropModal from "./CropModal";
+import CropModal from "../../utils/CropModal";
 
 export default function UploadImg({ cropShape }) {
   const { user, setUser } = useUser(); // 로그인 사용자 정보와 업데이트 함수

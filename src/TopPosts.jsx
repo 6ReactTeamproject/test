@@ -41,7 +41,7 @@ const TopPosts = () => {
             <div className="post-title">{post.title}</div>
             <div className="post-preview">{post.content}</div>
             <div className="post-meta">
-              {getAuthorName(post.userId)} · 💬 {post.comments?.length || 0}
+              {getAuthorName(post.userId)} · 📖 {post.views || 0}
             </div>
           </li>
         ))}

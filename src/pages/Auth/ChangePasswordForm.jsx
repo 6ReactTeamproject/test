@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useUser } from "../../hooks/UserContext";
 import MypageLayout from "./MypageLayout";
+import "../../styles/mypageform.css"; // 공통 폼 스타일 불러오기
 
 export default function ChangePasswordForm() {
   const { user } = useUser();
@@ -54,29 +55,39 @@ export default function ChangePasswordForm() {
 
   return (
     <MypageLayout>
-      <form onSubmit={handleSubmit}>
-        <h3>비밀번호 변경</h3>
-        <div style={{ display: "flex", flexDirection: "column", gap: "10px", maxWidth: "250px" }}>
-          <input
-            type="password"
-            placeholder="현재 비밀번호"
-            value={currentPw}
-            onChange={(e) => setCurrentPw(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="새 비밀번호"
-            value={newPw}
-            onChange={(e) => setNewPw(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="새 비밀번호 확인"
-            value={confirmPw}
-            onChange={(e) => setConfirmPw(e.target.value)}
-          />
-          <button type="submit">변경하기</button>
-        </div>
+      <form onSubmit={handleSubmit} className="mypage-form">
+        <h2 className="mypage-form-title">비밀번호 변경</h2>
+
+        <input
+          type="password"
+          placeholder="현재 비밀번호"
+          value={currentPw}
+          onChange={(e) => setCurrentPw(e.target.value)}
+          className="mypage-form-input"
+          required
+        />
+
+        <input
+          type="password"
+          placeholder="새 비밀번호"
+          value={newPw}
+          onChange={(e) => setNewPw(e.target.value)}
+          className="mypage-form-input"
+          required
+        />
+
+        <input
+          type="password"
+          placeholder="새 비밀번호 확인"
+          value={confirmPw}
+          onChange={(e) => setConfirmPw(e.target.value)}
+          className="mypage-form-input"
+          required
+        />
+
+        <button type="submit" className="mypage-form-button">
+          변경하기
+        </button>
       </form>
     </MypageLayout>
   );

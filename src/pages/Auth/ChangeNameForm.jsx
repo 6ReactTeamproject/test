@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useUser } from "../../hooks/UserContext";
 import MypageLayout from "./MypageLayout";
+import "../../styles/mypageform.css"; // 공통 스타일 import
 
 export default function ChangeNameForm() {
   const { user, setUser } = useUser();
@@ -55,22 +56,24 @@ export default function ChangeNameForm() {
 
   return (
     <MypageLayout>
-      <form onSubmit={handleSubmit} className="change-name-form">
-        <h3>닉네임 변경</h3>
-        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px', maxWidth: '400px' }}>
-          <input
-            type="text"
-            placeholder="변경할 닉네임"
-            value={name}
-            onChange={handleChange}
-            required
-          />
-          <button type="submit">변경하기</button>
-        </div>
+      <form onSubmit={handleSubmit} className="mypage-form">
+        <h2 className="mypage-form-title">닉네임 변경</h2>
+
+        <input
+          type="text"
+          placeholder="변경할 닉네임"
+          value={name}
+          onChange={handleChange}
+          className="mypage-form-input"
+          required
+        />
+
+        <button type="submit" className="mypage-form-button">
+          변경하기
+        </button>
+
         {!isValid && name && (
-          <p style={{ color: 'red', fontSize: '0.9rem', margin: '4px 0 0 0' }}>
-            특수문자는 사용할 수 없어요!
-          </p>
+          <p className="mypage-form-error">특수문자는 사용할 수 없어요!</p>
         )}
       </form>
     </MypageLayout>

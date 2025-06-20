@@ -307,3 +307,12 @@ textarea {
 .modal-content {
   max-width: 90%;
 }
+.modal-content {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  width: 100%;           /* 전체 가로폭 활용 */
+  max-width: 1200px;     /* 너무 넓어지지 않도록 제한 */
+  margin: 40px auto;     /* 가운데 정렬 */
+  box-sizing: border-box;
+}
