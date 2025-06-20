@@ -84,7 +84,7 @@
       "content": "캬캬캬캬컄ㅋ",
       "userId": 2,
       "createdAt": "2023-04-15",
-      "views": 92,
+      "views": 99,
       "id": 11
     },
     {
@@ -148,7 +148,7 @@
       "content": "여름에도 많이들 입으시나요? 덥진 않을지 고민돼요. 사진은 예쁘게 나올 것 같긴 한데 ㅎㅎ",
       "userId": 1,
       "createdAt": "2025-05-25",
-      "views": 23,
+      "views": 34,
       "id": 9
     }
   ],
@@ -312,6 +312,46 @@
       "likes": 0,
       "likedUserIds": [],
       "id": 13
+    },
+    {
+      "text": "123",
+      "postId": "11",
+      "userId": 5,
+      "parentId": 14,
+      "createdAt": "2025-06-20T16:00:52.253Z",
+      "likes": 0,
+      "likedUserIds": [],
+      "id": 17
+    },
+    {
+      "text": "123",
+      "postId": "11",
+      "userId": 5,
+      "parentId": null,
+      "createdAt": "2025-06-20T16:01:27.252Z",
+      "likes": 0,
+      "likedUserIds": [],
+      "id": 18
+    },
+    {
+      "text": "1234",
+      "postId": "9",
+      "userId": 5,
+      "parentId": 8,
+      "createdAt": "2025-06-20T16:05:41.696Z",
+      "likes": 0,
+      "likedUserIds": [],
+      "id": 19
+    },
+    {
+      "text": "1234",
+      "postId": "9",
+      "userId": 5,
+      "parentId": null,
+      "createdAt": "2025-06-20T16:05:55.299Z",
+      "likes": 0,
+      "likedUserIds": [],
+      "id": 20
     }
   ],
   "messages": [
@@ -429,8 +469,17 @@
       "title": "게시판 이용 방법",
       "content": "검색시에 띄어쓰기를 해도 검색이 될까요?",
       "createdAt": "2025-06-20T13:59:02.098Z",
-      "isRead": false,
+      "isRead": true,
       "id": 13
+    },
+    {
+      "title": "답장 테스트",
+      "content": "답장 테스트",
+      "senderId": 5,
+      "receiverId": 3,
+      "createdAt": "2025-06-20T16:15:52.285Z",
+      "isRead": false,
+      "id": 14
     }
   ],
   "members": [

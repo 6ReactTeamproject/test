@@ -25,9 +25,6 @@ function PostActions({ post, postUser, currentUser, id, navigate }) {
 
   return (
     <div className="post-actions-container">
-      <span className="post-author-info">
-        작성자: {postUser ? postUser.name : "알 수 없음"}
-      </span>
       {currentUser && String(currentUser.id) === String(post.userId) && (
         <>
           <button

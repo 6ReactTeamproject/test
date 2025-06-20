@@ -10,6 +10,7 @@ const MessageDetail = ({ message, onClose, onMessageSent }) => {
   const [showReplyForm, setShowReplyForm] = useState(false);
   const [replyData, setReplyData] = useState({ title: "", content: "" });
 
+  // 보낸 사람과 받는 사람 정보 가져오기
   useEffect(() => {
     apiGet("users").then((users) => {
       const foundSender = users.find(
@@ -23,15 +24,18 @@ const MessageDetail = ({ message, onClose, onMessageSent }) => {
     });
   }, [message]);
 
+  // 답장 전송 처리
   const handleReplySubmit = async (e) => {
     e.preventDefault();
 
+    // 제목과 내용 검증
     if (!replyData.title.trim() || !replyData.content.trim()) {
       alert("제목과 내용을 모두 입력해주세요.");
       return;
     }
 
     try {
+      // 새 메시지 객체 생성
       const newMessage = {
         title: replyData.title,
         content: replyData.content,
@@ -59,6 +63,7 @@ const MessageDetail = ({ message, onClose, onMessageSent }) => {
     }
   };
 
+  // 답장 폼 입력값 변경 처리
   const handleReplyChange = (e) => {
     const { name, value } = e.target;
     setReplyData((prev) => ({ ...prev, [name]: value }));
@@ -91,6 +96,7 @@ const MessageDetail = ({ message, onClose, onMessageSent }) => {
       <div className="message-detail-content">{message.content}</div>
 
       <div className="message-detail-footer">
+        {/* 받은 쪽지인 경우에만 답장 버튼 표시 */}
         {message.senderId !== user.id && !showReplyForm && (
           <button
             className="reply-button"
@@ -101,6 +107,7 @@ const MessageDetail = ({ message, onClose, onMessageSent }) => {
         )}
       </div>
 
+      {/* 답장 폼 */}
       {showReplyForm && (
         <div className="reply-form">
           <h3>답장 작성</h3>
