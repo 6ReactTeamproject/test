@@ -1,25 +1,6 @@
 import { apiDelete } from "../../api/fetch";
 import { useLocation } from "react-router-dom";
-
-const buttonStyle = {
-  marginLeft: "10px",
-  padding: "5px 10px",
-  border: "none",
-  borderRadius: "4px",
-  cursor: "pointer",
-};
-
-const editButtonStyle = {
-  ...buttonStyle,
-  backgroundColor: "#4CAF50",
-  color: "white",
-};
-
-const deleteButtonStyle = {
-  ...buttonStyle,
-  backgroundColor: "#f44336",
-  color: "white",
-};
+import "../../styles/post.css";
 
 function PostActions({ post, postUser, currentUser, id, navigate }) {
   const location = useLocation();
@@ -43,14 +24,14 @@ function PostActions({ post, postUser, currentUser, id, navigate }) {
   };
 
   return (
-    <div style={{ marginBottom: "20px" }}>
-      <span style={{ marginRight: "15px" }}>
+    <div className="post-actions-container">
+      <span className="post-author-info">
         작성자: {postUser ? postUser.name : "알 수 없음"}
       </span>
       {currentUser && String(currentUser.id) === String(post.userId) && (
         <>
           <button
-            style={editButtonStyle}
+            className="edit-button"
             onClick={() =>
               navigate(`/edit/${id}`, {
                 state: {
@@ -63,7 +44,7 @@ function PostActions({ post, postUser, currentUser, id, navigate }) {
           >
             수정
           </button>
-          <button style={deleteButtonStyle} onClick={handleDelete}>
+          <button className="delete-button" onClick={handleDelete}>
             삭제
           </button>
         </>
