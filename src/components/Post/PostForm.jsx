@@ -1,5 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import FormInput from "../common/FormInput";
+import FormTextarea from "../common/FormTextarea";
+import FormButton from "../common/FormButton";
+import { MESSAGES } from "../../constants";
+import "../../styles/form.css";
+import "../../styles/post.css";
+import SelectingImg from "../../pages/Auth/SelectingImg";
+import PostImgUploader from "../../utils/PostImgUploader";
 
 const PostForm = ({ post, setPost, onSubmit, id }) => {
   const nav = useNavigate();
@@ -59,13 +67,14 @@ const PostForm = ({ post, setPost, onSubmit, id }) => {
           boxSizing: "border-box",
         }}
       />
-      <div
-        style={{
-          display: "flex",
-          gap: "10px",
-          justifyContent: "flex-end",
-        }}
-      >
+      <div className="post-form-image">
+        <PostImgUploader
+          onChangeImage={(img) =>
+            setPost((prev) => ({ ...prev, image: img }))
+          }
+        />
+      </div>
+      <div className="post-form-buttons">
         <button
           type="button"
           onClick={() => nav(-1)}

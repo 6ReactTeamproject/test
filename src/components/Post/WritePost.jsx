@@ -8,14 +8,14 @@ const WritePost = () => {
   const { id } = useParams(); // 수정이면 id 존재
   const navigate = useNavigate();
   const location = useLocation();
-  const [post, setPost] = useState({ title: "", content: "" });
+  const [post, setPost] = useState({ title: "", content: "", image: "" });
   const { user: currentUser } = useUser();
 
   useEffect(() => {
     if (id) {
       // 수정 시 기존 데이터 불러오기
       apiGet("posts", id).then((data) =>
-        setPost({ title: data.title, content: data.content })
+        setPost({ title: data.title, content: data.content, image: data.image || "" })
       );
     }
   }, [id]);

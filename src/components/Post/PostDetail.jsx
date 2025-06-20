@@ -91,6 +91,15 @@ function PostDetail() {
         {post.createdAt} | 조회수: {post.views}
       </div>
       <div className="post-detail-content">{post.content}</div>
+      {post.image && (
+        <div className="post-detail-image-box">
+          <img
+            src={post.image} 
+            alt="게시글 이미지"
+            className="post-detail-image"
+          />
+        </div>
+      )}
       <PostActions
         post={post}
         postUser={postUser}

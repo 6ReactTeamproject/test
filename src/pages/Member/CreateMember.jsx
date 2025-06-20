@@ -1,5 +1,5 @@
 import CreateButton from "../../components/Travel&Member/CreateButton";
-import SelectImage from "../../components/Travel&Member/SelectImage.jsx";
+import PostImgUploader from "../../utils/PostImgUploader.jsx";
 
 export default function CreateMember() {
   const isFilled = (data) =>
@@ -14,7 +14,7 @@ export default function CreateMember() {
       <input name="name" placeholder="이름" />
       <input name="role" placeholder="역할" />
       <textarea name="introduction" placeholder="조원 소개" />
-      <SelectImage cropShape="square" />
+      <PostImgUploader />
     </CreateButton>
   );
 }

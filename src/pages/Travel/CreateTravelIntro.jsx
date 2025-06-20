@@ -1,5 +1,5 @@
 import CreateButton from "../../components/Travel&Member/CreateButton";
-import SelectImage from "../../components/Travel&Member/SelectImage.jsx";
+import PostImgUploader from "../../utils/PostImgUploader.jsx";
 
 export default function CreateTravelIntro() {
   const isFilled = (data) =>
@@ -13,7 +13,7 @@ export default function CreateTravelIntro() {
     >
       <input name="title" placeholder="현지학기제 장소" />
       <textarea name="description" placeholder="현지학기제 소개" />
-      <SelectImage cropShape="square" />
+      <PostImgUploader />
     </CreateButton>
   );
 }

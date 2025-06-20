@@ -21,7 +21,7 @@ const deleteButtonStyle = {
   color: "white",
 };
 
-function PostActions({ post, postUser, currentUser, id, navigate }) {
+function PostActions({ post, currentUser, id, navigate }) {
   const location = useLocation();
 
   const handleDelete = () => {
@@ -43,10 +43,7 @@ function PostActions({ post, postUser, currentUser, id, navigate }) {
   };
 
   return (
-    <div style={{ marginBottom: "20px" }}>
-      <span style={{ marginRight: "15px" }}>
-        작성자: {postUser ? postUser.name : "알 수 없음"}
-      </span>
+    <div className="post-actions-container">
       {currentUser && String(currentUser.id) === String(post.userId) && (
         <>
           <button
