@@ -283,3 +283,27 @@ textarea {
   padding: 0 12px;
   box-sizing: border-box;
 }
+
+/* --- 사이드바 대응: 메인 콘텐츠는 왼쪽 마진 확보 --- */
+.page-container,
+.form-container,
+.modal-content {
+  margin-left: 130px; /* 사이드바 고정 너비만큼 띄움 */
+  box-sizing: border-box;
+}
+
+/* --- 좁은 화면(모바일)에서 반응형 처리 --- */
+@media (max-width: 768px) {
+
+
+  .page-container,
+  .form-container,
+  .modal-content {
+    margin-left: 0;
+  }
+}
+
+/* --- 모달 우측 잘림 방지 --- */
+.modal-content {
+  max-width: 90%;
+}
