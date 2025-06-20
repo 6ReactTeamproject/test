@@ -414,3 +414,32 @@
 .comment-cancel-button:hover {
   background-color: #e5e7eb;
 }
+
+.comment-sort-buttons {
+  margin-bottom: 16px;
+  display: flex;
+  gap: 8px;
+}
+
+.comment-sort-button {
+  padding: 6px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background-color: #f9fafb;
+  color: #374151;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+}
+
+.comment-sort-button.active,
+.comment-sort-button:active {
+  background-color: #4f46e5;
+  color: #fff;
+  border-color: #4f46e5;
+}
+
+.comment-sort-button:hover {
+  background-color: #e5e7eb;
+}
