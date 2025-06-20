@@ -23,15 +23,18 @@ const MessageDetail = ({ message, onClose, onMessageSent }) => {
     });
   }, [message]);
 
+  // 답장 제출 핸들러
   const handleReplySubmit = async (e) => {
     e.preventDefault();
 
+    // 제목과 내용이 빈 문자열이면 경고 후 함수 종료
     if (!replyData.title.trim() || !replyData.content.trim()) {
       alert("제목과 내용을 모두 입력해주세요.");
       return;
     }
 
     try {
+      // 새로운 메시지 객체 생성
       const newMessage = {
         title: replyData.title,
         content: replyData.content,
@@ -43,11 +46,11 @@ const MessageDetail = ({ message, onClose, onMessageSent }) => {
 
       await apiPost("messages", newMessage);
 
-      // 답장 폼 초기화
+      // 답장 초기화 및 닫기
       setReplyData({ title: "", content: "" });
       setShowReplyForm(false);
 
-      // 부모 컴포넌트에 메시지 전송 완료 알림
+      // 메시지 전송 완료 알림
       if (onMessageSent) {
         onMessageSent();
       }
@@ -59,6 +62,7 @@ const MessageDetail = ({ message, onClose, onMessageSent }) => {
     }
   };
 
+  // 답장 입력값 변경 처리
   const handleReplyChange = (e) => {
     const { name, value } = e.target;
     setReplyData((prev) => ({ ...prev, [name]: value }));
@@ -83,14 +87,17 @@ const MessageDetail = ({ message, onClose, onMessageSent }) => {
             </span>
           </div>
         </div>
+        {/* 상세보기 닫기 버튼 */}
         <button className="close-button" onClick={onClose}>
           ×
         </button>
       </div>
 
+      {/* 메시지 내용 */}
       <div className="message-detail-content">{message.content}</div>
 
       <div className="message-detail-footer">
+        {/* 답장이 원본 메시지 보낸 사람이 현재 사용자와 다를 경우에만 표시 */}
         {message.senderId !== user.id && !showReplyForm && (
           <button
             className="reply-button"
@@ -101,6 +108,7 @@ const MessageDetail = ({ message, onClose, onMessageSent }) => {
         )}
       </div>
 
+      {/* 답장 */}
       {showReplyForm && (
         <div className="reply-form">
           <h3>답장 작성</h3>
@@ -128,9 +136,11 @@ const MessageDetail = ({ message, onClose, onMessageSent }) => {
               />
             </div>
             <div className="form-buttons">
+              {/* 답장 전송 버튼 */}
               <button type="submit" className="submit-button">
                 답장 전송
               </button>
+              {/* 답장 취소 버튼*/}
               <button
                 type="button"
                 className="cancel-button"

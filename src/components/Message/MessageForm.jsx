@@ -20,6 +20,7 @@ const MessageForm = ({ onClose }) => {
       .catch((err) => console.error("사용자 목록 로딩 실패:", err));
   }, []);
 
+  // 입력 값 변경 핸들러
   const handleChange = (e) => {
     setMessage({ ...message, [e.target.name]: e.target.value });
   };
@@ -28,16 +29,18 @@ const MessageForm = ({ onClose }) => {
     e.preventDefault();
 
     const newMessage = {
-      senderId: user.id,
-      receiverId: message.receiverId,
+      senderId: user.id, // 현재 사용자
+      receiverId: message.receiverId, // 선택된 받는 사람
       title: message.title,
       content: message.content,
-      createdAt: new Date().toISOString(),
-      isRead: false,
+      createdAt: new Date().toISOString(), // 전송 시간
+      isRead: false, // 새 메시지는 읽지 않은 상태
     };
 
     try {
       await apiPost("messages", newMessage);
+
+      // 전송 후 초기화
       setMessage({
         receiverId: "",
         title: "",
@@ -46,6 +49,7 @@ const MessageForm = ({ onClose }) => {
         createdAt: new Date().toISOString(),
         isRead: false,
       });
+
       onClose();
     } catch (error) {
       console.error("쪽지 전송 실패:", error);
@@ -56,6 +60,7 @@ const MessageForm = ({ onClose }) => {
     <div className="message-form">
       <h3>쪽지 작성</h3>
       <form onSubmit={handleSubmit}>
+        {/* 받는 사람 선택 박스 */}
         <select
           name="receiverId"
           value={message.receiverId}
@@ -63,6 +68,7 @@ const MessageForm = ({ onClose }) => {
           required
         >
           <option value="">받는 사람 선택</option>
+          {/* 본인을 제외한 사용자 목록 옵션 생성 */}
           {users
             .filter((u) => u.id !== user?.id)
             .map((u) => (
@@ -71,6 +77,8 @@ const MessageForm = ({ onClose }) => {
               </option>
             ))}
         </select>
+
+        {/* 제목 입력 */}
         <input
           type="text"
           name="title"
@@ -79,6 +87,8 @@ const MessageForm = ({ onClose }) => {
           placeholder="제목을 입력하세요"
           required
         />
+
+        {/* 내용 입력 */}
         <textarea
           name="content"
           value={message.content}
@@ -86,8 +96,12 @@ const MessageForm = ({ onClose }) => {
           placeholder="쪽지 내용을 입력하세요"
           required
         />
+
         <div className="form-buttons">
+          {/* 전송 버튼 */}
           <button type="submit">전송</button>
+
+          {/* 취소 버튼 */}
           <button
             type="button"
             onClick={() => {

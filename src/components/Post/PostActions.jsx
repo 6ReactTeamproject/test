@@ -5,10 +5,11 @@ import "../../styles/post.css";
 function PostActions({ post, postUser, currentUser, id, navigate }) {
   const location = useLocation();
 
+  // 게시글 삭제 처리 함수
   const handleDelete = () => {
     if (window.confirm("게시글을 삭제할까요?")) {
       apiDelete("posts", id).then(() => {
-        // 게시판에서 왔다면 해당 페이지로 돌아가기
+        // 게시판에서 왔다면 해당 페이지 파라미터를 유지하며 돌아가기
         if (location.state?.fromBoard) {
           let url = "/post";
           const params = [];
@@ -17,6 +18,7 @@ function PostActions({ post, postUser, currentUser, id, navigate }) {
           if (params.length > 0) url += "?" + params.join("&");
           navigate(url);
         } else {
+          // 이전 페이지로 이동
           navigate(-1);
         }
       });
@@ -25,9 +27,12 @@ function PostActions({ post, postUser, currentUser, id, navigate }) {
 
   return (
     <div className="post-actions-container">
+      {/* 작성자 정보 출력 */}
       <span className="post-author-info">
         작성자: {postUser ? postUser.name : "알 수 없음"}
       </span>
+
+      {/* 현재 사용자가 작성자일 경우 수정/삭제 버튼 노출 */}
       {currentUser && String(currentUser.id) === String(post.userId) && (
         <>
           <button
