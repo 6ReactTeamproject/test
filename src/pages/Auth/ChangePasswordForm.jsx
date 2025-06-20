@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import { useUser } from "../../hooks/UserContext";
-import Sidebar from "./Sidebar";
+import MypageLayout from "./MypageLayout";
 
 export default function ChangePasswordForm() {
   const { user } = useUser();
-
   const [currentPw, setCurrentPw] = useState("");
   const [newPw, setNewPw] = useState("");
   const [confirmPw, setConfirmPw] = useState("");
 
-  if (!user) return <p>로그인이 필요합니다.</p>; // 마이페이지에서 로그아웃 한 경우에 띄우는 메세지예요
+  if (!user) return <p>로그인이 필요합니다.</p>;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -54,9 +53,7 @@ export default function ChangePasswordForm() {
   };
 
   return (
-    <div className="mypage-container">
-      <Sidebar/>
-      
+    <MypageLayout>
       <form onSubmit={handleSubmit}>
         <h3>비밀번호 변경</h3>
         <div style={{ display: "flex", flexDirection: "column", gap: "10px", maxWidth: "250px" }}>
@@ -81,6 +78,6 @@ export default function ChangePasswordForm() {
           <button type="submit">변경하기</button>
         </div>
       </form>
-    </div>
+    </MypageLayout>
   );
 }

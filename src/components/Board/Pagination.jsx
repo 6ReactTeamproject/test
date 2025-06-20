@@ -1,9 +1,17 @@
+import "../../styles/board.css";
+
 const Pagination = ({ currentPage, totalPages, onPrev, onNext }) => (
-  <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "10px", marginTop: "5px",  }}>
-    <span onClick={onPrev} style={{ cursor: "pointer" }}>&lt;</span>
-    <span>{currentPage} / {totalPages}</span>
-    <span onClick={onNext} style={{ cursor: "pointer" }}>&gt;</span>
-</div>
+  <div className="pagination-container">
+    <span onClick={onPrev} className="pagination-button">
+      &lt;
+    </span>
+    <span className="pagination-info">
+      {currentPage} / {totalPages}
+    </span>
+    <span onClick={onNext} className="pagination-button">
+      &gt;
+    </span>
+  </div>
 );
 
 export default Pagination;

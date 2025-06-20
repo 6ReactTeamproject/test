@@ -66,69 +66,55 @@ function PostDetail() {
   if (!post) return <div>Loading...</div>;
 
   return (
-    <div className="post-detail-container" style={{ position: "relative" }}>
-      <button
-        className="close-button"
-        onClick={handleBackToBoard}
-        style={{
-          position: "absolute",
-          top: "24px",
-          right: "32px",
-          background: "none",
-          border: "none",
-          fontSize: "2rem",
-          color: "#888",
-          cursor: "pointer",
-          zIndex: 10,
-        }}
-        aria-label="닫기"
-      >
-        ×
-      </button>
-      <div className="post-detail-title">{post.title}</div>
-      <div className="post-detail-meta">
-        작성자: {postUser?.name || post.authorName || post.authorId} |{" "}
-        {post.createdAt} | 조회수: {post.views}
-      </div>
-      <div className="post-detail-content">{post.content}</div>
-      {post.image && (
-        <div className="post-detail-image-box">
-          <img
-            src={post.image} 
-            alt="게시글 이미지"
-            className="post-detail-image"
-          />
+    <div className="post-detail-wrapper">
+      <div className="post-card">
+        <button className="back-to-board-button" onClick={handleBackToBoard}>
+          &larr; 목록으로
+        </button>
+        <div className="post-header">
+          <h1 className="post-title">{post.title}</h1>
+          <div className="post-meta">
+            <span>
+              작성자: {postUser?.name || post.authorName || post.authorId}
+            </span>
+            <span>{new Date(post.createdAt).toLocaleString()}</span>
+            <span>조회수: {post.views}</span>
+          </div>
         </div>
-      )}
-      <PostActions
-        post={post}
-        postUser={postUser}
-        currentUser={currentUser}
-        id={id}
-        navigate={navigate}
-      />
-      <hr />
-      <div className="comment-count-box">
-        <span className="comment-count-icon">💬</span>
-        <span className="comment-count-text">
-          댓글 <b>{comments.length}</b>개
-        </span>
-      </div>
-      <CommentList
-        comments={comments}
-        setComments={setComments}
-        users={users}
-        currentUser={currentUser}
-      />
-      {currentUser ? (
-        <CommentForm
+        <div className="post-content">{post.content}</div>
+        <PostActions
+          post={post}
+          postUser={postUser}
           currentUser={currentUser}
           id={id}
-          setComments={setComments}
+          navigate={navigate}
         />
-      ) : (
-        <div>댓글을 작성하려면 로그인하세요.</div>
-      )}
+      </div>
+      <div className="comment-section">
+        <div className="comment-count-box">
+          <span className="comment-count-icon">💬</span>
+          <span className="comment-count-text">
+            댓글 <b>{comments.length}</b>개
+          </span>
+        </div>
+        <CommentList
+          comments={comments}
+          setComments={setComments}
+          users={users}
+          currentUser={currentUser}
+        />
+        {currentUser ? (
+          <CommentForm
+            currentUser={currentUser}
+            id={id}
+            setComments={setComments}
+          />
+        ) : (
+          <div className="login-prompt-for-comment">
+            댓글을 작성하려면 로그인하세요.
+          </div>
+        )}
+      </div>
     </div>
   );
 }

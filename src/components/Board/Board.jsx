@@ -13,6 +13,7 @@ import { filterPosts } from "../../utils/search";
 import { getPaginatedItems, getTotalPages } from "../../utils/pagination";
 import { useUser } from "../../hooks/UserContext";
 import HandleAuth from "../common/HandleAuth";
+import "../../styles/board.css";
 
 const Board = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -22,6 +23,7 @@ const Board = () => {
   const [searchType, setSearchType] = useState("title_content");
   const [filtered, setFiltered] = useState([]);
   const [members, setMembers] = useState([]);
+  const [users, setUsers] = useState([]);
 
   const { user } = useUser();
   const postsPerPage = 5;
@@ -54,8 +56,8 @@ const Board = () => {
     apiGet("members")
       .then((data) => setMembers(data))
       .catch((err) => console.error("에러:", err));
-    apiGet("members")
-      .then((data) => setMembers(data))
+    apiGet("users")
+      .then((data) => setUsers(data))
       .catch((err) => console.error("에러:", err));
   }, []);
 
@@ -86,9 +88,10 @@ const Board = () => {
   const totalPages = getTotalPages(displayPosts, postsPerPage);
 
   return (
-    <div>
-      <h2>게시판</h2>
+    <div className="board-container">
+      <h2 className="board-title">게시판</h2>
       <button
+        className="board-write-button"
         onClick={() => {
           if (user) {
             nav("/post/write", {
@@ -105,12 +108,22 @@ const Board = () => {
       >
         게시글 작성
       </button>
-      <div>
-      <button onClick={() => setSortType("views")}>조회수순</button>
-      <button onClick={() => setSortType("")}>최신순</button>
+      <div className="board-sort-buttons">
+        <button
+          className={`sort-button ${sortType === "views" ? "active" : ""}`}
+          onClick={() => setSortType("views")}
+        >
+          조회수순
+        </button>
+        <button
+          className={`sort-button ${sortType === "" ? "active" : ""}`}
+          onClick={() => setSortType("")}
+        >
+          최신순
+        </button>
       </div>
       <PostList
-        members={members}
+        users={users}
         posts={currentPosts}
         currentPage={currentPage}
         sortType={sortType}

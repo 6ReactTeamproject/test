@@ -6,8 +6,6 @@ import FormButton from "../common/FormButton";
 import { MESSAGES } from "../../constants";
 import "../../styles/form.css";
 import "../../styles/post.css";
-import SelectingImg from "../../pages/Auth/SelectingImg";
-import PostImgUploader from "../../utils/PostImgUploader";
 
 const PostForm = ({ post, setPost, onSubmit, id }) => {
   const nav = useNavigate();
@@ -17,92 +15,44 @@ const PostForm = ({ post, setPost, onSubmit, id }) => {
     setPost((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!post.title.trim()) {
+      alert(MESSAGES.REQUIRED_FIELD);
+      return;
+    }
+    if (!post.content.trim()) {
+      alert(MESSAGES.REQUIRED_FIELD);
+      return;
+    }
+    onSubmit();
+  };
+
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        if (onSubmit) {
-          onSubmit();
-        }
-      }}
-      style={{
-        maxWidth: "800px",
-        margin: "0 auto",
-        padding: "20px",
-        backgroundColor: "#fff",
-        borderRadius: "8px",
-        boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-      }}
-    >
-      <input
-        type="text"
+    <form onSubmit={handleSubmit} className="post-form">
+      <FormInput
         name="title"
-        placeholder="제목을 입력하세요"
         value={post.title}
         onChange={handleChange}
-        style={{
-          width: "100%",
-          padding: "12px",
-          marginBottom: "20px",
-          border: "1px solid #ddd",
-          borderRadius: "4px",
-          fontSize: "16px",
-          boxSizing: "border-box",
-        }}
+        placeholder="제목을 입력하세요"
+        className="post-form-input"
       />
-      <textarea
+      <FormTextarea
         name="content"
-        placeholder="내용을 입력하세요"
         value={post.content}
         onChange={handleChange}
-        style={{
-          width: "100%",
-          minHeight: "300px",
-          padding: "12px",
-          marginBottom: "20px",
-          border: "1px solid #ddd",
-          borderRadius: "4px",
-          fontSize: "16px",
-          resize: "vertical",
-          boxSizing: "border-box",
-        }}
+        placeholder="내용을 입력하세요"
+        className="post-form-textarea"
       />
-      <div className="post-form-image">
-        <PostImgUploader
-          onChangeImage={(img) =>
-            setPost((prev) => ({ ...prev, image: img }))
-          }
-        />
-      </div>
       <div className="post-form-buttons">
         <button
           type="button"
           onClick={() => nav(-1)}
-          style={{
-            padding: "10px 20px",
-            border: "1px solid #ddd",
-            borderRadius: "4px",
-            backgroundColor: "#f8f9fa",
-            cursor: "pointer",
-            fontSize: "14px",
-            transition: "background-color 0.2s",
-          }}
+          className="post-form-cancel-button"
         >
           취소
         </button>
-        <button
-          type="submit"
-          style={{
-            padding: "10px 20px",
-            border: "none",
-            borderRadius: "4px",
-            backgroundColor: "#4CAF50",
-            color: "white",
-            cursor: "pointer",
-            fontSize: "14px",
-            transition: "background-color 0.2s",
-          }}
-        >
+        <button type="submit" className="post-form-submit-button">
           {id ? "수정" : "작성"}
         </button>
       </div>

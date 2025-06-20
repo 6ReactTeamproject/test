@@ -1,16 +1,13 @@
-function PostHeader({ post }) {
-  return (
-    <div style={{ marginBottom: "20px" }}>
-      <h2 style={{ marginBottom: "10px" }}>{post.title}</h2>
-      <p style={{ whiteSpace: "pre-wrap", marginBottom: "10px" }}>
-        {post.content}
-      </p>
-      <div style={{ color: "#666", fontSize: "0.9em" }}>
-        <span style={{ marginRight: "15px" }}>작성일: {post.createdAt}</span>
-        <span>조회수: {post.views ?? 0}회</span>
-      </div>
+import "../../styles/post.css";
+
+const PostHeader = ({ post }) => (
+  <div className="post-header-container">
+    <h2 className="post-header-title">{post.title}</h2>
+    <p className="post-header-content">{post.content}</p>
+    <div className="post-header-meta">
+      <span className="post-header-date">작성일: {post.createdAt}</span>
     </div>
-  );
-}
+  </div>
+);
 
 export default PostHeader;
