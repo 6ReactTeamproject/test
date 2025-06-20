@@ -3,13 +3,12 @@ import Cropper from "react-easy-crop";
 import getCroppedImg from "./cropUtils";
 import "./CropModal.css";
 
-export default function CropModal({ imageSrc, onClose, onCropComplete }) {
+export default function CropModal({ imageSrc, onClose, onCropComplete, Shape }) {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
 
-  const [aspect, setAspect] = useState(1); // 기본 정사각형
-  const [cropShape, setCropShape] = useState("round"); // 기본 원형
+  const [aspect, setAspect] = useState(Shape === 'round' ? 1 / 1 : 3 / 4); // 기본 1:1 비율
 
   const handleCropComplete = useCallback((_, areaPixels) => {
     setCroppedAreaPixels(areaPixels);
@@ -29,7 +28,7 @@ export default function CropModal({ imageSrc, onClose, onCropComplete }) {
           crop={crop}
           zoom={zoom}
           aspect={aspect}
-          cropShape={cropShape}
+          cropShape={Shape}
           showGrid={false}
           onCropChange={setCrop}
           onZoomChange={setZoom}
@@ -51,7 +50,7 @@ export default function CropModal({ imageSrc, onClose, onCropComplete }) {
           </label>
 
           {/* 자르기 비율 선택 */}
-          <label style={{ color: "white" }}>
+          {Shape == 'square' && <label style={{ color: "white" }}>
             비율:
             <select value={aspect} onChange={(e) => setAspect(Number(e.target.value))}>
               <option value={1}>1:1</option>
@@ -60,15 +59,7 @@ export default function CropModal({ imageSrc, onClose, onCropComplete }) {
               <option value={3 / 4}>3:4</option>
             </select>
           </label>
-
-          {/* 모양 선택 */}
-          <label style={{ color: "white" }}>
-            모양:
-            <select value={cropShape} onChange={(e) => setCropShape(e.target.value)}>
-              <option value="rect">사각형</option>
-              <option value="round">원형</option>
-            </select>
-          </label>
+          }
 
           <button onClick={onClose}>취소</button>
           <button onClick={handleSave}>저장</button>

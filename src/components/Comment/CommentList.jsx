@@ -85,30 +85,45 @@ export default function CommentList({
             key={comment.id}
             style={{ flexDirection: "column", alignItems: "flex-start" }}
           >
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <span className="comment-author">
-                {user?.name || comment.authorName || comment.authorId}
-              </span>
-              <span className="comment-content">{comment.text}</span>
-              <span className="comment-date">{comment.createdAt}</span>
-              <span> | 좋아요: {comment.likes}</span>
-              {currentUser && (
-                <LikeButton
-                  comment={comment}
-                  currentUser={currentUser}
-                  onLike={handleLike}
-                />
-              )}
-              <span className="comment-actions">
-                <CommentActions
-                  comment={comment}
-                  currentUser={currentUser}
-                  onEdit={handleEdit}
-                  onDelete={handleDelete}
-                />
-                <button onClick={() => setReplyTo(comment.id)}>답글달기</button>
-              </span>
-            </div>
+            {editingCommentId === comment.id ? (
+              <CommentEditForm
+                comment={comment}
+                onSave={(newText) => handleSave(comment.id, newText)}
+                onCancel={() => setEditingCommentId(null)}
+              />
+            ) : (
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <span className="comment-author">
+                  {user?.name || comment.authorName || comment.authorId}
+                </span>
+                <span className="comment-content">{comment.text}</span>
+                <span className="comment-date">{comment.createdAt}</span>
+                <span> | 좋아요: {comment.likes}</span>
+                <div className="comment-buttons">
+                  {currentUser && (
+                    <LikeButton
+                      comment={comment}
+                      currentUser={currentUser}
+                      onLike={handleLike}
+                    />
+                  )}
+                  <CommentActions
+                    comment={comment}
+                    currentUser={currentUser}
+                    onEdit={handleEdit}
+                    onDelete={handleDelete}
+                  />
+                  {currentUser && (
+                    <button
+                      onClick={() => setReplyTo(comment.id)}
+                      className="comment-reply-button"
+                    >
+                      답글달기
+                    </button>
+                  )}
+                </div>
+              </div>
+            )}
 
             {replyTo === comment.id && (
               <CommentForm
@@ -120,35 +135,47 @@ export default function CommentList({
               />
             )}
 
-            <div style={{ marginLeft: 32, width: "100%" }}>
+            <div style={{ marginLeft: 32 }}>
               {getReplies(comment.id).map((reply) => {
                 const replyUser = users.find(
                   (u) => String(u.id) === String(reply.userId)
                 );
                 return (
                   <div className="reply-item comment-item" key={reply.id}>
-                    <span className="reply-label">↳ 대댓글</span>
-                    <span className="comment-author">
-                      {replyUser?.name || reply.authorName || reply.authorId}
-                    </span>
-                    <span className="comment-content">{reply.text}</span>
-                    <span className="comment-date">{reply.createdAt}</span>
-                    <span> | 좋아요: {reply.likes}</span>
-                    {currentUser && (
-                      <LikeButton
+                    {editingCommentId === reply.id ? (
+                      <CommentEditForm
                         comment={reply}
-                        currentUser={currentUser}
-                        onLike={handleLike}
+                        onSave={(newText) => handleSave(reply.id, newText)}
+                        onCancel={() => setEditingCommentId(null)}
                       />
+                    ) : (
+                      <>
+                        <span className="reply-label">↳ 대댓글</span>
+                        <span className="comment-author">
+                          {replyUser?.name ||
+                            reply.authorName ||
+                            reply.authorId}
+                        </span>
+                        <span className="comment-content">{reply.text}</span>
+                        <span className="comment-date">{reply.createdAt}</span>
+                        <span> | 좋아요: {reply.likes}</span>
+                        <div className="comment-buttons">
+                          {currentUser && (
+                            <LikeButton
+                              comment={reply}
+                              currentUser={currentUser}
+                              onLike={handleLike}
+                            />
+                          )}
+                          <CommentActions
+                            comment={reply}
+                            currentUser={currentUser}
+                            onEdit={handleEdit}
+                            onDelete={handleDelete}
+                          />
+                        </div>
+                      </>
                     )}
-                    <span className="comment-actions">
-                      <CommentActions
-                        comment={reply}
-                        currentUser={currentUser}
-                        onEdit={handleEdit}
-                        onDelete={handleDelete}
-                      />
-                    </span>
                   </div>
                 );
               })}

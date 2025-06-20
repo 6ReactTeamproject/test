@@ -1,21 +1,68 @@
 import { useState, useEffect } from "react";
 import { useUser } from "../../hooks/UserContext";
-import { apiGet } from "../../api/fetch";
+import { apiGet, apiPost } from "../../api/fetch";
 import "./Message.css";
 
-const MessageDetail = ({ message, onClose }) => {
+const MessageDetail = ({ message, onClose, onMessageSent }) => {
   const { user } = useUser();
   const [sender, setSender] = useState(null);
   const [receiver, setReceiver] = useState(null);
+  const [showReplyForm, setShowReplyForm] = useState(false);
+  const [replyData, setReplyData] = useState({ title: "", content: "" });
 
   useEffect(() => {
     apiGet("users").then((users) => {
-      const foundSender = users.find((u) => u.id === message.senderId);
-      const foundReceiver = users.find((u) => u.id === message.receiverId);
+      const foundSender = users.find(
+        (u) => String(u.id) === String(message.senderId)
+      );
+      const foundReceiver = users.find(
+        (u) => String(u.id) === String(message.receiverId)
+      );
       setSender(foundSender);
       setReceiver(foundReceiver);
     });
   }, [message]);
+
+  const handleReplySubmit = async (e) => {
+    e.preventDefault();
+
+    if (!replyData.title.trim() || !replyData.content.trim()) {
+      alert("제목과 내용을 모두 입력해주세요.");
+      return;
+    }
+
+    try {
+      const newMessage = {
+        title: replyData.title,
+        content: replyData.content,
+        senderId: user.id,
+        receiverId: message.senderId,
+        createdAt: new Date().toISOString(),
+        isRead: false,
+      };
+
+      await apiPost("messages", newMessage);
+
+      // 답장 폼 초기화
+      setReplyData({ title: "", content: "" });
+      setShowReplyForm(false);
+
+      // 부모 컴포넌트에 메시지 전송 완료 알림
+      if (onMessageSent) {
+        onMessageSent();
+      }
+
+      alert("답장이 전송되었습니다.");
+    } catch (error) {
+      console.error("답장 전송 실패:", error);
+      alert("답장 전송에 실패했습니다.");
+    }
+  };
+
+  const handleReplyChange = (e) => {
+    const { name, value } = e.target;
+    setReplyData((prev) => ({ ...prev, [name]: value }));
+  };
 
   return (
     <div className="message-detail">
@@ -44,18 +91,60 @@ const MessageDetail = ({ message, onClose }) => {
       <div className="message-detail-content">{message.content}</div>
 
       <div className="message-detail-footer">
-        {message.senderId !== user.id && (
+        {message.senderId !== user.id && !showReplyForm && (
           <button
             className="reply-button"
-            onClick={() => {
-              // 답장 기능 구현 예정
-              console.log("답장하기");
-            }}
+            onClick={() => setShowReplyForm(true)}
           >
             답장하기
           </button>
         )}
       </div>
+
+      {showReplyForm && (
+        <div className="reply-form">
+          <h3>답장 작성</h3>
+          <form onSubmit={handleReplySubmit}>
+            <div className="form-group">
+              <label>제목:</label>
+              <input
+                type="text"
+                name="title"
+                value={replyData.title}
+                onChange={handleReplyChange}
+                placeholder="답장 제목을 입력하세요"
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>내용:</label>
+              <textarea
+                name="content"
+                value={replyData.content}
+                onChange={handleReplyChange}
+                placeholder="답장 내용을 입력하세요"
+                rows="5"
+                required
+              />
+            </div>
+            <div className="form-buttons">
+              <button type="submit" className="submit-button">
+                답장 전송
+              </button>
+              <button
+                type="button"
+                className="cancel-button"
+                onClick={() => {
+                  setShowReplyForm(false);
+                  setReplyData({ title: "", content: "" });
+                }}
+              >
+                취소
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
     </div>
   );
 };

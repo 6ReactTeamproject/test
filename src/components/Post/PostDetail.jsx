@@ -66,21 +66,10 @@ function PostDetail() {
   if (!post) return <div>Loading...</div>;
 
   return (
-    <div className="post-detail-container" style={{ position: "relative" }}>
+    <div className="post-detail-container">
       <button
         className="close-button"
         onClick={handleBackToBoard}
-        style={{
-          position: "absolute",
-          top: "24px",
-          right: "32px",
-          background: "none",
-          border: "none",
-          fontSize: "2rem",
-          color: "#888",
-          cursor: "pointer",
-          zIndex: 10,
-        }}
         aria-label="닫기"
       >
         ×

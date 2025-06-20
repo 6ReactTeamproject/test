@@ -2,13 +2,14 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Navigation from "./Navigation";
 import { styles } from "./Layout.styles";
+import "../styles/layout.css";
 
 const Layout = ({ children }) => {
   // 항상 펼친 상태로 고정
   const isNavExpanded = true;
 
   return (
-    <div style={styles.layout}>
+    <div style={styles.layout} className="layout-container">
       <Header
         style={{
           ...styles.header,
@@ -22,6 +23,9 @@ const Layout = ({ children }) => {
           ...(isNavExpanded ? styles.mainContentExpanded : {}),
           marginTop: "60px",
         }}
+        className={`main-content ${
+          isNavExpanded ? "main-content-expanded" : ""
+        }`}
       >
         {children}
       </main>
@@ -30,6 +34,9 @@ const Layout = ({ children }) => {
           ...styles.footer,
           ...(isNavExpanded ? styles.footerExpanded : {}),
         }}
+        className={`footer-container ${
+          isNavExpanded ? "footer-container-expanded" : ""
+        }`}
       />
     </div>
   );

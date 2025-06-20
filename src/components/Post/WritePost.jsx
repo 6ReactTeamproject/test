@@ -3,6 +3,7 @@ import { useParams, useNavigate, useLocation } from "react-router-dom";
 import PostForm from "./PostForm";
 import { useUser } from "../../hooks/UserContext";
 import { apiGet, apiPost, apiPatch } from "../../api/fetch";
+import "../../styles/post.css";
 
 const WritePost = () => {
   const { id } = useParams(); // 수정이면 id 존재
@@ -59,23 +60,8 @@ const WritePost = () => {
   };
 
   return (
-    <div
-      style={{
-        maxWidth: "1200px",
-        margin: "0 auto",
-        padding: "20px",
-      }}
-    >
-      <h2
-        style={{
-          marginBottom: "30px",
-          fontSize: "24px",
-          fontWeight: "600",
-          color: "#333",
-        }}
-      >
-        {id ? "게시글 수정" : "새 글 작성"}
-      </h2>
+    <div className="write-post-container">
+      <h2 className="write-post-title">{id ? "게시글 수정" : "새 글 작성"}</h2>
       <PostForm post={post} setPost={setPost} onSubmit={handleSubmit} id={id} />
     </div>
   );

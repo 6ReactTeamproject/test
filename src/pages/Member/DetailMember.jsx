@@ -4,7 +4,7 @@ import EditMember from "./EditMember";
 import DeleteButton from "../../components/Travel&Member/DeleteButton";
 import { useUser } from "../../hooks/UserContext";
 import "../../styles/travel.css";
-
+import "../../styles/post.css";
 const API_URL = "http://localhost:3001/members";
 
 function DetailMember() {
@@ -26,12 +26,27 @@ function DetailMember() {
 
   if (!members) return <p>로딩 중...</p>;
 
-  const isOwner = user?.id === members.authorId;
+  const isOwner = String(user?.id) === String(members.authorId);
 
   return (
     <>
-      <div className="modal-overlay" onClick={() => navigate("/team")}>
-        <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{ position: "relative" }}>
+          <button
+        className="close-button"
+        onClick={() => navigate(-1)}
+        style={{
+          position: "absolute",
+          top: "12px",
+          right: "20px",
+          background: "none",
+          border: "none",
+          fontSize: "2rem",
+          color: "#888",
+          cursor: "pointer",
+          zIndex: 10,
+        }}
+        aria-label="닫기"
+      > × </button>
           {isEditing ? (
             <EditMember
               member={members}
@@ -71,7 +86,6 @@ function DetailMember() {
             </>
           )}
         </div>
-      </div>
     </>
   );
 }

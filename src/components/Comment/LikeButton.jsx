@@ -7,8 +7,11 @@ function LikeButton({ comment, currentUser, onLike }) {
     : false;
 
   return (
-    <button onClick={() => onLike(comment, alreadyLiked)}>
-      {alreadyLiked ? "💔" : "❤️"}
+    <button
+      onClick={() => onLike(comment, alreadyLiked)}
+      className={`like-button ${alreadyLiked ? "liked" : ""}`}
+    >
+      <span className="like-icon">{alreadyLiked ? "❤️" : "♡"}</span>
     </button>
   );
 }
