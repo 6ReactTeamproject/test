@@ -16,7 +16,7 @@ export default function CommentList({
   // 수정 중인 댓글 id 저장
   const [editingCommentId, setEditingCommentId] = useState(null);
   // 정렬 타입(최신순/좋아요순)
-  const [sortType, setSortType] = useState("");
+  const [sortType, setSortType] = useState("latest")
   // 대댓글 입력창 열려있는 댓글 id
   const [replyTo, setReplyTo] = useState(null);
 

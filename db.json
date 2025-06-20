@@ -84,8 +84,9 @@
       "content": "캬캬캬캬컄ㅋ",
       "userId": 2,
       "createdAt": "2023-04-15",
-      "views": 99,
-      "id": 11
+      "views": 101,
+      "id": 11,
+      "image": ""
     },
     {
       "title": "편의점 말고 마트 간식 뭐가 좋을까요?",
@@ -116,7 +117,7 @@
       "content": "사보리노 마스크팩,\n나라치카 립밤,\n간장 과자 + 우마이봉\n나라치카 립밤,\n간장 과자 + 우마이봉\n\n사보리노 마스크팩은 1분 안에 올인원 스킨케어까지 가능!!\n하면서 우마이봉 하나 먹으면 끝",
       "userId": 3,
       "createdAt": "2025-02-28",
-      "views": 11,
+      "views": 12,
       "id": 6
     },
     {
@@ -124,7 +125,7 @@
       "content": "편의점 BEST 3!\n1. 세븐일레븐 - 명란 마요 주먹밥\n2. 로손 - 치즈 인 치킨\n3. 패밀리마트 - 푸딩\n -> 이건 꼭 먹어야함 밤마다 먹으면 기분 좋아짐",
       "userId": 3,
       "createdAt": "2025-03-03",
-      "views": 18,
+      "views": 22,
       "id": 5
     },
     {
@@ -132,7 +133,7 @@
       "content": "저는 유니버셜 스튜디오 재팬에 가고싶습니다.",
       "userId": 3,
       "createdAt": "2025-05-10",
-      "views": 7,
+      "views": 8,
       "id": 3
     },
     {
@@ -140,7 +141,7 @@
       "content": "오사카 성이나 이케다 성에 가보고 싶네요",
       "userId": 3,
       "createdAt": "2025-05-18",
-      "views": 5,
+      "views": 8,
       "id": 4
     },
     {
@@ -148,7 +149,7 @@
       "content": "여름에도 많이들 입으시나요? 덥진 않을지 고민돼요. 사진은 예쁘게 나올 것 같긴 한데 ㅎㅎ",
       "userId": 1,
       "createdAt": "2025-05-25",
-      "views": 34,
+      "views": 42,
       "id": 9
     }
   ],
@@ -189,8 +190,10 @@
       "userId": 1,
       "parentId": null,
       "createdAt": "2025-06-20T14:30:42.987Z",
-      "likes": 3,
-      "likedUserIds": [],
+      "likes": 4,
+      "likedUserIds": [
+        1
+      ],
       "id": 1
     },
     {
@@ -209,8 +212,10 @@
       "userId": 4,
       "parentId": null,
       "createdAt": "2025-06-20T14:33:08.008Z",
-      "likes": 42,
-      "likedUserIds": [],
+      "likes": 43,
+      "likedUserIds": [
+        1
+      ],
       "id": 3
     },
     {
