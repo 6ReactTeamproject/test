@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import Cropper from "react-easy-crop";
-import getCroppedImg from "./cropUtils";
-import "./CropModal.css";
+import getCroppedImg from "../pages/Auth/cropUtils";
+import "../styles/CropModal.css";
 
 export default function CropModal({ imageSrc, onClose, onCropComplete, Shape }) {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
@@ -61,8 +61,8 @@ export default function CropModal({ imageSrc, onClose, onCropComplete, Shape }) 
           </label>
           }
 
-          <button onClick={onClose}>취소</button>
-          <button onClick={handleSave}>저장</button>
+          <button type="button" onClick={onClose}>취소</button>
+          <button type="button" onClick={handleSave}>저장</button>
         </div>
     </div>
   );

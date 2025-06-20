@@ -2,7 +2,7 @@ import { apiDelete } from "../../api/fetch";
 import { useLocation } from "react-router-dom";
 import "../../styles/post.css";
 
-function PostActions({ post, postUser, currentUser, id, navigate }) {
+function PostActions({ post, currentUser, id, navigate }) {
   const location = useLocation();
 
   const handleDelete = () => {

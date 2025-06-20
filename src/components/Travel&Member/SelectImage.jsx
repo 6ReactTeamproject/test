@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import CropModal from "../../pages/Auth/CropModal";
+import CropModal from "../../utils/CropModal";
 
 export default function SelectImage({ setInputs }) {
   const [imageSrc, setImageSrc] = useState(null);
