@@ -1,246 +1,93 @@
-/* Layout Styles */
+/* layout.css */
+
+/* 페이지 전체 컨테이너 */
 .layout-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-color: #f4f6f8; /* 카페 배경색 */
+  font-family: "Apple SD Gothic Neo", "Segoe UI", sans-serif;
 }
 
+/* 상단 헤더 */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: white;
+  border-bottom: 1px solid #ddd;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+}
+
+.header-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #333;
+  margin: 0;
+}
+
+/* 본문 콘텐츠 (사이드바와 헤더 공간 고려) */
 .main-content {
+  margin-left: 160px;
+  margin-top: 60px;
+  padding: 24px;
   flex: 1;
-  margin-left: 60px;
-  padding: 20px;
-  transition: margin-left 0.3s ease;
+  box-sizing: border-box;
 }
 
-.main-content-expanded {
-  margin-left: 200px;
-}
-
-/* Footer Styles */
 .footer-container {
-  background-color: #dee2e6;
-  padding: 20px;
-  margin-top: auto;
-  text-align: center;
-  color: #495057;
-  margin-left: 60px;
-  transition: margin-left 0.3s ease;
-}
-
-.footer-container-expanded {
-  margin-left: 200px;
+  width: 100%;
+  background-color: #222;
+  color: #ccc;
+  padding: 40px 20px;
+  font-size: 14px;
+  position: relative;  
+  z-index: 2000;        
 }
 
 .footer-content {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
 }
 
 .footer-section {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
-  align-items: flex-start;
   flex-wrap: wrap;
-  gap: 20px;
 }
 
-.footer-info {
-  flex: 1;
-  min-width: 250px;
-}
-
-.footer-title {
-  margin: 0 0 10px 0;
-  color: #495057;
-  font-size: 18px;
-  font-weight: 600;
-}
-
-.footer-description {
-  margin: 0;
-  color: #6c757d;
-  line-height: 1.5;
-}
-
-.footer-contact {
-  text-align: right;
-  flex: 1;
-  min-width: 250px;
-}
-
-.footer-contact-title {
-  margin: 0 0 5px 0;
-  color: #6c757d;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.footer-contact-info {
-  margin: 0;
-  color: #6c757d;
-  font-size: 14px;
-}
-
-/* Home Styles */
-.home-container {
-  text-align: center;
-  margin-top: 100px;
-}
-
-.home-title {
-  font-size: 2rem;
-  color: #1f2937;
+.footer-info, .footer-contact {
+  flex: 1 1 300px;
   margin-bottom: 20px;
 }
 
-/* TopPosts Styles */
-.top-posts-container {
-  padding: 20px;
-  background: #f9f9f9;
-  border-radius: 8px;
-  margin: 20px 0;
+.footer-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 10px;
 }
 
-.top-posts-title {
-  font-size: 1.5rem;
-  color: #1f2937;
-  margin-bottom: 15px;
-}
-
-.top-posts-list {
-  list-style: none;
-  padding: 0;
-}
-
-.top-posts-item {
-  padding: 10px 0;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.top-posts-item:last-child {
-  border-bottom: none;
-}
-
-body {
+.footer-description {
+  color: #aaa;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif;
-  background-color: #f8f9fa;
-  color: #333;
-  line-height: 1.6;
 }
 
-* {
-  box-sizing: border-box;
-}
-
-/* 기본 버튼 스타일 */
-.btn {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-}
-
-.btn-primary {
-  background-color: #4f46e5;
-  color: white;
-}
-
-.btn-primary:hover {
-  background-color: #4338ca;
-  transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.btn-secondary {
-  background-color: #ffffff;
-  color: #333;
-  border: 1px solid #d1d5db;
-}
-
-.btn-secondary:hover {
-  background-color: #f9fafb;
-  border-color: #4f46e5;
-}
-
-/* 기본 입력 필드 스타일 */
-.input-field {
-  padding: 12px 16px;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
-  font-size: 14px;
-  transition: all 0.2s ease;
-  background-color: #ffffff;
-  color: #333;
-}
-
-.input-field:focus {
-  outline: none;
-  border-color: #4f46e5;
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
-}
-
-.input-field::placeholder {
-  color: #9ca3af;
-}
-
-/* 카드 스타일 */
-.card {
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e5e7eb;
-  transition: all 0.2s ease;
-}
-
-.card:hover {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-  transform: translateY(-2px);
-}
-
-/* 컨테이너 스타일 */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-/* 섹션 스타일 */
-.section {
-  padding: 40px 0;
-}
-
-.section-title {
-  font-size: 24px;
+.footer-contact-title {
   font-weight: 600;
-  color: #333;
-  margin-bottom: 24px;
-  text-align: center;
+  color: #ffffff;
+  margin-bottom: 6px;
 }
 
-/* 네비게이션 스타일 */
-.nav-link {
-  color: #666;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.2s ease;
-}
-
-.nav-link:hover {
-  color: #4f46e5;
-}
-
-.nav-link.active {
-  color: #4f46e5;
-  font-weight: 600;
+.footer-contact-info {
+  color: #bbb;
+  margin: 0;
 }

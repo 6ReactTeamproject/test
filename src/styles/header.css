@@ -1,24 +1,23 @@
-/* Header Styles */
+/* 전체 헤더 */
 .header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
   background-color: #ffffff;
   border-bottom: 1px solid #e5e7eb;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  position: sticky;
-  top: 0;
   z-index: 1000;
-}
 
-.header-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
   display: flex;
+  justify-content: space-between;  /* 로고와 유저 정보를 양 끝으로 */
   align-items: center;
-  justify-content: space-between;
-  height: 64px;
-  width: 100%;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 
+/* 왼쪽 로고 */
 .logo {
   font-size: 24px;
   font-weight: 700;
@@ -26,9 +25,6 @@
   text-decoration: none;
   display: flex;
   align-items: center;
-  gap: 8px;
-  flex-shrink: 0;
-  margin-right: auto;
 }
 
 .logo:hover {
@@ -43,143 +39,18 @@
   line-height: 1;
 }
 
-/* UserSection이 오른쪽 끝에 확실히 배치되도록 */
-.header-container > *:last-child {
-  margin-left: auto;
-}
-
-.user-section {
+/* 오른쪽 유저 정보 래퍼 */
+.header-right {
   display: flex;
   align-items: center;
-  gap: 16px;
 }
 
-.user-info {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #666;
-  font-size: 14px;
-}
-
-.user-avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #e5e7eb;
-}
-
-.user-name {
-  font-weight: 500;
-  color: #333;
-}
-
-.auth-buttons {
-  display: flex;
-  gap: 8px;
-}
-
-.login-btn {
-  padding: 8px 16px;
-  background-color: #4f46e5;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  text-decoration: none;
-}
-
-.login-btn:hover {
-  background-color: #4338ca;
-  transform: translateY(-1px);
-}
-
-.signup-btn {
-  padding: 8px 16px;
-  background-color: #ffffff;
-  color: #4f46e5;
-  border: 1px solid #4f46e5;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  text-decoration: none;
-}
-
-.signup-btn:hover {
-  background-color: #4f46e5;
-  color: white;
-}
-
-.logout-btn {
-  padding: 6px 12px;
-  background-color: #f9fafb;
-  color: #666;
-  border: 1px solid #d1d5db;
-  border-radius: 4px;
-  font-size: 12px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.logout-btn:hover {
-  background-color: #f3f4f6;
-  color: #333;
-}
-
-/* Navigation Styles */
-.nav-container {
-  width: 200px;
-  transition: width 0.3s ease;
-}
-
-.nav-menu {
-  flex-direction: column;
-  padding: 20px 0;
-}
-
-.nav-item {
-  transition: background-color 0.2s;
-  padding: 12px 20px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.nav-item.active {
-  background-color: #f0f7ff;
-  border-left: 4px solid #4f46e5;
-}
-
-.nav-item:hover {
-  background-color: #f8f9fa;
-}
-
-.nav-icon {
-  min-width: 24px;
-  text-align: center;
-}
-
-.nav-label {
-  margin-left: 12px;
-  opacity: 1;
-  transition: opacity 0.2s;
-}
-
-/* UserSection Styles */
+/* 유저 섹션 전체 */
 .user-section-container {
   display: flex;
   align-items: center;
   gap: 12px;
-  flex-shrink: 0;
-  margin-left: auto;
+  white-space: nowrap;
 }
 
 .user-profile-image {
@@ -203,8 +74,8 @@
 }
 
 .user-button {
-  padding: 4px 8px;
-  font-size: 12px;
+  padding: 6px 12px;
+  font-size: 13px;
   border: 1px solid #d1d5db;
   border-radius: 4px;
   background-color: #f9fafb;

@@ -88,7 +88,7 @@ export default function CommentList({
   const parentComments = sortedComments.filter((c) => !c.parentId);
 
   return (
-    <div className="comment-list">
+    <div className="comment-list-wrapper">
       {/* 정렬 버튼 영역 */}
       <div className="comment-sort-buttons">
         {/* 최신순 버튼 */}
@@ -115,122 +115,118 @@ export default function CommentList({
       {parentComments.map((comment) => {
         // 댓글 작성자 정보 찾기
         const user = users.find((u) => String(u.id) === String(comment.userId));
+        const isEditing = editingCommentId === comment.id;
+
         return (
-          <div
-            className="comment-item"
-            key={comment.id}
-            style={{ flexDirection: "column", alignItems: "flex-start" }}
-          >
-            {/* 수정 중이면 수정 폼 보여주고, 아니면 댓글 내용 보여줌 */}
-            {editingCommentId === comment.id ? (
-              <CommentEditForm
-                comment={comment}
-                onSave={(newText) => handleSave(comment.id, newText)}
-                onCancel={() => setEditingCommentId(null)}
-              />
-            ) : (
-              <div style={{ display: "flex", alignItems: "center" }}>
-                {/* 작성자 이름 */}
-                <span className="comment-author">
-                  {user?.name || comment.authorName || comment.authorId}
-                </span>
-                {/* 댓글 내용 */}
-                <span className="comment-content">{comment.text}</span>
-                {/* 작성일 */}
-                <span className="comment-date">{comment.createdAt}</span>
-                {/* 좋아요 수 */}
-                <span> | 좋아요: {comment.likes}</span>
-                <div className="comment-buttons">
-                  {/* 좋아요 버튼 */}
-                  {currentUser && (
-                    <LikeButton
-                      comment={comment}
-                      currentUser={currentUser}
-                      onLike={handleLike}
-                    />
-                  )}
-                  {/* 수정/삭제 버튼 */}
-                  <CommentActions
-                    comment={comment}
-                    currentUser={currentUser}
-                    onEdit={handleEdit}
-                    onDelete={handleDelete}
-                  />
-                  {/* 답글달기 버튼 (로그인한 유저만) */}
-                  {currentUser && (
-                    <button
-                      onClick={() => setReplyTo(comment.id)}
-                      className="comment-reply-button"
-                    >
-                      답글달기
-                    </button>
-                  )}
-                </div>
+          <div key={comment.id} className="comment-thread">
+            <div className="comment-item">
+              <div className="comment-avatar">
+                <span>{user?.name?.charAt(0) || "G"}</span>
               </div>
-            )}
+              <div className="comment-body">
+                {isEditing ? (
+                  <CommentEditForm
+                    comment={comment}
+                    onSave={(newText) => handleSave(comment.id, newText)}
+                    onCancel={() => setEditingCommentId(null)}
+                  />
+                ) : (
+                  <>
+                    <div className="comment-header">
+                      <span className="comment-author">
+                        {user?.name || comment.authorName || "익명"}
+                      </span>
+                      <span className="comment-date">
+                        {new Date(comment.createdAt).toLocaleString()}
+                      </span>
+                    </div>
+                    <p className="comment-text">{comment.text}</p>
+                    <div className="comment-footer">
+                      <LikeButton
+                        comment={comment}
+                        currentUser={currentUser}
+                        onLike={handleLike}
+                      />
+                      <CommentActions
+                        comment={comment}
+                        currentUser={currentUser}
+                        onEdit={handleEdit}
+                        onDelete={handleDelete}
+                      />
+                      {currentUser && (
+                        <button
+                          onClick={() => setReplyTo(comment.id)}
+                          className="comment-reply-button"
+                        >
+                          답글달기
+                        </button>
+                      )}
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
 
             {/* 대댓글 입력 폼 (답글달기 버튼 눌렀을 때만) */}
             {replyTo === comment.id && (
-              <CommentForm
-                currentUser={currentUser}
-                id={comment.postId}
-                setComments={setComments}
-                parentId={comment.id}
-                onCancel={() => setReplyTo(null)}
-              />
+              <div className="reply-form-container">
+                <CommentForm
+                  currentUser={currentUser}
+                  id={comment.postId}
+                  setComments={setComments}
+                  parentId={comment.id}
+                  onCancel={() => setReplyTo(null)}
+                />
+              </div>
             )}
 
             {/* 대댓글 목록 렌더링 */}
-            <div style={{ marginLeft: 32 }}>
+            <div className="replies-container">
               {getReplies(comment.id).map((reply) => {
-                // 대댓글 작성자 정보 찾기
                 const replyUser = users.find(
                   (u) => String(u.id) === String(reply.userId)
                 );
+                const isReplyEditing = editingCommentId === reply.id;
+
                 return (
-                  <div className="reply-item comment-item" key={reply.id}>
-                    {/* 대댓글 수정 중이면 수정 폼, 아니면 대댓글 내용 */}
-                    {editingCommentId === reply.id ? (
-                      <CommentEditForm
-                        comment={reply}
-                        onSave={(newText) => handleSave(reply.id, newText)}
-                        onCancel={() => setEditingCommentId(null)}
-                      />
-                    ) : (
-                      <>
-                        {/* 대댓글 표시 라벨 */}
-                        <span className="reply-label">↳ 대댓글</span>
-                        {/* 대댓글 작성자 */}
-                        <span className="comment-author">
-                          {replyUser?.name ||
-                            reply.authorName ||
-                            reply.authorId}
-                        </span>
-                        {/* 대댓글 내용 */}
-                        <span className="comment-content">{reply.text}</span>
-                        {/* 대댓글 작성일 */}
-                        <span className="comment-date">{reply.createdAt}</span>
-                        {/* 대댓글 좋아요 수 */}
-                        <span> | 좋아요: {reply.likes}</span>
-                        <div className="comment-buttons">
-                          {/* 대댓글 좋아요 버튼 */}
-                          {currentUser && (
+                  <div className="comment-item reply-item" key={reply.id}>
+                    <div className="comment-avatar">
+                      <span>{replyUser?.name?.charAt(0) || "G"}</span>
+                    </div>
+                    <div className="comment-body">
+                      {isReplyEditing ? (
+                        <CommentEditForm
+                          comment={reply}
+                          onSave={(newText) => handleSave(reply.id, newText)}
+                          onCancel={() => setEditingCommentId(null)}
+                        />
+                      ) : (
+                        <>
+                          <div className="comment-header">
+                            <span className="comment-author">
+                              {replyUser?.name || reply.authorName || "익명"}
+                            </span>
+                            <span className="comment-date">
+                              {new Date(reply.createdAt).toLocaleString()}
+                            </span>
+                          </div>
+                          <p className="comment-text">{reply.text}</p>
+                          <div className="comment-footer">
                             <LikeButton
                               comment={reply}
                               currentUser={currentUser}
                               onLike={handleLike}
                             />
-                          )}
-                          {/* 대댓글 수정/삭제 버튼 */}
-                          <CommentActions
-                            comment={reply}
-                            currentUser={currentUser}
-                            onEdit={handleEdit}
-                            onDelete={handleDelete}
-                          />
-                        </div>
-                      </>
-                    )}
+                            <CommentActions
+                              comment={reply}
+                              currentUser={currentUser}
+                              onEdit={handleEdit}
+                              onDelete={handleDelete}
+                            />
+                          </div>
+                        </>
+                      )}
+                    </div>
                   </div>
                 );
               })}
