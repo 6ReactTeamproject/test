@@ -29,7 +29,7 @@ export default function PostImgUploader({ onChangeImage, Shape = "square" }) {
 
   return (
   <>
-    {/* 항상 보이는 업로드 버튼 */}
+    {/* 업로드 버튼 */}
     <button
       type="button"
       className="image-upload-button"
@@ -38,7 +38,7 @@ export default function PostImgUploader({ onChangeImage, Shape = "square" }) {
       이미지 선택
     </button>
 
-    {/* 숨겨진 파일 input */}
+    {/* 파일 input */}
     <input
       type="file"
       accept="image/*"

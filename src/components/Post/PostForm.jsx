@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import FormInput from "../common/FormInput";
 import FormTextarea from "../common/FormTextarea";
 import FormButton from "../common/FormButton";
+import PostImgUploader from "../../utils/PostImgUploader";
 import { MESSAGES } from "../../constants";
 import "../../styles/form.css";
 import "../../styles/post.css";
@@ -44,6 +45,13 @@ const PostForm = ({ post, setPost, onSubmit, id }) => {
         placeholder="내용을 입력하세요"
         className="post-form-textarea"
       />
+      <div className="post-form-image">
+        <PostImgUploader
+          onChangeImage={(img) => {
+            setPost((prev) => ({ ...prev, image: img }));
+          }}
+        />
+      </div>
       <div className="post-form-buttons">
         <button onClick={() => nav(-1)} className="post-form-cancel-button">
           취소

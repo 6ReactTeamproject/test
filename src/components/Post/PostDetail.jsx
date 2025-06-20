@@ -92,6 +92,16 @@ function PostDetail() {
         </div>
         {/* 게시글 내용 */}
         <div className="post-content">{post.content}</div>
+        {/* 게시글 이미지 */}
+        {post.image && (
+          <div className="post-detail-image-box">
+            <img
+              src={post.image} 
+              alt="게시글 이미지"
+              className="post-detail-image"
+            />
+          </div>
+        )}
         {/* 게시글 액션 버튼들 */}
         <PostActions
           post={post}

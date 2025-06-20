@@ -3,7 +3,7 @@ import { useUser } from "../../hooks/UserContext";
 import "./UploadImg.css";
 import CropModal from "../../utils/CropModal";
 
-export default function UploadImg({ cropShape }) {
+export default function UploadImg({ shape = "round" }) {
   const { user, setUser } = useUser(); // 로그인 사용자 정보와 업데이트 함수
   const [preview, setPreview] = useState(user.image); // 현재 프로필 이미지 미리보기
   const [imageSrc, setImageSrc] = useState(null); // 자르기 모달에 전달할 이미지 소스
@@ -70,7 +70,7 @@ export default function UploadImg({ cropShape }) {
           imageSrc={imageSrc} // 원본 이미지 소스
           onClose={() => setImageSrc(null)} // 모달 닫기 함수
           onCropComplete={handleCropComplete} // 자르기 완료 시 실행될 함수
-          Shape={cropShape} // 자르기 모양 ('round' 또는 'square')
+          Shape={shape} // 자르기 모양 ('round' 또는 'square')
         />
       )}
     </>
