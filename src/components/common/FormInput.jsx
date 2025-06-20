@@ -6,6 +6,7 @@ export default function FormInput({
   onChange,
   placeholder,
   type = "text",
+  className,
 }) {
   return (
     <input
@@ -14,6 +15,7 @@ export default function FormInput({
       value={value}
       onChange={onChange}
       placeholder={placeholder}
+      className={className}
     />
   );
 }
