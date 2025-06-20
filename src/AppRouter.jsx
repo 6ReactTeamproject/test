@@ -18,8 +18,6 @@ import ChangePasswordForm from "./pages/Auth/ChangePasswordForm.jsx";
 import ChangeNameForm from "./pages/Auth/ChangeNameForm.jsx";
 import { useRouteHistory } from "./hooks/useRouteHistory";
 
-
-
 export default function AppRouter({ user, setUser }) {
   useRouteHistory();
   return (
@@ -28,7 +26,7 @@ export default function AppRouter({ user, setUser }) {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/signup" element={<Signup />} />
-       
+
         <Route path="/intro" element={<TravelIntro />} />
         <Route path="/intro/new" element={<CreateTravelIntro />} />
         <Route path="/intro/:id" element={<DetailTravel />} />
@@ -40,7 +38,7 @@ export default function AppRouter({ user, setUser }) {
         <Route path="/post" element={<PostBoard />} />
         <Route path="/post/:id" element={<PostDetail currentUser={user} />} />
         <Route path="/post/write" element={<WritePost />} />
-        <Route path="/edit/:id" element={<WritePost />} />
+        <Route path="/post/edit/:id" element={<WritePost />} />
 
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/message" element={<MessageBox />} />

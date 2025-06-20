@@ -16,29 +16,39 @@ const WritePost = () => {
     if (id) {
       // 수정 시 기존 데이터 불러오기
       apiGet("posts", id).then((data) =>
-        setPost({ title: data.title, content: data.content, image: data.image || "" })
+        setPost({
+          title: data.title,
+          content: data.content,
+          image: data.image || "",
+        })
       );
     }
   }, [id]);
 
-  const handleSubmit = () => {
-    if (!currentUser || !currentUser.id) {
-      alert("로그인된 사용자 정보가 없습니다.");
-      return;
-    }
+  const handleSubmit = async () => {
+    try {
+      if (!currentUser || !currentUser.id) {
+        alert("로그인된 사용자 정보가 없습니다.");
+        return;
+      }
 
-    const postData = {
-      ...post,
-      ...(id
-        ? {}
-        : {
-            userId: currentUser.id,
-            createdAt: new Date().toISOString().slice(0, 10),
-            views: 0,
-          }),
-    };
+      const data = {
+        ...post,
+        ...(id
+          ? {}
+          : {
+              userId: currentUser.id,
+              createdAt: new Date().toISOString().slice(0, 10),
+              views: 0,
+            }),
+      };
 
-    const handleSuccess = () => {
+      if (id) {
+        await apiPatch("posts", id, data);
+      } else {
+        await apiPost("posts", data);
+      }
+
       // 게시판에서 왔다면 해당 페이지로 돌아가기
       if (location.state?.fromBoard) {
         let url = "/post";
@@ -50,12 +60,9 @@ const WritePost = () => {
       } else {
         navigate(-1);
       }
-    };
-
-    if (id) {
-      apiPatch("posts", id, postData).then(handleSuccess);
-    } else {
-      apiPost("posts", postData).then(handleSuccess);
+    } catch (error) {
+      console.error("게시글 작성 실패:", error);
+      alert("게시글 작성에 실패했습니다.");
     }
   };
 
