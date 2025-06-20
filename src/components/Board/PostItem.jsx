@@ -1,7 +1,9 @@
 import "../../styles/board.css";
 
-const PostItem = ({ members, post, onClick }) => {
-  const author = members.find((member) => member.id === post.userId.toString());
+const PostItem = ({ users, post, onClick }) => {
+  const author = users.find(
+    (user) => user.id.toString() === post.userId.toString()
+  );
 
   return (
     <li className="post-item" onClick={onClick}>
