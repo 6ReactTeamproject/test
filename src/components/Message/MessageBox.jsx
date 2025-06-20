@@ -14,6 +14,7 @@ const MessageBox = () => {
   const [refreshKey, setRefreshKey] = useState(0);
   const nav = useNavigate();
 
+  // 로그인 상태 확인
   useEffect(() => {
     if (!user) {
       alert("로그인 후 이용해주세요.");
@@ -21,8 +22,8 @@ const MessageBox = () => {
     }
   }, [user, nav]);
 
+  // 메시지 전송 후 목록 새로고침
   const handleMessageSent = () => {
-    // 메시지 전송 후 목록 새로고침
     setRefreshKey((prev) => prev + 1);
   };
 

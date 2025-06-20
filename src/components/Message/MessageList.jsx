@@ -13,20 +13,25 @@ const MessageList = ({
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
 
+  // 사용자 정보와 메시지 목록을 가져오는 useEffect
   useEffect(() => {
     if (!user) return;
 
+    // 사용자 목록 가져오기
     apiGet("users")
       .then((data) => setUsers(data))
       .catch((err) => console.error("사용자 목록 로딩 실패:", err));
 
+    // 메시지 목록 가져오기
     apiGet("messages")
       .then((data) => {
+        // 받은 쪽지/보낸 쪽지 필터링
         const filteredMessages = data.filter((message) =>
           activeTab === "received"
             ? String(message.receiverId) === String(user.id)
             : String(message.senderId) === String(user.id)
         );
+        // 최신순으로 정렬 (createdAt 기준 내림차순)
         const sortedMessages = filteredMessages.sort(
           (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
         );
@@ -35,10 +40,13 @@ const MessageList = ({
       .catch((err) => console.error("메시지 로딩 실패:", err));
   }, [user, activeTab, showForm]);
 
+  // 메시지 클릭 시 읽음 상태 변경 및 선택
   const handleMessageClick = async (message) => {
+    // 받은 쪽지이고 아직 읽지 않은 경우 읽음 상태로 변경
     if (activeTab === "received" && !message.isRead) {
       try {
         await apiPatch("messages", message.id, { isRead: true });
+        // 로컬 상태 업데이트
         setMessages(
           messages.map((msg) =>
             msg.id === message.id ? { ...msg, isRead: true } : msg
@@ -55,6 +63,7 @@ const MessageList = ({
     return null;
   }
 
+  // 사용자 ID로 사용자 이름 찾기
   const getSenderName = (userId) => {
     const foundUser = users.find((u) => String(u.id) === String(userId));
     return foundUser ? foundUser.name : "알 수 없음";

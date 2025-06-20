@@ -14,19 +14,23 @@ const MessageForm = ({ onClose }) => {
     isRead: false,
   });
 
+  // 사용자 목록 가져오기
   useEffect(() => {
     apiGet("users")
       .then((data) => setUsers(data))
       .catch((err) => console.error("사용자 목록 로딩 실패:", err));
   }, []);
 
+  // 폼 입력값 변경 처리
   const handleChange = (e) => {
     setMessage({ ...message, [e.target.name]: e.target.value });
   };
 
+  // 쪽지 전송 처리
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // 새 메시지 객체 생성
     const newMessage = {
       senderId: user.id,
       receiverId: message.receiverId,
@@ -38,6 +42,7 @@ const MessageForm = ({ onClose }) => {
 
     try {
       await apiPost("messages", newMessage);
+      // 폼 초기화
       setMessage({
         receiverId: "",
         title: "",
@@ -63,6 +68,7 @@ const MessageForm = ({ onClose }) => {
           required
         >
           <option value="">받는 사람 선택</option>
+          {/* 현재 사용자를 제외한 사용자 목록 */}
           {users
             .filter((u) => u.id !== user?.id)
             .map((u) => (
@@ -91,6 +97,7 @@ const MessageForm = ({ onClose }) => {
           <button
             type="button"
             onClick={() => {
+              // 폼 초기화 후 닫기
               setMessage({
                 receiverId: "",
                 title: "",
