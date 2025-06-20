@@ -23,6 +23,7 @@ const Board = () => {
   const [searchType, setSearchType] = useState("title_content");
   const [filtered, setFiltered] = useState([]);
   const [members, setMembers] = useState([]);
+  const [users, setUsers] = useState([]);
 
   const { user } = useUser();
   const postsPerPage = 5;
@@ -55,8 +56,8 @@ const Board = () => {
     apiGet("members")
       .then((data) => setMembers(data))
       .catch((err) => console.error("에러:", err));
-    apiGet("members")
-      .then((data) => setMembers(data))
+    apiGet("users")
+      .then((data) => setUsers(data))
       .catch((err) => console.error("에러:", err));
   }, []);
 
@@ -122,7 +123,7 @@ const Board = () => {
         </button>
       </div>
       <PostList
-        members={members}
+        users={users}
         posts={currentPosts}
         currentPage={currentPage}
         sortType={sortType}
