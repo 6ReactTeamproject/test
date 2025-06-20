@@ -3,7 +3,6 @@ const CommentActions = ({
   currentUser,
   onEdit,
   onDelete,
-  buttonClassName,
 }) => {
   if (!currentUser || String(currentUser.id) !== String(comment.userId))
     return null;

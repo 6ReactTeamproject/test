@@ -1,9 +1,8 @@
-import { styles } from "./Layout.styles";
 import "../styles/layout.css";
 
-const Footer = ({ style }) => {
+const Footer = () => {
   return (
-    <footer style={{ ...styles.footer, ...style }} className="footer-container">
+    <footer className="footer-container">
       <div className="footer-content">
         <div className="footer-section">
           <div className="footer-info">

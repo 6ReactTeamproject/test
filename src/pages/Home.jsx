@@ -12,7 +12,6 @@ export default function Home() {
     <>
       {console.log(currentUser)}
       <div className="home-container">
-        <h1 className="home-title">메인 화면</h1>
         <TravelCarousel />
       </div>
       <TopPosts />

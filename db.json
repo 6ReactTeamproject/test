@@ -6,7 +6,6 @@
       "password": "1111",
       "name": "강희준",
       "image": "https://i.ibb.co/Fz1bk4g/default-profile.png",
-      "grade": "일반회원",
       "giturl": "https://github.com/Kanghuijun"
     },
     {
@@ -15,7 +14,6 @@
       "password": "2222",
       "name": "김성민",
       "image": "https://i.ibb.co/Fz1bk4g/default-profile.png",
-      "grade": "일반회원",
       "giturl": "https://github.com/kimmin042"
     },
     {
@@ -24,7 +22,6 @@
       "password": "2222",
       "name": "권혁빈",
       "image": "https://i.ibb.co/Fz1bk4g/default-profile.png",
-      "grade": "일반회원",
       "giturl": "https://github.com/HB-KWon"
     },
     {
@@ -33,7 +30,6 @@
       "password": "4444",
       "name": "이유찬",
       "image": "https://i.ibb.co/Fz1bk4g/default-profile.png",
-      "grade": "일반회원",
       "giturl": "https://github.com/kgh6a"
     },
     {
@@ -42,7 +38,6 @@
       "password": "5555",
       "name": "이창민",
       "image": "https://i.ibb.co/Fz1bk4g/default-profile.png",
-      "grade": "일반회원",
       "giturl": "https://github.com/mu4404"
     }
   ],
@@ -85,55 +80,357 @@
   ],
   "posts": [
     {
-      "id": 1,
-      "userId": 1,
-      "title": "첫 게시글입니다!",
-      "content": "안녕하세요. 첫 글이에요.",
-      "createdAt": "2025-05-22",
-      "views": 154
+      "title": "바나나 먹으면 나한테 바나나?",
+      "content": "캬캬캬캬컄ㅋ",
+      "userId": 2,
+      "createdAt": "2023-04-15",
+      "views": 92,
+      "id": 11
     },
     {
-      "title": "s",
-      "content": "s",
+      "title": "편의점 말고 마트 간식 뭐가 좋을까요?",
+      "content": "돈키호테 말고 이온이나 세이유 같은 데서 사기 좋은 일본 간식 뭐 있을까요?? 추천 좀요!",
+      "userId": 2,
+      "createdAt": "2024-07-06",
+      "views": 11,
+      "id": 8
+    },
+    {
+      "title": "유후인 온천 마을 가보신 분?",
+      "content": "후쿠오카 근처라 들었는데 조용하고 힐링되나요? 혼자 여행이라 걱정도 좀 되네요ㅠㅠ",
+      "userId": 4,
+      "createdAt": "2024-08-29",
+      "views": 14,
+      "id": 7
+    },
+    {
+      "title": "일본 자판기 진짜 미쳤네요;;",
+      "content": "심야에 뜨끈한 옥수수수프 뽑아먹고 감동받았습니다. 자판기만 투어해도 재밌을 듯 ㅋㅋ",
+      "userId": 5,
+      "createdAt": "2024-12-20",
+      "views": 28,
+      "id": 10
+    },
+    {
+      "title": "돈키호테 쇼핑리스트(후쿠오카 기준으로)",
+      "content": "사보리노 마스크팩,\n나라치카 립밤,\n간장 과자 + 우마이봉\n나라치카 립밤,\n간장 과자 + 우마이봉\n\n사보리노 마스크팩은 1분 안에 올인원 스킨케어까지 가능!!\n하면서 우마이봉 하나 먹으면 끝",
+      "userId": 3,
+      "createdAt": "2025-02-28",
+      "views": 11,
+      "id": 6
+    },
+    {
+      "title": "일본 편의점 음식 추천",
+      "content": "편의점 BEST 3!\n1. 세븐일레븐 - 명란 마요 주먹밥\n2. 로손 - 치즈 인 치킨\n3. 패밀리마트 - 푸딩\n -> 이건 꼭 먹어야함 밤마다 먹으면 기분 좋아짐",
+      "userId": 3,
+      "createdAt": "2025-03-03",
+      "views": 18,
+      "id": 5
+    },
+    {
+      "title": "오사카 어디로 가고싶어요?",
+      "content": "저는 유니버셜 스튜디오 재팬에 가고싶습니다.",
+      "userId": 3,
+      "createdAt": "2025-05-10",
+      "views": 7,
+      "id": 3
+    },
+    {
+      "title": "저는 건물 좋아해서",
+      "content": "오사카 성이나 이케다 성에 가보고 싶네요",
+      "userId": 3,
+      "createdAt": "2025-05-18",
+      "views": 5,
+      "id": 4
+    },
+    {
+      "title": "교토에서 기모노 체험 해보신 분?",
+      "content": "여름에도 많이들 입으시나요? 덥진 않을지 고민돼요. 사진은 예쁘게 나올 것 같긴 한데 ㅎㅎ",
       "userId": 1,
-      "createdAt": "2025-06-20",
-      "views": 3,
-      "id": 2
+      "createdAt": "2025-05-25",
+      "views": 23,
+      "id": 9
     }
   ],
   "comments": [
     {
-      "id": 1,
-      "postId": 1,
-      "userId": 4,
-      "text": "축하드립니다!",
-      "likes": 4,
-      "createdAt": "2025-05-22",
-      "likedUserIds": [
-        4,
-        1
-      ]
-    },
-    {
-      "text": "aa",
-      "postId": 1,
-      "userId": 1,
-      "parentId": 1,
-      "createdAt": "2025-06-20T13:31:41.195Z",
+      "text": "이게 무슨 드립이야 ㅋㅋㅋㅋㅋ 터졌음",
+      "postId": "11",
+      "userId": 2,
+      "parentId": null,
+      "createdAt": "2025-06-20T16:00:00.000Z",
       "likes": 0,
       "likedUserIds": [],
+      "id": 14
+    },
+    {
+      "text": "우마이봉 진짜 일본 갈 때마다 꼭 사요 ㅋㅋ",
+      "postId": "6",
+      "userId": 3,
+      "parentId": null,
+      "createdAt": "2025-06-20T16:00:01.000Z",
+      "likes": 0,
+      "likedUserIds": [],
+      "id": 15
+    },
+    {
+      "text": "이케다 성은 덜 알려졌는데 은근 매력 있죠~",
+      "postId": "4",
+      "userId": 1,
+      "parentId": null,
+      "createdAt": "2025-06-20T16:00:02.000Z",
+      "likes": 0,
+      "likedUserIds": [],
+      "id": 16
+    },
+    {
+      "text": "UFO 야끼소바도 JMT",
+      "postId": "5",
+      "userId": 1,
+      "parentId": null,
+      "createdAt": "2025-06-20T14:30:42.987Z",
+      "likes": 3,
+      "likedUserIds": [],
+      "id": 1
+    },
+    {
+      "text": "푸딩 못 참즤~",
+      "postId": "5",
+      "userId": 2,
+      "parentId": null,
+      "createdAt": "2025-06-20T14:32:41.484Z",
+      "likes": 1,
+      "likedUserIds": [],
       "id": 2
+    },
+    {
+      "text": "다음에 메론빵도 먹어보세요",
+      "postId": "5",
+      "userId": 4,
+      "parentId": null,
+      "createdAt": "2025-06-20T14:33:08.008Z",
+      "likes": 42,
+      "likedUserIds": [],
+      "id": 3
+    },
+    {
+      "text": "유후인 진짜 조용하고 좋아요~ 노천탕 강추입니다",
+      "postId": "7",
+      "userId": 1,
+      "parentId": null,
+      "createdAt": "2025-06-20T15:02:12.000Z",
+      "likes": 5,
+      "likedUserIds": [],
+      "id": 4
+    },
+    {
+      "text": "저도 혼자 갔다왔는데 혼자여서 더 힐링됐어요 ㅎㅎ",
+      "postId": "7",
+      "userId": 5,
+      "parentId": null,
+      "createdAt": "2025-06-20T15:04:18.000Z",
+      "likes": 2,
+      "likedUserIds": [],
+      "id": 5
+    },
+    {
+      "text": "마트 간식은 감자칩 ‘쟈가리코’ 추천이요! 맥주랑 찰떡!",
+      "postId": "8",
+      "userId": 3,
+      "parentId": null,
+      "createdAt": "2025-06-20T15:05:44.000Z",
+      "likes": 7,
+      "likedUserIds": [],
+      "id": 6
+    },
+    {
+      "text": "이온에서 파는 쿄로짱 초코볼도 은근 맛있어요",
+      "postId": "8",
+      "userId": 1,
+      "parentId": null,
+      "createdAt": "2025-06-20T15:07:10.000Z",
+      "likes": 1,
+      "likedUserIds": [],
+      "id": 7
+    },
+    {
+      "text": "저 8월에 입었는데 생각보다 안 덥고 진짜 사진 잘 나왔어요!!",
+      "postId": "9",
+      "userId": 2,
+      "parentId": null,
+      "createdAt": "2025-06-20T15:20:31.000Z",
+      "likes": 6,
+      "likedUserIds": [],
+      "id": 8
+    },
+    {
+      "text": "기모노 샵 중에 '유메야카타' 추천이요~ 스탭도 친절하고 종류 많아요!",
+      "postId": "9",
+      "userId": 4,
+      "parentId": null,
+      "createdAt": "2025-06-20T15:22:02.000Z",
+      "likes": 3,
+      "likedUserIds": [],
+      "id": 9
+    },
+    {
+      "text": "ㅋㅋ 저도 자판기에서 따뜻한 오뎅 국물 뽑아먹음 감동했어요",
+      "postId": "10",
+      "userId": 3,
+      "parentId": null,
+      "createdAt": "2025-06-20T15:24:18.000Z",
+      "likes": 10,
+      "likedUserIds": [],
+      "id": 10
+    },
+    {
+      "text": "라멘 자판기도 신세계였어요 ㄹㅇ…",
+      "postId": "10",
+      "userId": 2,
+      "parentId": null,
+      "createdAt": "2025-06-20T15:25:11.000Z",
+      "likes": 4,
+      "likedUserIds": [],
+      "id": 11
+    },
+    {
+      "text": "별로 재미없던데요?",
+      "postId": "3",
+      "userId": 2,
+      "parentId": null,
+      "createdAt": "2025-06-20T14:50:42.981Z",
+      "likes": 0,
+      "likedUserIds": [],
+      "id": 12
+    },
+    {
+      "text": "우마이 우마이",
+      "postId": "6",
+      "userId": 2,
+      "parentId": null,
+      "createdAt": "2025-06-20T14:51:26.160Z",
+      "likes": 0,
+      "likedUserIds": [],
+      "id": 13
     }
   ],
   "messages": [
     {
-      "id": 1,
+      "senderId": 3,
+      "receiverId": "4",
+      "title": "일본취업",
+      "content": "같이해요",
+      "createdAt": "2025-06-20T13:49:52.292Z",
+      "isRead": true,
+      "id": 1
+    },
+    {
+      "senderId": 3,
+      "receiverId": "4",
+      "title": "그래요 ",
+      "content": "열심히 공부합시다",
+      "createdAt": "2025-06-20T13:50:11.523Z",
+      "isRead": true,
+      "id": 2
+    },
+    {
+      "senderId": 3,
+      "receiverId": "1",
+      "title": "프로젝트",
+      "content": "어느 부분을 수정할까요?",
+      "createdAt": "2025-06-20T13:50:26.308Z",
+      "isRead": true,
+      "id": 3
+    },
+    {
       "senderId": 1,
-      "receiverId": 4,
-      "title": "테스트용 쪽지 제목",
-      "content": "테스트용 쪽지",
-      "createdAt": "2024-03-21T10:00:00",
-      "isRead": true
+      "receiverId": "3",
+      "title": "수정할 부분은요",
+      "content": "여행 소개 페이지는 어떨까요?",
+      "createdAt": "2025-06-20T13:50:50.695Z",
+      "isRead": true,
+      "id": 4
+    },
+    {
+      "senderId": 4,
+      "receiverId": "2",
+      "title": "어학연수",
+      "content": "어디로 가나요?",
+      "createdAt": "2025-06-20T13:51:57.396Z",
+      "isRead": true,
+      "id": 5
+    },
+    {
+      "senderId": 2,
+      "receiverId": "4",
+      "title": "어학연수 장소는",
+      "content": "오사카 외국어 학원입니다.",
+      "createdAt": "2025-06-20T13:52:52.381Z",
+      "isRead": true,
+      "id": 6
+    },
+    {
+      "senderId": 2,
+      "receiverId": "5",
+      "title": "게시판 기능",
+      "content": "어떤 것들이 있나요?",
+      "createdAt": "2025-06-20T13:53:39.181Z",
+      "isRead": true,
+      "id": 7
+    },
+    {
+      "senderId": 5,
+      "receiverId": "2",
+      "title": "게시판 기능 설명",
+      "content": "조회수순, 최신순으로 정렬 가능해요",
+      "createdAt": "2025-06-20T13:54:24.534Z",
+      "isRead": true,
+      "id": 8
+    },
+    {
+      "senderId": 1,
+      "receiverId": "5",
+      "title": "게시판 검색 기능",
+      "content": "어떤 것들이 있나요?",
+      "createdAt": "2025-06-20T13:55:18.591Z",
+      "isRead": true,
+      "id": 9
+    },
+    {
+      "senderId": 5,
+      "receiverId": "1",
+      "title": "게시판 검색 기능",
+      "content": "제목\n제목+작성자\n등이 있어요",
+      "createdAt": "2025-06-20T13:55:51.256Z",
+      "isRead": true,
+      "id": 10
+    },
+    {
+      "senderId": 2,
+      "receiverId": "1",
+      "title": "현지학기제 소개 페이지",
+      "content": "게시글 추가시에 이미지를 첨부할 수 있나요?",
+      "createdAt": "2025-06-20T13:56:34.545Z",
+      "isRead": true,
+      "id": 11
+    },
+    {
+      "senderId": 1,
+      "receiverId": "2",
+      "title": "현지학기제 소개 페이지 회신",
+      "content": "네. 이미지 첨부가 가능합니다",
+      "createdAt": "2025-06-20T13:57:13.386Z",
+      "isRead": true,
+      "id": 12
+    },
+    {
+      "senderId": 3,
+      "receiverId": "5",
+      "title": "게시판 이용 방법",
+      "content": "검색시에 띄어쓰기를 해도 검색이 될까요?",
+      "createdAt": "2025-06-20T13:59:02.098Z",
+      "isRead": false,
+      "id": 13
     }
   ],
   "members": [
