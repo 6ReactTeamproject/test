@@ -7,9 +7,9 @@ const Footer = () => {
       <div className="footer-content">
         <div className="footer-section">
           <div className="footer-info">
-            <h3 className="footer-title">여행 커뮤니티</h3>
+            <h3 className="footer-title">현지학기제 카페</h3>
             <p className="footer-description">
-              여행 정보를 공유하고 소통하는 커뮤니티입니다.
+              현지학기제의 정보를 공유하고 소통하는 커뮤니티입니다.
             </p>
           </div>
           <div className="footer-contact">

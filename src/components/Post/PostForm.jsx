@@ -56,7 +56,7 @@ const PostForm = ({ post, setPost, onSubmit, id }) => {
       </div>
       <div className="post-form-buttons">
         {/* 취소 버튼 이전 페이지로 이동 */}
-        <button onClick={() => nav(-1)} className="post-form-cancel-button">
+        <button type="button" onClick={() => nav(-1)} className="post-form-cancel-button">
           취소
         </button>
         {/* 제출 버튼 "수정", 없으면 "작성" */}

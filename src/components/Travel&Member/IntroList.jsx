@@ -60,7 +60,7 @@ export default function IntroList({
         onClick={() => HandleAuth(user, navigate, `/${pathPrefix}/new`)}
         className="floating-add-button"
       >
-        ➕ 추가
+        ➕ 소개 추가
       </button>
     </div>
   );
