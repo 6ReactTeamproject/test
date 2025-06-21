@@ -68,7 +68,7 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  z-index: 10000;
+  z-index: 9998;
   transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
@@ -225,7 +225,6 @@ textarea {
   border-radius: 10px;
 }
 
-
 .carousel-text {
   padding: 0.5rem;
 }
@@ -295,8 +294,6 @@ textarea {
 
 /* --- 좁은 화면(모바일)에서 반응형 처리 --- */
 @media (max-width: 768px) {
-
-
   .page-container,
   .form-container,
   .modal-content {
@@ -312,8 +309,8 @@ textarea {
   background: white;
   padding: 40px;
   border-radius: 12px;
-  width: 100%;           /* 전체 가로폭 활용 */
-  max-width: 1200px;     /* 너무 넓어지지 않도록 제한 */
-  margin: 40px auto;     /* 가운데 정렬 */
+  width: 100%; /* 전체 가로폭 활용 */
+  max-width: 1200px; /* 너무 넓어지지 않도록 제한 */
+  margin: 40px auto; /* 가운데 정렬 */
   box-sizing: border-box;
 }
