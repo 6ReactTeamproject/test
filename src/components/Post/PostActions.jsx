@@ -52,10 +52,7 @@ function PostActions({ post, currentUser, id, navigate }) {
   return (
     <div className="post-actions-container">
       {/* 작성자 정보 표시 */}
-      <span className="post-author-info">
-        작성자: {post?.authorName || "알 수 없음"}
-      </span>
-      
+
       {/* 작성자인 경우에만 수정/삭제 버튼 표시 */}
       {isAuthor && (
         <>
