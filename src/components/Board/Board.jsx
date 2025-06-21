@@ -14,12 +14,12 @@ const Board = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   // 게시글 및 검색 관련 상태
   const [posts, setPosts] = useState([]); // 전체 게시글
-  const [inputTerm, setInputTerm] = useState(""); // 입력 중인 검색어
-  const [searchTerm, setSearchTerm] = useState(""); // 검색 실행된 키워드
+  const [searchTerm, setSearchTerm] = useState(""); // 검색어
   const [searchType, setSearchType] = useState("title_content"); // 검색 타입
   const [filtered, setFiltered] = useState([]); // 검색 결과 게시글
+  const [isSearching, setIsSearching] = useState(false); // 검색 실행 여부
 
-    // 사용자/멤버 정보
+  // 사용자/멤버 정보
   const [members, setMembers] = useState([]);
   const [users, setUsers] = useState([]);
 
@@ -62,28 +62,44 @@ const Board = () => {
       .catch((err) => console.error("에러:", err));
   }, []);
 
+  // 검색어 변경 처리
+  const handleTermChange = (term) => {
+    setSearchTerm(term);
+    // 검색어가 비어있으면 검색 상태 해제
+    if (!term.trim()) {
+      setIsSearching(false);
+      setFiltered([]);
+    }
+  };
+
   // 검색 실행
   const handleSearch = () => {
+    if (!searchTerm.trim()) {
+      setIsSearching(false);
+      setFiltered([]);
+      return;
+    }
+
     const results = filterPosts(
       posts,
-      inputTerm.trim().toLowerCase(),
-      searchType
+      searchTerm.trim().toLowerCase(),
+      searchType,
+      users
     );
     setFiltered(results); // 검색 결과 저장
-    setSearchTerm(inputTerm); // 현재 검색어 저장
+    setIsSearching(true); // 검색 상태 활성화
     setCurrentPage(1); // 검색 후 1페이지로 이동
   };
 
   // 정렬 기준에 따라 게시글 목록 구성
-  const source = searchTerm.trim() ? filtered : posts;
+  const source = isSearching ? filtered : posts; // 검색 중이면 필터링된 결과, 아니면 전체 게시글
   const sortedPosts = [...source].sort((a, b) => {
     if (sortType === "views") return b.views - a.views; // 조회수순 정렬
     return 0;
   });
 
-
   // 현재 페이지에 표시할 게시글 목록
-  const displayPosts = searchTerm.trim() ? filtered : posts;
+  const displayPosts = isSearching ? filtered : posts; // 검색 중이면 필터링된 결과, 아니면 전체 게시글
   const currentPosts = getPaginatedItems(
     sortedPosts,
     currentPage,
@@ -164,7 +180,7 @@ const Board = () => {
       <SearchBar
         searchTerm={searchTerm}
         searchType={searchType}
-        onTermChange={setInputTerm}
+        onTermChange={handleTermChange}
         onTypeChange={setSearchType}
         onSearch={handleSearch}
       />
