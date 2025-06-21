@@ -4,7 +4,7 @@ import SelectImage from "../../components/Travel&Member/SelectImage";
 export default function EditMember({ member, onDone }) {
   // 모든 필드가 비어 있지 않은지 확인하는 유효성 검사 함수
   const isFilled = (data) =>
-    data.name?.trim() && data.role?.trim() && data.introduction?.trim();
+    data.name?.trim() && data.introduction?.trim();
 
   return (
     <EditForm

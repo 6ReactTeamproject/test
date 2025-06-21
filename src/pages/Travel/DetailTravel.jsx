@@ -32,7 +32,6 @@ export default function DetailTravel() {
   return (
     <div
       className="modal-content"
-      onClick={(e) => e.stopPropagation()} // 모달 내부 클릭 시 닫힘 방지
       style={{ position: "relative" }}
     >
       {/* 닫기 버튼 */}
@@ -71,7 +70,7 @@ export default function DetailTravel() {
             <img
               src={travelPlace.imageUrl}
               alt="preview"
-              style={{ width: "100%", borderRadius: "8px" }}
+              style={{ maxWidth: "340px", borderRadius: "8px" }}
             />
           )}
           {/* 제목 및 설명 출력 */}

@@ -14,7 +14,7 @@ export default function CommentList({
   currentUser,     // 로그인 중인 사용자 정보
 }) {
   const [editingCommentId, setEditingCommentId] = useState(null); // 수정 중인 댓글
-  const [sortType, setSortType] = useState("");                    // 정렬 방식
+  const [sortType, setSortType] = useState("latest");                    // 정렬 방식
   const [replyTo, setReplyTo] = useState(null);                    // 답글을 작성 중인 댓글
 
   // 특정 댓글의 대댓글
@@ -45,6 +45,10 @@ export default function CommentList({
 
   // 댓글 좋아요 처리
   const handleLike = async (comment, alreadyLiked) => {
+    if (!currentUser) {
+      alert("좋아요를 누르려면 로그인이 필요합니다.");
+      return;
+    }
     try {
       // 이미 좋아요 눌렀으면 -1, 아니면 +1
       const updatedLikes = alreadyLiked

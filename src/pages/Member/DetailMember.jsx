@@ -34,7 +34,6 @@ function DetailMember() {
     <>
       <div
         className="modal-content"
-        onClick={(e) => e.stopPropagation()}
         style={{ position: "relative" }}
       >
         {/* 닫기 버튼 */}
@@ -73,7 +72,7 @@ function DetailMember() {
               <img
                 src={members.imageUrl}
                 alt="preview"
-                style={{ width: "100%", borderRadius: "8px" }}
+                style={{ maxWidth: "340px", borderRadius: "8px" }}
               />
             )}
             <br />
