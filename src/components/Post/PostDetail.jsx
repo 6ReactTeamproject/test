@@ -10,38 +10,37 @@ import "../../styles/post.css";
 
 // 게시글 상세 페이지 컴포넌트
 function PostDetail() {
-  const { user: currentUser } = useUser();
-  const { id } = useParams();
+  const { user: currentUser } = useUser(); // 현재 로그인 사용자 정보
+  const { id } = useParams(); // URL 파라미터에서 게시글 ID 가져오기
   const navigate = useNavigate();
   const location = useLocation();
-  // 게시글 정보 저장
-  const [post, setPost] = useState(null);
-  // 게시글 작성자 정보 저장
-  const [postUser, setPostUser] = useState(null);
-  // 댓글 목록 저장
-  const [comments, setComments] = useState([]);
-  // 사용자 목록 저장
-  const [users, setUsers] = useState([]);
+  const [post, setPost] = useState(null); // 게시글 데이터 상태
+  const [postUser, setPostUser] = useState(null); // 게시글 작성자 정보
+  const [comments, setComments] = useState([]); // 댓글 목록 상태
+  const [users, setUsers] = useState([]); // 사용자 목록 상태
 
-  // 사용자 목록 가져오기
+  // 사용자 목록 한번만 불러오기
   useEffect(() => {
     apiGet("users").then((data) => setUsers(data));
   }, []);
 
-  useEffect(() => {
-    // 게시글 정보 가져오기 + 조회수 증가 처리
-    apiGet("posts", id).then((data) => {
-      setPost(data);
-      apiPatch("posts", id, { views: (data.views || 0) + 1 }); // 조회수 증가
-    });
+  // 게시글과 댓글 불러오기 및 조회수 증가 처리
+    useEffect(() => {
+      // 게시글 정보 조회
+      apiGet("posts", id).then((data) => {
+        setPost(data);
+        // 조회수 1 증가
+        apiPatch("posts", id, { views: (data.views || 0) + 1 });
+      });
 
-    // 댓글 목록 가져오기
-    apiGet("comments", `?postId=${id}`).then((data) => {
-      const enriched = data.map((c) => ({
-        ...c,
-        createdAt: c.createdAt || new Date().toISOString(),
-        likes: c.likes || 0,
-        likedUserIds: Array.isArray(c.likedUserIds) ? c.likedUserIds : [],
+      // 해당 게시글 댓글 목록 조회
+      apiGet("comments", `?postId=${id}`).then((data) => {
+        // 댓글에 기본 값들 보정
+        const enriched = data.map((c) => ({
+          ...c,
+          createdAt: c.createdAt || new Date().toISOString(),
+          likes: c.likes || 0,
+          likedUserIds: Array.isArray(c.likedUserIds) ? c.likedUserIds : [],
       }));
       setComments(enriched);
     });
@@ -83,6 +82,7 @@ function PostDetail() {
         <div className="post-header">
           <h1 className="post-title">{post.title}</h1>
           <div className="post-meta">
+            {/* 게시글에 작성자, 작성일, 조회수 표시 */}
             <span>
               작성자: {postUser?.name || post.authorName || post.authorId}
             </span>
@@ -102,7 +102,7 @@ function PostDetail() {
             />
           </div>
         )}
-        {/* 게시글 액션 버튼들 */}
+        {/* 게시글 수정/삭제 버튼 및 동작 */}
         <PostActions
           post={post}
           postUser={postUser}

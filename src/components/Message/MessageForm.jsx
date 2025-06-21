@@ -32,17 +32,17 @@ const MessageForm = ({ onClose }) => {
 
     // 새 메시지 객체 생성
     const newMessage = {
-      senderId: user.id,
-      receiverId: message.receiverId,
+      senderId: user.id, // 현재 사용자
+      receiverId: message.receiverId, // 선택된 받는 사람
       title: message.title,
       content: message.content,
-      createdAt: new Date().toISOString(),
-      isRead: false,
+      createdAt: new Date().toISOString(), // 전송 시간
+      isRead: false, // 새 메시지는 읽지 않은 상태
     };
 
     try {
       await apiPost("messages", newMessage);
-      // 폼 초기화
+      // 전송 후 초기화
       setMessage({
         receiverId: "",
         title: "",
@@ -61,6 +61,7 @@ const MessageForm = ({ onClose }) => {
     <div className="message-form">
       <h3>쪽지 작성</h3>
       <form onSubmit={handleSubmit}>
+        {/* 받는 사람 선택 박스 */}
         <select
           name="receiverId"
           value={message.receiverId}
@@ -68,7 +69,7 @@ const MessageForm = ({ onClose }) => {
           required
         >
           <option value="">받는 사람 선택</option>
-          {/* 현재 사용자를 제외한 사용자 목록 */}
+          {/* 본인을 제외한 사용자 목록 옵션 생성 */}
           {users
             .filter((u) => u.id !== user?.id)
             .map((u) => (

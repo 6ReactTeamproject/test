@@ -5,10 +5,12 @@ const PostHeader = ({ post }) => (
   <div className="post-header-container">
     {/* 게시글 제목 */}
     <h1 className="post-header-title">{post.title}</h1>
-    {/* 게시글 메타 정보 */}
+
+    {/* 게시글 내용 */}
     <div className="post-header-content">
+
+      {/* 작성일 표시 */}
       <div className="post-header-meta">
-        {/* 작성일 표시 */}
         <span className="post-header-date">
           {new Date(post.createdAt).toLocaleString()}
         </span>

@@ -88,11 +88,13 @@ const MessageDetail = ({ message, onClose, onMessageSent }) => {
             </span>
           </div>
         </div>
+        {/* 상세보기 닫기 버튼 */}
         <button className="close-button" onClick={onClose}>
           ×
         </button>
       </div>
 
+      {/* 메시지 내용 */}
       <div className="message-detail-content">{message.content}</div>
 
       <div className="message-detail-footer">
@@ -107,7 +109,7 @@ const MessageDetail = ({ message, onClose, onMessageSent }) => {
         )}
       </div>
 
-      {/* 답장 폼 */}
+      {/* 답장 */}
       {showReplyForm && (
         <div className="reply-form">
           <h3>답장 작성</h3>

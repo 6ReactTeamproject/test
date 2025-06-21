@@ -6,7 +6,13 @@ import FormButton from "../common/FormButton";
 import { MESSAGES } from "../../constants";
 import "../../styles/form.css";
 
-function CommentForm({ currentUser, id, setComments, onCancel, parentId }) {
+function CommentForm({
+  currentUser,   // 로그인 중인 사용자
+  id,            // 댓글을 작성할 게시글 ID
+  setComments,   // 댓글 목록을 갱신
+  onCancel,      // 취소 버튼 클릭
+  parentId,      // 답글 작성
+}) {
   // 댓글 텍스트 상태 관리
   const [values, setValues] = useState({ text: "" });
 
@@ -21,16 +27,16 @@ function CommentForm({ currentUser, id, setComments, onCancel, parentId }) {
     setValues({ text: "" });
   };
 
-  // 폼 제출 처리 (댓글/대댓글 저장)
+  // 댓글/답글
   const handleSubmit = (e) => {
     e.preventDefault();
-    // 빈 텍스트면 경고창 띄우고 함수 종료
+    // 비어 있으면 알림 후 중단
     if (!values.text.trim()) {
       alert(MESSAGES.REQUIRED_FIELD);
       return;
     }
 
-    // 서버에 댓글/대댓글 데이터 전송
+    // 댓글 생성
     apiPost("comments", {
       text: values.text,
       postId: id,
@@ -53,6 +59,7 @@ function CommentForm({ currentUser, id, setComments, onCancel, parentId }) {
 
   return (
     <form onSubmit={handleSubmit} className="form-container">
+      {/* 댓글/답글 입력 필드 */}
       <FormInput
         name="text"
         value={values.text}
@@ -60,12 +67,13 @@ function CommentForm({ currentUser, id, setComments, onCancel, parentId }) {
         placeholder={parentId ? "답글을 입력하세요" : "댓글을 입력하세요"}
         className="form-input"
       />
+      {/* 버튼 영역 */}
       <div className="button-group">
         {/* 대댓글이면 "답글 작성", 일반 댓글이면 "댓글 작성" */}
         <FormButton type="submit" className="add-button">
           {parentId ? "답글 작성" : "댓글 작성"}
         </FormButton>
-        {/* onCancel 함수가 있으면 취소 버튼 보여줌 (대댓글 입력창에서만) */}
+        {/* 취소 버튼은 답글일 때만 표시 */}
         {onCancel && (
           <FormButton
             type="button"

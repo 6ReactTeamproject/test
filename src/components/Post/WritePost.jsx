@@ -31,14 +31,15 @@ const WritePost = () => {
         alert("로그인된 사용자 정보가 없습니다.");
         return;
       }
-
+      
+      // 새 글 작성 시 userId, createdAt, views 기본 데이터 포함
       const data = {
         ...post,
         ...(id
           ? {}
           : {
               userId: currentUser.id,
-              createdAt: new Date().toISOString().slice(0, 10),
+              createdAt: new Date().toISOString().slice(0, 10), // 날짜만 yyyy-mm-dd 형식으로 저장
               views: 0,
             }),
       };

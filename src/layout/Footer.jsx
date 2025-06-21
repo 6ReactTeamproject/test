@@ -2,6 +2,7 @@ import "../styles/layout.css";
 
 const Footer = () => {
   return (
+    // footer 태그에 스타일과 className 적용
     <footer className="footer-container">
       <div className="footer-content">
         <div className="footer-section">

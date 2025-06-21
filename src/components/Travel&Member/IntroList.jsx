@@ -13,10 +13,11 @@ export default function IntroList({
   imageKey,
   pathPrefix,
 }) {
-  const [items, setItems] = useState([]);
-  const navigate = useNavigate();
-  const { user } = useUser();
+  const [items, setItems] = useState([]); // 받아온 데이터 저장 상태
+    const navigate = useNavigate(); // 페이지 이동용 훅
+    const { user } = useUser(); // 로그인 유저 정보
 
+  // 기본 이미지
   const DEFAULT_PROFILE = "https://placehold.co/48x48?text=No+Img&font=roboto";
 
   useEffect(() => {
@@ -32,25 +33,26 @@ export default function IntroList({
       }`}
     >
       <div className="intro-header">
-        <h1>{heading}</h1>
+        <h1>{heading}</h1> {/* 제목 표시 */}
       </div>
       <div className="travel-grid">
+        {/* 받아온 아이템들을 카드 형식으로 렌더링 */}
         {items.map((item) => (
           <div
             key={item.id}
             className="travel-card"
-            onClick={() => navigate(`/${pathPrefix}/${item.id}`)}
+            onClick={() => navigate(`/${pathPrefix}/${item.id}`)} // 클릭 시 상세 페이지 이동
           >
             <img
-              src={item[imageKey] ? item[imageKey] : DEFAULT_PROFILE}
-              alt={item[primaryKey]}
+              src={item[imageKey] ? item[imageKey] : DEFAULT_PROFILE} // 이미지가 없으면 기본 이미지
+              alt={item[primaryKey]} // 이미지 대체 텍스트
               onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = DEFAULT_PROFILE;
+                e.target.onerror = null; // 무한 루프 방지
+                e.target.src = DEFAULT_PROFILE; // 로딩 실패 시 기본 이미지로 교체
               }}
             />
-            <h3>{item[primaryKey]}</h3>
-            <p>{item[secondaryKey]}</p>
+            <h3>{item[primaryKey]}</h3> {/* 주요 키 값 */}
+            <p>{item[secondaryKey]}</p> {/* 부가 설명 */}
           </div>
         ))}
       </div>

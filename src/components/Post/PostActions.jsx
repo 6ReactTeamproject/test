@@ -23,6 +23,7 @@ function PostActions({ post, currentUser, id, navigate }) {
             if (params.length > 0) url += "?" + params.join("&");
             navigateTo(url);
           } else {
+            // 이전 페이지로 이동
             navigate(-1);
           }
         })
@@ -54,6 +55,7 @@ function PostActions({ post, currentUser, id, navigate }) {
       <span className="post-author-info">
         작성자: {post?.authorName || "알 수 없음"}
       </span>
+      
       {/* 작성자인 경우에만 수정/삭제 버튼 표시 */}
       {isAuthor && (
         <>

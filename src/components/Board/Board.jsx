@@ -1,8 +1,3 @@
-/* 
-좋아요 순으로 정렬 ✅
-검색기능 버튼 눌렀을 때 실행되도록 ✅
-댓글 좋아요 순으로 ✅
-*/
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import SearchBar from "./SearchBar";
@@ -17,24 +12,27 @@ import "../../styles/board.css";
 
 const Board = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [posts, setPosts] = useState([]);
-  const [inputTerm, setInputTerm] = useState("");
-  const [searchTerm, setSearchTerm] = useState("");
-  const [searchType, setSearchType] = useState("title_content");
-  const [filtered, setFiltered] = useState([]);
+  // 게시글 및 검색 관련 상태
+  const [posts, setPosts] = useState([]); // 전체 게시글
+  const [inputTerm, setInputTerm] = useState(""); // 입력 중인 검색어
+  const [searchTerm, setSearchTerm] = useState(""); // 검색 실행된 키워드
+  const [searchType, setSearchType] = useState("title_content"); // 검색 타입
+  const [filtered, setFiltered] = useState([]); // 검색 결과 게시글
+
+    // 사용자/멤버 정보
   const [members, setMembers] = useState([]);
   const [users, setUsers] = useState([]);
 
-  const { user } = useUser();
-  const postsPerPage = 5;
+  const { user } = useUser(); // 로그인한 유저 정보
+  const postsPerPage = 5; // 페이지당 게시글 수
 
-  // URL에서 페이지/정렬 정보 가져오기
+  // 현재 페이지/정렬 방식
   const currentPage = parseInt(searchParams.get("page")) || 1;
   const sortType = searchParams.get("sort") || "";
 
   const nav = useNavigate();
 
-  // 페이지 변경 함수
+  // 현재 페이지 설정
   const setCurrentPage = (page) => {
     const newSearchParams = new URLSearchParams(searchParams);
     newSearchParams.set("page", page.toString());
@@ -49,36 +47,42 @@ const Board = () => {
     setSearchParams(newSearchParams);
   };
 
+  // 게시글, 멤버, 유저 정보 초기 로드
   useEffect(() => {
     apiGet("posts")
-      .then((data) => setPosts([...data].reverse()))
+      .then((data) => setPosts([...data].reverse())) // 최신순 정렬
       .catch((err) => console.error("에러:", err));
+
     apiGet("members")
       .then((data) => setMembers(data))
       .catch((err) => console.error("에러:", err));
+
     apiGet("users")
       .then((data) => setUsers(data))
       .catch((err) => console.error("에러:", err));
   }, []);
 
+  // 검색 실행
   const handleSearch = () => {
     const results = filterPosts(
       posts,
       inputTerm.trim().toLowerCase(),
       searchType
     );
-
-    setFiltered(results);
-    setSearchTerm(inputTerm);
-    setCurrentPage(1);
+    setFiltered(results); // 검색 결과 저장
+    setSearchTerm(inputTerm); // 현재 검색어 저장
+    setCurrentPage(1); // 검색 후 1페이지로 이동
   };
 
+  // 정렬 기준에 따라 게시글 목록 구성
   const source = searchTerm.trim() ? filtered : posts;
   const sortedPosts = [...source].sort((a, b) => {
-    if (sortType === "views") return b.views - a.views;
+    if (sortType === "views") return b.views - a.views; // 조회수순 정렬
     return 0;
   });
 
+
+  // 현재 페이지에 표시할 게시글 목록
   const displayPosts = searchTerm.trim() ? filtered : posts;
   const currentPosts = getPaginatedItems(
     sortedPosts,
@@ -94,6 +98,7 @@ const Board = () => {
       {/* 상단 액션 영역 */}
       <div className="board-actions">
         <div className="board-sort-buttons">
+          {/* 정렬 버튼 */}
           <button
             className={`sort-button ${sortType === "" ? "active" : ""}`}
             onClick={() => setSortType("")}
@@ -107,6 +112,7 @@ const Board = () => {
             조회수순
           </button>
         </div>
+        {/* 게시글 작성 버튼 */}
         <button
           className="board-write-button"
           onClick={() => {
@@ -119,7 +125,7 @@ const Board = () => {
                 },
               });
             } else {
-              HandleAuth(user, nav, "/post/write");
+              HandleAuth(user, nav, "/post/write"); // 비로그인 시 로그인 창으로 이동
             }
           }}
         >

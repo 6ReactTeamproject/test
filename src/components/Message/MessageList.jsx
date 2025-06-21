@@ -28,8 +28,8 @@ const MessageList = ({
         // 받은 쪽지/보낸 쪽지 필터링
         const filteredMessages = data.filter((message) =>
           activeTab === "received"
-            ? String(message.receiverId) === String(user.id)
-            : String(message.senderId) === String(user.id)
+            ? String(message.receiverId) === String(user.id) // 받은 쪽지 필터
+            : String(message.senderId) === String(user.id) // 보낸 쪽지 필터
         );
         // 최신순으로 정렬 (createdAt 기준 내림차순)
         const sortedMessages = filteredMessages.sort(
@@ -40,11 +40,12 @@ const MessageList = ({
       .catch((err) => console.error("메시지 로딩 실패:", err));
   }, [user, activeTab, showForm]);
 
-  // 메시지 클릭 시 읽음 상태 변경 및 선택
+  // 메시지 클릭 시 읽음 처리 및 선택
   const handleMessageClick = async (message) => {
     // 받은 쪽지이고 아직 읽지 않은 경우 읽음 상태로 변경
     if (activeTab === "received" && !message.isRead) {
       try {
+        // 메시지 읽음 상태 업데이트
         await apiPatch("messages", message.id, { isRead: true });
         // 로컬 상태 업데이트
         setMessages(
@@ -56,10 +57,12 @@ const MessageList = ({
         console.error("읽음 상태 변경 실패:", err);
       }
     }
+    // 선택된 메시지 설정
     onSelectMessage(message);
   };
 
   if (!user) {
+    // 로그인 상태가 아니면 컴포넌트 렌더링 안 함
     return null;
   }
 
@@ -86,8 +89,8 @@ const MessageList = ({
             <div className="message-preview">
               <span className="sender">
                 {activeTab === "received"
-                  ? getSenderName(message.senderId)
-                  : getSenderName(message.receiverId)}
+                  ? getSenderName(message.senderId) // 받은 쪽지일 땐 보낸 사람 이름 표시
+                  : getSenderName(message.receiverId)} {/* 보낸 쪽지일 땐 받는 사람 이름 표시 */}
               </span>
               <span className="date">
                 {new Date(message.createdAt).toLocaleDateString()}

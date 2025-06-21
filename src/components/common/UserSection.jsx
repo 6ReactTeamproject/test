@@ -12,18 +12,18 @@ export function UserSection() {
   const nav = useNavigate();
   const location = useLocation();
 
-  // 컴포넌트 마운트 시 로컬 스토리지에서 사용자 정보를 불러와 상태를 초기화
+  // 컴포넌트 최초 렌더링 시 localStorage에서 유저 정보 불러오기
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
       const parsedUser = JSON.parse(storedUser);
       setUser(parsedUser);
-      setPreview(parsedUser.image || "");
+      setPreview(parsedUser.image || ""); // 프로필 이미지
     }
     setIsLoading(false);
   }, [setUser]);
 
-  // 사용자 정보가 업데이트되면 프로필 이미지 미리보기를 업데이트
+  // 유저 이미지가 변경될 때마다 preview 상태 업데이트
   useEffect(() => {
     if (user?.image) {
       setPreview(user.image);
@@ -66,8 +66,8 @@ export function UserSection() {
             </button>
           </>
         ) : (
-          // 로그아웃 상태일 때
           <>
+          {/* 비로그인 상태일 때 로그인, 회원가입 버튼 */}
             <button onClick={() => nav("/login")} className="user-button">
               로그인
             </button>

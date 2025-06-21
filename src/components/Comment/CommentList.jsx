@@ -8,19 +8,16 @@ import "../../styles/comment.css";
 
 // 댓글/대댓글 목록 컴포넌트
 export default function CommentList({
-  comments,
-  setComments,
-  users,
-  currentUser,
+  comments,        // 전체 댓글
+  setComments,     // 댓글 리스트를 업데이트
+  users,           // 사용자 정보 배열
+  currentUser,     // 로그인 중인 사용자 정보
 }) {
-  // 수정 중인 댓글 id 저장
-  const [editingCommentId, setEditingCommentId] = useState(null);
-  // 정렬 타입(최신순/좋아요순)
-  const [sortType, setSortType] = useState("latest")
-  // 대댓글 입력창 열려있는 댓글 id
-  const [replyTo, setReplyTo] = useState(null);
+  const [editingCommentId, setEditingCommentId] = useState(null); // 수정 중인 댓글
+  const [sortType, setSortType] = useState("");                    // 정렬 방식
+  const [replyTo, setReplyTo] = useState(null);                    // 답글을 작성 중인 댓글
 
-  // parentId가 일치하는 대댓글만 골라서 반환
+  // 특정 댓글의 대댓글
   const getReplies = (parentId) =>
     comments.filter((c) => c.parentId === parentId);
 
@@ -29,7 +26,7 @@ export default function CommentList({
     setEditingCommentId(comment.id);
   };
 
-  // 저장 버튼 누르면 댓글 내용 업데이트하고 수정 모드 해제
+  // 댓글 수정/저장
   const handleSave = (commentId, newText) => {
     // 댓글 목록에서 해당 댓글 찾아서 텍스트만 바꿔줌
     setComments((prev) =>
@@ -39,14 +36,14 @@ export default function CommentList({
     setEditingCommentId(null);
   };
 
-  // 삭제 버튼 누르면 확인창 띄우고, 확인 누르면 해당 댓글 삭제
+  // 댓글 삭제
   const handleDelete = (comment) => {
     if (window.confirm("삭제할까요?")) {
       setComments((prev) => prev.filter((c) => c.id !== comment.id));
     }
   };
 
-  // 좋아요 버튼 누르면 서버에 PATCH 요청 보내고, 상태 업데이트
+  // 댓글 좋아요 처리
   const handleLike = async (comment, alreadyLiked) => {
     try {
       // 이미 좋아요 눌렀으면 -1, 아니면 +1
@@ -78,13 +75,13 @@ export default function CommentList({
     }
   };
 
-  // 정렬 타입에 따라 댓글 정렬
+  // 정렬된 전체 댓글 목록
   const sortedComments = [...comments].sort((a, b) => {
     if (sortType === "likes") return b.likes - a.likes; // 좋아요순
     return new Date(b.createdAt) - new Date(a.createdAt); // 최신순
   });
 
-  // 부모 댓글만 추출(대댓글 제외)
+  // 댓글/답글 구분
   const parentComments = sortedComments.filter((c) => !c.parentId);
 
   return (
@@ -141,6 +138,7 @@ export default function CommentList({
                       </span>
                     </div>
                     <p className="comment-text">{comment.text}</p>
+                    {/* 좋아요, 수정, 삭제, 답글버튼 */}
                     <div className="comment-footer">
                       <LikeButton
                         comment={comment}
@@ -167,7 +165,7 @@ export default function CommentList({
               </div>
             </div>
 
-            {/* 대댓글 입력 폼 (답글달기 버튼 눌렀을 때만) */}
+            {/* 답글 입력 */}
             {replyTo === comment.id && (
               <div className="reply-form-container">
                 <CommentForm
