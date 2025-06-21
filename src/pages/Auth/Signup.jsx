@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../../constants";
-import "./Signup.css";
+import "../../styles/Signup.css"
 
 const API_URL = `${API_BASE_URL}/users`;
 

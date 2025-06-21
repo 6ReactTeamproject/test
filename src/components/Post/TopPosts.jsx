@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { apiGet } from "./api/fetch";
-import "./styles/topposts.css";
+import { apiGet } from "../../api/fetch";
+import "../../styles/topposts.css"
 
 const TopPosts = () => {
   const [posts, setPosts] = useState([]); // 인기 게시글 목록을 저장

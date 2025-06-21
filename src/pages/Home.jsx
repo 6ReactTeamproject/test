@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../hooks/UserContext";
 import "../styles/layout.css";
-import TopPosts from "../TopPosts";
+import TopPosts from "../components/Post/TopPosts";
 import TravelCarousel from "../components/Travel&Member/TravelCarousel";
 
 export default function Home() {

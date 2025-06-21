@@ -1,5 +1,5 @@
 import MypageSidebar from "./MypageSidebar";
-import "./Mypage.css"
+import "../../styles/Mypage.css"
 
 export default function MypageLayout({ children }) {
   return (

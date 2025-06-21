@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useUser } from "../../hooks/UserContext";
-import "./UploadImg.css";
+import "../../styles/UploadImg.css"
 import CropModal from "../../utils/CropModal";
 
 export default function UploadImg({ shape = "round" }) {

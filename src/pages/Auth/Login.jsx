@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../hooks/UserContext"; // 사용자 정보 Context 훅 import
-import "./Login.css";
+import "../../styles/Login.css";
 
 export default function Login() {
   // 아이디, 비밀번호 입력값 관리 상태 정의 
